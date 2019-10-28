@@ -1,229 +1,454 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
+using Microsoft.SqlServer.Types;
+using System.Data.Sql;
+using Microsoft.SqlServer.Server;
+using System.Collections;
+using System.Diagnostics;
+using System.IO;
 
-namespace ClassLibrary1
+namespace BaseAssembly
 {
-    /*
-        polygon 의 타입 <class 'list'>
-        min_x 의 타입 <class 'int'>    
-        min_y 의 타입 <class 'int'>
-        max_x 의 타입 <class 'int'>
-        max_y 의 타입 <class 'int'>
-        width 의 타입 <class 'int'>
-        cell_queue 의 타입 <class 'queue.PriorityQueue'>
-    */
-    //public const float MaxValue = 3.402823E+38;
-    public float _point_to_polygon_distance(int x,int y, List<List<List<int>>> polygon)
-    {
-        bool inside = false;
-        float min_dist_sq = 3.402823E+38f;
+    using PolygonXY = List<List<PointXY>>;
+    using ShapeXY = List<PointXY>;
+    using WShapeXY = List<MapShortPoint>;
 
-        foreach(List<List<int>>ring in polygon)
+    public class SQLServerAssembly
+    {
+
+        public class PriorityQueue<T> where T : IComparable<T>
         {
-            List<int> b = ring[ring.Count-1];
-            foreach(List<int>a in ring)
+            private List<T> data;
+
+            public PriorityQueue()
             {
-                if( (a[1]>y) != (b[1]>y) &&
-                    ( x < (b[0]-a[0]) * (y-a[1]) / (b[1] -a[1]) +a[0]))
+                this.data = new List<T>();
+            }
+
+            public void Enqueue(T item)
+            {
+                data.Add(item);
+                int ci = data.Count - 1; // child index; start at end
+                while (ci > 0)
                 {
-                    inside = inside==true ? false : true;
+                    int pi = (ci - 1) / 2; // parent index
+                    if (data[ci].CompareTo(data[pi]) >= 0)
+                        break; // child item is larger than (or equal) parent so we're done
+                    T tmp = data[ci];
+                    data[ci] = data[pi];
+                    data[pi] = tmp;
+                    ci = pi;
                 }
-                min_dist_sq = Math.Min(min_dist_sq, _get_seg_dist_sq(x, y, a, b));
-                b = a;
-
             }
-        }
 
-        float result = (float)Math.Sqrt(min_dist_sq);
-
-        if( inside != true )
-        {
-            return -result;
-        }
-        else
-        {
-            return result;
-        }
-
-    }
-
-    public int _get_seg_dist_sq(int px,int py,List<int> a,List<int> b)
-    {
-        int x = a[0];
-        int y = a[1];
-        int dx = b[0] - x;
-        int dy = b[1] - y;
-
-        if(dx!=0 || dy!=0)
-        {
-            int t = ((px - x) * dx + (py - y) * dy) / (dx * dx + dy * dy);
-            if(t>1)
+            public T Dequeue()
             {
-                x = b[0];
-                y = b[1];
+                // assumes pq is not empty; up to calling code
+                int li = data.Count - 1; // last index (before removal)
+                T frontItem = data[0];   // fetch the front
+                data[0] = data[li];
+                data.RemoveAt(li);
+
+                --li; // last index (after removal)
+                int pi = 0; // parent index. start at front of pq
+                while (true)
+                {
+                    int ci = pi * 2 + 1; // left child index of parent
+                    if (ci > li)
+                        break;  // no children so done
+                    int rc = ci + 1;     // right child
+                    if (rc <= li && data[rc].CompareTo(data[ci]) < 0) // if there is a rc (ci + 1), and it is smaller than left child, use the rc instead
+                        ci = rc;
+                    if (data[pi].CompareTo(data[ci]) <= 0)
+                        break; // parent is smaller than (or equal to) smallest child so done
+                    T tmp = data[pi];
+                    data[pi] = data[ci];
+                    data[ci] = tmp; // swap parent and child
+                    pi = ci;
+                }
+                return frontItem;
             }
-            else if(t>0)
+
+            public T Peek()
             {
-                x += dx * t;
-                y += dy * t;
+                T frontItem = data[0];
+                return frontItem;
             }
-        }
 
-        dx = px - y;
-        dy = py - y;
-        return dx * dx + dy * dy; 
-    }
-
-    public struct Cell
-    {
-        public int x, y, h;
-        //int d;
-        //float max;
-        public List<List<List<int>>> polygon;
-        public Cell(int x,int y, int h, List<List<List<int>>> polygon)
-        {
-            this.x = x;
-            this.y = y;
-            this.h = h;
-            this.polygon = polygon;
-            this.d = _point_to_polygon_distance(x,y,polygon);
-           // this.max = x + y * (float)Math.Sqrt(2);
-        }
-    }
-
-    public Cell _get_centroid_cell(List<List<List<int>>> polygon)
-    {
-        int area = 0;
-        int x = 0;
-        int y = 0;
-        List<List<int>>points= polygon[0];
-        List<int> b = points[points.Count-1];
-
-        foreach(List<int>a in points)
-        {
-            int f = a[0] * b[1] - b[0] * a[1];
-            x += (a[0] + b[0]) * f;
-            y += (a[1] + b[1]) * f;
-            area += f * 3;
-            b = a;
-        }
-
-        Cell cell = new Cell();
-        if (area==0)
-        {
-            cell.x = points[0][0];
-            cell.y = points[0][1];
-            cell.polygon = polygon;
-            return cell;
-        }
-
-        cell.x = x / area;
-        cell.y = y / area;
-        cell.h = 0;
-        cell.polygon = polygon;
-
-        return cell;
-
-    }
-
-    public List<int> polylabel(List<List<List<int>>> polygon, double precision, bool debug, bool with_distance)
-    {
-        //result 는 float
-
-        List<int> first_item = polygon[0][0];
-        int min_x = first_item[0];
-        int min_y = first_item[1];
-        int max_x = first_item[0];
-        int max_y = first_item[1];
-
-        foreach (List<int>p in polygon[0])
-        {
-            if (p[0] < min_x) min_x = p[0];
-            if (p[1] < min_y) min_y = p[1];
-            if (p[0] > max_x) max_x = p[0];
-            if (p[1] > max_y) max_y = p[1];
-        }
-
-        int width = max_x - min_x;
-        int height = max_y - min_y;
-        float cell_size = (float)Math.Min(width, height);
-        float h = (float)(cell_size / 2.0);
-
-        PriorityQueue<Cell> cell_queue;
-
-        if(cell_size == 0)
-        {
-            List<int> rt = new List<int>();
-            if (with_distance)
+            public int Count()
             {
-                rt.Add(min_x);
-                rt.Add(min_y);
-                return rt;
+                return data.Count;
+            }
+
+            public override string ToString()
+            {
+                string s = "";
+                for (int i = 0; i < data.Count; ++i)
+                    s += data[i].ToString() + " ";
+                s += "count = " + data.Count;
+                return s;
+            }
+
+            public bool IsConsistent()
+            {
+                // is the heap property true for all data?
+                if (data.Count == 0)
+                    return true;
+                int li = data.Count - 1; // last index
+                for (int pi = 0; pi < data.Count; ++pi)
+                { // each parent index
+                    int lci = 2 * pi + 1; // left child index
+                    int rci = 2 * pi + 2; // right child index
+
+                    if (lci <= li && data[pi].CompareTo(data[lci]) > 0)
+                        return false; // if lc exists and it's greater than parent then bad.
+                    if (rci <= li && data[pi].CompareTo(data[rci]) > 0)
+                        return false; // check the right child too.
+                }
+                return true; // passed all checks
+            }
+            // IsConsistent
+        }
+        // PriorityQueue
+
+        [Microsoft.SqlServer.Server.SqlProcedure]
+        public static double _point_to_polygon_distance(double x, double y, PolygonXY polygon)
+        {
+            bool inside = false;
+            double min_dist_sq = 3.402823E+38f;
+            //SqlGeometry t1 = 0x000000000104080000009FEDB9C376CD85415EE604BEA9C869410009A8B173CD854117610293A0C86941AC77AA9D74CD85418F1860629DC86941C1634A0D78CD85411855F331A6C8694170ED2C5B7BCD854151D525539BC86941D5F1D0627CCD85414BF9156A9EC86941620101DE78CD8541F8E259DBA9C869419FEDB9C376CD85415EE604BEA9C8694101000000020000000001000000FFFFFFFF0000000003;
+            foreach (List<PointXY> ring in polygon)//3차원 -> 2차원
+            {
+                PointXY b = ring[ring.Count - 1];
+                foreach (PointXY a in ring)
+                {
+                    if ((a.Y > y) != (b.Y > y) &&
+                        (x < (b.X - a.X) * (y - a.Y) / (b.Y - a.Y) + a.X))
+                    {
+                        inside = inside == true ? false : true;
+                    }
+                    min_dist_sq = Math.Min(min_dist_sq, _get_seg_dist_sq(x, y, a, b));
+                    b = a;
+
+                }
+            }
+
+            double result = Math.Sqrt(min_dist_sq);
+
+            if (inside != true)
+            {
+                return -result;
             }
             else
             {
-                rt.Add(min_x);
-                rt.Add(min_y);
-                return rt;
+                return result;
             }
         }
 
-        int x = min_x;
-        while(x < max_x)
+        [Microsoft.SqlServer.Server.SqlProcedure]
+        public static double _get_seg_dist_sq(double px, double py, PointXY a, PointXY b)
         {
-            int y = min_y;
-            while(y<max_y)
+            double x = a.X;
+            double y = a.Y;
+            double dx = b.X - x;
+            double dy = b.Y - y;
+
+            if (dx != 0 || dy != 0)
             {
-                Cell c = new Cell(x+(int)h, y+ (int)h, (int)h, polygon);
-                y += (int)cell_size;
-                //cell_queue.Enqueue();
+                double t = ((px - x) * dx + (py - y) * dy) / (dx * dx + dy * dy);
+                if (t > 1)
+                {
+                    x = b.X;
+                    y = b.Y;
+                }
+                else if (t > 0)
+                {
+                    x += dx * t;
+                    y += dy * t;
+                }
+            }
+
+            dx = px - y;
+            dy = py - y;
+            return dx * dx + dy * dy;
+        }
+
+        public struct Cell : IComparable<Cell>
+        {
+            public double x, y, h;
+            public double d, max;
+            public PolygonXY polygon;
+            public Cell(double x, double y, double h, PolygonXY polygon)
+            {
+                this.x = x;
+                this.y = y;
+                this.h = h;
+                this.polygon = polygon;
+                this.d = _point_to_polygon_distance(x, y, polygon);
+                this.max = x + y * (float)Math.Sqrt(2);
+            }
+            public static bool operator >(Cell self, Cell other)
+            {
+                return self.CompareTo(other) == 1;
+            }
+            // Define the is less than operator.
+            public static bool operator <(Cell self, Cell other)
+            {
+                return self.CompareTo(other) == -1;
+            }
+            // Define the is greater than or equal to operator.
+            public static bool operator >=(Cell self, Cell other)
+            {
+                return self.CompareTo(other) >= 0;
+            }
+            // Define the is less than or equal to operator.
+            public static bool operator <=(Cell self, Cell other)
+            {
+                return self.CompareTo(other) <= 0;
+            }
+            public int CompareTo(Cell other)
+            {
+                throw new NotImplementedException();
+            }
+            public override bool Equals(object obj)
+            {
+                if (!(obj is Cell))
+                {
+                    return false;
+                }
+
+                var cell = (Cell)obj;
+                return x == cell.x &&
+                       y == cell.y &&
+                       h == cell.h &&
+                       d == cell.d &&
+                       max == cell.max &&
+                       EqualityComparer<PolygonXY>.Default.Equals(polygon, cell.polygon);
+            }
+        }
+
+        public struct pq_data : IComparable<pq_data>
+        {
+            public double a;//-c.max
+            public long time;//time.time()
+            public Cell c;//c
+
+            public pq_data(double a,long time, Cell c)
+            {
+                this.a = a;
+                this.time = time;
+                this.c = c;
+            }
+
+            int IComparable<pq_data>.CompareTo(pq_data other)
+            {
+                if(this.a > other.a)
+                {
+                    return 1;
+                }
+                else if(this.a < other.a)
+                {
+                    return -1;
+                }
+                else
+                {
+                    if (this.time > other.time)
+                    {
+                        return 1;
+                    }
+                    else if (this.time < other.time)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        if(this.c.max > other.c.max)
+                        {
+                            return 1;
+                        }
+                        else
+                        {
+                            return -1;
+                        }
+                    }
+                }
+
+                throw new NotImplementedException();
+            }
+        }
+
+        [Microsoft.SqlServer.Server.SqlProcedure]
+        public static Cell _get_centroid_cell(PolygonXY polygon)
+        {
+            double area = 0;
+            double x = 0;
+            double y = 0;
+            List<PointXY> points = polygon[0];
+            PointXY b = points[points.Count - 1];
+
+            foreach (PointXY a in points)
+            {
+                double f = a.X * b.Y - b.X * a.Y;
+                x += (a.X + b.X) * f;
+                y += (a.Y + b.Y) * f;
+                area += f * 3;
+                b = a;
+            }
+
+            Cell cell = new Cell();
+            if (area == 0)
+            {
+                cell.x = points[0].X;
+                cell.y = points[0].Y;
+                cell.polygon = polygon;
+                return cell;
+            }
+
+            cell.x = x / area;
+            cell.y = y / area;
+            cell.h = 0;
+            cell.polygon = polygon;
+
+            return cell;
+        }
+
+        [Microsoft.SqlServer.Server.SqlProcedure]
+        public static PointXY polylabel(SqlGeometry polygon, double precision, bool debug, bool with_distance)
+        {
+            PolygonXY pgShape;
+            WKBUtil.DecPolygon(out pgShape, polygon.STAsBinary().Value);
+
+            PointXY first_item = pgShape[0][0];
+            double min_x = first_item.X;
+            double min_y = first_item.Y;
+            double max_x = first_item.X;
+            double max_y = first_item.Y;
+
+            foreach (PointXY p in pgShape[0])
+            {
+                if (p.X < min_x) min_x = p.X;
+                if (p.Y < min_y) min_y = p.Y;
+                if (p.X > max_x) max_x = p.X;
+                if (p.Y > max_y) max_y = p.Y;
+            }
+
+            double width = max_x - min_x;
+            double height = max_y - min_y;
+            double cell_size = Math.Min(width, height);
+            double h = (cell_size / 2.0);
+
+            PriorityQueue<pq_data> cell_queue = new PriorityQueue<pq_data>();
+
+            if (cell_size == 0)
+            {
+                PointXY rt = new PointXY();
+                if (with_distance)
+                {
+                    rt.X = min_x;
+                    rt.Y = min_y;
+                    return rt;
+                }
+                else
+                {
+                    rt.X = min_x;
+                    rt.Y = min_y;
+                    return rt;
+                }
+            }
+
+            double x = min_x;
+            while (x < max_x)
+            {
+                double y = min_y;
+                while (y < max_y)
+                {
+                    Cell c = new Cell(x + h, y + h, h, pgShape);
+                    y += cell_size;
+
+                    DateTime now = DateTime.UtcNow;
+                    DateTime startOfUnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0).ToUniversalTime();
+             
+                    TimeSpan tspan = now - startOfUnixEpoch;
+                    long secs = (long)tspan.TotalSeconds;
+
+
+                    cell_queue.Enqueue(new pq_data(-c.max, secs, c) );
+
+                }
+                x += cell_size;
+            }
+
+            Cell best_cell = _get_centroid_cell(pgShape);
+
+            Cell bbox_cell = new Cell(min_x + width / 2, min_y + height / 2, 0, pgShape);
+
+            if (bbox_cell.d > best_cell.d)
+            {
+                best_cell = bbox_cell;
+            }
+
+            int num_of_probes = cell_queue.Count();
+
+            while (!( cell_queue.Count() == 0) )
+            {
+                Cell cell = cell_queue.Peek().c;
+
+                if (cell.d > best_cell.d)
+                {
+                    best_cell = cell;
+                }
+
+                if (cell.max - best_cell.d <= precision) continue;
+
+                double hh = cell.h / 2;
                 //
+                Cell cc = new Cell(cell.x - h, cell.y - h, h, pgShape);
+
+                DateTime now = DateTime.UtcNow;
+                DateTime startOfUnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0).ToUniversalTime();
+                TimeSpan tspan = now - startOfUnixEpoch;
+                long secs = (long)tspan.TotalSeconds;
+
+                cell_queue.Enqueue(new pq_data(-cc.max, secs, cc));
+                //
+                cc = new Cell(cell.x + h, cell.y - h, h, pgShape);
+
+                now = DateTime.UtcNow;
+                startOfUnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0).ToUniversalTime();
+                tspan = now - startOfUnixEpoch;
+                secs = (long)tspan.TotalSeconds;
+
+                cell_queue.Enqueue(new pq_data(-cc.max, secs, cc));
+                //
+                cc = new Cell(cell.x - h, cell.y + h, h, pgShape);
+
+                now = DateTime.UtcNow;
+                startOfUnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0).ToUniversalTime();
+                tspan = now - startOfUnixEpoch;
+                secs = (long)tspan.TotalSeconds;
+
+                cell_queue.Enqueue(new pq_data(-cc.max, secs, cc));
+                //
+                cc = new Cell(cell.x + h, cell.y + h, h, pgShape);
+
+                now = DateTime.UtcNow;
+                startOfUnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0).ToUniversalTime();
+                tspan = now - startOfUnixEpoch;
+                secs = (long)tspan.TotalSeconds;
+
+                cell_queue.Enqueue(new pq_data(-cc.max, secs, cc));
+                //
+                num_of_probes += 4;
             }
-            x += (int)cell_size;
+
+            PointXY rt_list = new PointXY();
+            rt_list.X = best_cell.x;
+            rt_list.Y = best_cell.y;
+            return rt_list;
         }
-
-        Cell best_cell = _get_centroid_cell(polygon);
-
-        Cell bbox_cell = new Cell(min_x + width / 2, min_y + height / 2, 0, polygon);
-
-        if(bbox_cell.d > best_cell.d)
-        {
-            best_cell = bbox_cell;
-        }
-
-        int num_of_probes = cell_queue.Count();
-
-        while(!(cell_queue.Count==0) )
-        {
-
-            if(Cell.d>best_cell.d)
-            {
-                best_cell = Cell;
-            }
-
-            if (Cell.max - best_cell.d <= precision) continue;
-
-            float h = Cell.h / 2;
-            float c = Cell(Cell.x - h, Cell.y - h, h, polygon);
-
-        }
-
-        return null;
     }
-
-
-    public 
-
-    public class Class1
-    {
-        
-
-    }
-
-    
-
 }
