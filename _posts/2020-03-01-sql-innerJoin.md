@@ -5,9 +5,6 @@ author: tgparkk
 categories: [ CS, SQL ]
 tags: [#sql, 내부조인, INNERJOIN]
 image: assets/images/Visual_SQL_JOINS_orig.jpg
-description: "My review of Inception movie. Acting, plot and something else in this short description."
-featured: false
-hidden: false
 ---
 
 sql join
