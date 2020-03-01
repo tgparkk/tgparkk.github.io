@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "SQL-INNER JOIN"
+title:  "SQL-JOIN"
 author: tgparkk
 categories: [ CS, SQL ]
 image: assets/images/Visual_SQL_JOINS_orig.jpg
