@@ -14,17 +14,13 @@ sql join
 
 #### How to use?
 
+![walking]({{ site.baseurl }}/assets/images/8.jpg)
+
 INNER JOIN, 
 
-```html
----
-layout: post
-title:  "Inception Movie"
-author: john
-categories: [ Jekyll, tutorial ]
-tags: [red, yellow]
-image: assets/images/11.jpg
-description: "My review of Inception movie. Actors, directing and more."
-rating: 4.5
----
+1. 와일드카드 * 를 사용하기
+```sql
+SELECT tmp1.*, tmp2.mobile_no
+FROM addr AS tmp1, mobile AS tmp2
+WHERE tmp1.cust_id = tmp2.cust_id; 
 ```
