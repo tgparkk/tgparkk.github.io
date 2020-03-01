@@ -3,7 +3,6 @@ layout: post
 title:  "SQL-INNER JOIN"
 author: tgparkk
 categories: [ CS, SQL ]
-tags: [#sql, 내부조인, INNERJOIN]
 image: assets/images/Visual_SQL_JOINS_orig.jpg
 ---
 
