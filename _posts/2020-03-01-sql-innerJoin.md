@@ -6,7 +6,7 @@ categories: [CS, SQL]
 image: assets/images/Visual_SQL_JOINS_orig.jpg
 ---
 
-sql join
+sql join?
 
 #### How to use?
 
