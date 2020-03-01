@@ -2,7 +2,7 @@
 layout: post
 title:  "SQL-JOIN"
 author: tgparkk
-categories: [ CS, SQL ]
+categories: [CS, SQL]
 image: assets/images/Visual_SQL_JOINS_orig.jpg
 ---
 
@@ -61,3 +61,4 @@ FROM addr1 AS tmp1
 RIGHT OUTER JOIN mobile2 AS tmp2
 ON tmp1.cust_id = tmp2.cust_id;
 ```
+
