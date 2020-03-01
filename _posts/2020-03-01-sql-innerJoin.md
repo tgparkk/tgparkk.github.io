@@ -10,8 +10,6 @@ sql join?
 
 #### How to use?
 
-![walking]({{ site.baseurl }}/assets/images/Visual_SQL_JOINS_orig.jpg)
-
 INNER JOIN : 두 테이블의 교집합
 
 1. 와일드카드 * 를 사용하기
