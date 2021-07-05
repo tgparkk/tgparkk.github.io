@@ -25,3 +25,36 @@ A major clue to everything that truly happened was the scene that played next un
 ```html
 <span class="spoiler">My hidden paragraph here.</span>
 ```
+
+
+
+coconutView.h
+
+class ParameterClass
+{
+public:
+  CString temp;
+  CMapLonLat LLPOS;
+  
+  CCoconutView* view;
+}
+
+coconutView.cpp
+void CCoconutView::a()
+{
+  ParameterClass* threadParam = new ParameterClass();
+  threadParam->temp = m->GetPath();
+  threadParam->view = this;
+}
+
+void 전역함수(void* aArga)
+{
+  ParameterClass* pt = (ParameterClass*)aArg;
+  pt->view->GetYGManager()->CreateShpObjTable(pt->temp, &pt->LLPos);
+  pt->view->GetYGManager()->MovePosition(pt->LLPos, 2);
+}
+
+
+
+
+
