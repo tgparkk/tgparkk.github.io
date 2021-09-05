@@ -1,1 +1,0 @@
-# tgparkk.github.io
