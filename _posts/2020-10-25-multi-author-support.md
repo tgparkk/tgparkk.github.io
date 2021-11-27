@@ -19,20 +19,20 @@ For this every Author needs to have a unique username (without space) For eg. If
 
 ### Configuring Authors :
 
-Under _authors folder create a author details file (username.md) with his/her username (as described above). For eg. **johndoe.md**.
+Under _authors folder create a author details file (username.md) with his/her username (as described above). For eg. **tgparkk.md**.
 
-Then add this frontmatter to describe the author in **johndoe.md**.
+Then add this frontmatter to describe the author in **tgparkk.md**.
 ```yml
 ---
-name: John Doe # Name of the Author
-username: johndoe # Username of the Author
-bio: "Hi I a John, a Web Developer and Designer." # Author Bio
-site: http://johndoe.com  # Author Website URL
+name: Park TaeGeon # Name of the Author
+username: tgparkk # Username of the Author
+bio: "Hi I am TG, a C++ Developer and DB Designer." # Author Bio
+site: https://tgparkk.github.io  # Author Website URL
 avatar: johndoe.png  # Profile Image (img path will be /assets/img/authors/johndoe.png)
-email: mail@johndoe.com  # Author Email address
+email: sttgpark@gmail.com  # Author Email address
 social:  # Author Social profile links
     - title: "github"
-      url: "https://github.com/johndoe"
+      url: "https://github.com/tgparkk"
     - title: "linkedin"
       url: "https://www.linkedin.com/in/johndoe"
     - title: "youtube"
@@ -60,6 +60,39 @@ You can create multiple authors similarly under _authors
 Next, copy the same frontmatter in _data/authors.yml (under individual author usernames) like this :
 
 ```yml
+
+# Author 0
+tgparkk:
+   name: Park TaeGeon
+   username: tgparkk
+   site: https://tgparkk.github.io
+   avatar: johndoe.png
+   bio: "Hi I am TG, a C++ Developer and DB Designer."
+   email: sttgpark@gmail.com
+   social:
+      - title: "github"
+        url: "https://github.com/tgparkk"
+      - title: "linkedin"
+        url: "https://www.linkedin.com/in/태건-박-12b255209"
+      - title: "youtube"
+        url: "https://www.youtube.com/channel/UCSfLBFFfNU9r6ihfei6VeJw"
+      - title: "facebook"
+        url: "https://www.facebook.com/johndoe"
+      - title: "twitter"
+        url: "https://www.twitter.com/johndoe"
+      - title: "behance"
+        url: "https://behance.com/johndoe"
+      - title: "instagram"
+        url: "https://instagram.com/johndoe"
+      - title: "medium"
+        url: "https://medium.com/johndoe"
+      - title: "telegram"
+        url: "https://telegram.com/johndoe"
+      - title: "dribbble"
+        url: "https://dribbble.com/johndoe"
+      - title: "flickr"
+        url: "https://flickr.com/johndoe"
+
 # Author 1
 johndoe:
    name: John Doe
