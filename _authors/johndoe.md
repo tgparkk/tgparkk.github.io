@@ -1,15 +1,15 @@
 ---
-name: John Doe
-username: johndoe
-bio: "Hi I a John, a Web Developer and Designer."
-site: http://johndoe.com
+name: Park TaeGeon
+username: tgparkk
+bio: "Hi I a TG, a C++ Developer and DB Designer."
+site: https://tgparkk.github.io
 avatar: johndoe.png
-email: mail@johndoe.com
+email: sttgpark@gmail.com
 social:
     - title: "github"
-      url: "https://github.com/johndoe"
+      url: "https://github.com/tgparkk"
     - title: "linkedin"
-      url: "https://www.linkedin.com/in/johndoe"
+      url: "https://www.linkedin.com/in/태건-박-12b255209"
     - title: "youtube"
       url: "https://www.youtube.com/channel/UCSfLBFFfNU9r6ihfei6VeJw"
     - title: "facebook"
