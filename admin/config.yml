@@ -1,7 +1,7 @@
 backend:
   name: github
-  repo: sujaykundu777/sujaykundu777.github.io
-  branch: master
+  repo: tgparkk/tgparkk.github.io
+  branch: main
   site_domain: agitated-northcutt-53b578.netlify.app
 
 media_folder: "assets/img/posts" # Media files will be stored in the repo under images/uploads
