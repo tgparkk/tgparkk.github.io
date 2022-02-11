@@ -7,7 +7,7 @@ date: '2022-02-11 22:30:23 +0530'
 category: C++
 thumbnail: /assets/img/posts/code.jpg
 keywords: C++, DataStructers, Algorithm, Array
-permalink: /blog/c++DataStructures-std-array/
+permalink: /blog/CPLUS-DataStructures-std-array/
 usemathjax: true
 ---
 
