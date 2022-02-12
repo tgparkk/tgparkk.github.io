@@ -46,7 +46,7 @@ usemathjax: true
 
 0000 0000 (128 64 32 16 8 4 2 1)
 
-<img src="../assets/img/posts/image_coordinate_system.png" width="200" height="200" title='영상 좌표계'>
+<img src="/assets/img/posts/image_coordinate_system.png" width="200" height="200" title='영상 좌표계'>
 
 https://kr.mathworks.com/help/images/image-coordinate-systems.html
 
