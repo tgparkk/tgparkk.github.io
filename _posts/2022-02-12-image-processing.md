@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "image processing"
+title:  "영상처리의 개요"
 summary: "영상처리 C++"
 author: tgparkk
 date: '2022-02-12 15:27:23 +0530'
