@@ -1,4 +1,5 @@
 ---
+published: true
 layout: post
 title:  "영상처리의 개요"
 summary: "영상처리 C++"
