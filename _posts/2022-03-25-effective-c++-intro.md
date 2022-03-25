@@ -5,7 +5,6 @@ summary: "explicit"
 author: tgparkk
 date: '2022-03-25 21:58:23 +0530'
 category: C++
-thumbnail: /assets/img/posts/code.jpg
 keywords: C++
 permalink: /blog/effective-c++-intro-explicit/
 usemathjax: true
