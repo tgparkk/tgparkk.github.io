@@ -33,7 +33,7 @@ public:
 
 explicit 으로 선언된 생성자는 암시적인 타입 변환을 수행하는데 쓰이지 않게 됩니다.
 
-```C++
+```c++
 void doSomething(B bObject); // B 타입의 객체를 하나 받는 함수
 
 B bObj1;                     // B 타입의 객체
