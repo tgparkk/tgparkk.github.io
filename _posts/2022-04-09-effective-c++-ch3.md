@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Effective c++ ch3 - 낌새만 보이면 const를 들이대 보자!"
-summary: "const3"
+summary: "const"
 author: tgparkk
 date: '2022-04-09 12:38:23 +0530'
 category: C++
