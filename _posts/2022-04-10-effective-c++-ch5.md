@@ -6,7 +6,7 @@ author: tgparkk
 date: '2022-04-10 22:38:23 +0530'
 category: C++
 keywords: C++, copy constructor, copy assignment operator, destructor, 
-permalink: /blog/effective-cpp-ch4/
+permalink: /blog/effective-cpp-ch5/
 usemathjax: true
 ---
 
