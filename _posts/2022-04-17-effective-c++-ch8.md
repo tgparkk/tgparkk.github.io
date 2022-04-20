@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "Effective c++ ch8 - 예외가 소멸자를 떠나지 못하도록 붙들어 놓자"
+title:  "Effective c++ item8 - 예외가 소멸자를 떠나지 못하도록 붙들어 놓자"
 summary: "destructor, exceptions, c++"
 author: tgparkk
 date: '2022-04-17 20:38:23 +0530'
 category: C++
 keywords: destructor, exceptions, C++ 
-permalink: /blog/effective-cpp-ch8/
+permalink: /blog/effective-cpp-item8/
 usemathjax: true
 ---
 

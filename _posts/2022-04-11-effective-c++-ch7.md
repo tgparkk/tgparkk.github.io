@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "Effective c++ ch7 - 다형성을 가진 기본 클래스에서는 소멸자를 반드시 가상 소멸자로 선언하자"
+title:  "Effective c++ item7 - 다형성을 가진 기본 클래스에서는 소멸자를 반드시 가상 소멸자로 선언하자"
 summary: "destructor, polymorphism, c++"
 author: tgparkk
 date: '2022-04-11 17:38:23 +0530'
 category: C++
 keywords: destructor, polymorphism, C++ 
-permalink: /blog/effective-cpp-ch7/
+permalink: /blog/effective-cpp-item7/
 usemathjax: true
 ---
 

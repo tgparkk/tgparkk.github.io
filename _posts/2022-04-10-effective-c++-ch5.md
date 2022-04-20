@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "Effective c++ ch5 - C++가 은근슬쩍 만들어 호출해 버리는 함수들에 촉각을 세우자"
+title:  "Effective c++ item5 - C++가 은근슬쩍 만들어 호출해 버리는 함수들에 촉각을 세우자"
 summary: "copy constructor, copy assignment operator, destructor"
 author: tgparkk
 date: '2022-04-10 22:38:23 +0530'
 category: C++
 keywords: C++, copy constructor, copy assignment operator, destructor, 
-permalink: /blog/effective-cpp-ch5/
+permalink: /blog/effective-cpp-item5/
 usemathjax: true
 ---
 

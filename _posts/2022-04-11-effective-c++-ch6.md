@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "Effective c++ ch6 - 컴파일러가 만들어낸 함수가 필요 없으면 확실히 이들의 사용을 금해 버리자"
+title:  "Effective c++ item6 - 컴파일러가 만들어낸 함수가 필요 없으면 확실히 이들의 사용을 금해 버리자"
 summary: "compiler, private, c++"
 author: tgparkk
 date: '2022-04-11 14:38:23 +0530'
 category: C++
 keywords: C++, compiler, private 
-permalink: /blog/effective-cpp-ch6/
+permalink: /blog/effective-cpp-item6/
 usemathjax: true
 ---
 

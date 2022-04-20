@@ -65,6 +65,7 @@ public:
                                                            // 이제 비가상 함수입니다.
     ...
 };
+
 Transaction::Transaction(const std::string& logInfo)
 {
     ...
@@ -85,3 +86,4 @@ private:
     static std::string createLogString( parameters );
 };
 ```
+createLogString 이라는 정적 함수가 사용되고 있는 부분에 대해 잠깐 이야기 하려고요. 이 함수는 기본 클래스 생성자 쪽으로 넘길 값을 생성하는 용도로 쓰이는 도우미 함수인데, 기본 클래스에 멤버 초기화 리스트가 긴 경우에 특히 훨씬 편리합니다.
