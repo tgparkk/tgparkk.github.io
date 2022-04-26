@@ -49,7 +49,7 @@ public:
     ...                 // as before (이전과 동일)
 private:
     std::string name;
-    Date lastTransaction;
+    Date lastTransaction; // <- 추가된 멤버
 };
 ```
 At this point, the existing copying functions are performing a partial copy:  
