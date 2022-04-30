@@ -36,9 +36,9 @@ int days = daysHeld(pInv.get());    // fine, passes the raw pointer
 ```
 
 
-<img src="/assets/img/posts/item15_print.png" width="500" height="500" title='source'>
+<img src="/assets/img/posts/item15_print.png" width="500" height="500" title='item15_print'>
 
-<img src="/assets/img/posts/item15_source.png" width="800" height="500" title='source'>
+<img src="/assets/img/posts/item15_source.png" width="800" height="500" title='item15_source'>
 
 
 tr1::shared_ptr, auto_ptr은 포인터 역참조 연산자(operator-> 및 operator*)도 오버로딩하고 있습니다. 암시적 변환도 가능하죠
@@ -64,3 +64,7 @@ std::auto_ptr<Investment> pi2(createInvestment());  // have auto_ptr
 bool taxable2 = !((*pi2).isTaxFree());  // access resource
                                         // via operator* ..
 ```
+
+<img src="/assets/img/posts/item15_print2.png" width="500" height="500" title='item15_print2'>
+
+<img src="/assets/img/posts/item15_source2.png" width="800" height="500" title='item15_source2'>
