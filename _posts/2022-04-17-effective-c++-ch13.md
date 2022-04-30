@@ -48,7 +48,7 @@ void f()
 
 <img src="/assets/img/posts/item13_ctor_dtor.png" width="200" height="200" title='ctor_dtor'>
 
-<img src="/assets/img/posts/item13_source.png" width="500" height="500" title='ctor_dtor'>
+<img src="/assets/img/posts/item13_source.png" width="500" height="500" title='source'>
 
 
 
