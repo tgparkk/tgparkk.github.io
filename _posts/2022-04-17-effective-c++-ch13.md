@@ -50,7 +50,7 @@ void f()
 
 <img src="/assets/img/posts/item13_source.PNG" width="550" height="500" title='source'>
 
-
+위 소스는 Investment 소멸자에 virtual 을 붙이면 해결됩니다.(by item7)
 
 
 This looks okay, but there are several ways f could fail to delete the
