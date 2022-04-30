@@ -45,6 +45,14 @@ void f()
     delete pInv;                            // release object
 }
 ```
+
+<img src="/assets/img/posts/item13_ctor_dtor.png" width="200" height="200" title='ctor_dtor'>
+
+<img src="/assets/img/posts/item13_source.png" width="500" height="500" title='ctor_dtor'>
+
+
+
+
 This looks okay, but there are several ways f could fail to delete the
 investment object it gets from createInvestment.  
 
@@ -65,7 +73,9 @@ void f()
                                                         // delete pInv via 
                                                         // auto_ptr’s dtor
 ```
-아주 간단한 예제이지만, 자원 관리에 객체를 사용하는 방법의 중요한 두 가지 특징을 보여준다.
+아주 간단한 예제이지만, 자원 관리에 객체를 사용하는 방법의 중요한 두 가지 특징을 보여줍니다.  
+First.  are acquired and immediately turned over to resource-managing objects.
+
 
 
 
