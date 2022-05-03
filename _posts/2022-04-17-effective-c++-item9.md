@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Effective c++ ch9 - 객체 생성 및 소멸 과정 중에는 절대로 가상 함수를 호출하지 말자"
+title:  "Effective c++ item9 - 객체 생성 및 소멸 과정 중에는 절대로 가상 함수를 호출하지 말자"
 summary: "virtual function, destruction, c++"
 author: tgparkk
 date: '2022-04-19 22:38:23 +0530'
