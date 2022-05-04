@@ -3,7 +3,7 @@ layout: post
 title:  "Effective c++ item20 - '값에 의한 전달'보다는 '상수객체 참조자에 의한 전달' 방식을 택하는 편이 대개 낫다."
 summary: "reference to const"
 author: tgparkk
-date: '2022-05-01 01:12:23 +0530'
+date: '2022-05-04 20:12:23 +0530'
 category: C++
 keywords: reference to const, resource-managing, c++
 permalink: /blog/effective-cpp-item20/
