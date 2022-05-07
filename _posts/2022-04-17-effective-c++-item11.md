@@ -59,8 +59,15 @@ Widget::operator=(const Widget& rhs)    // unsafe impl. of operator=
     delete pb;                          // stop using current bitmap
     pb = new Bitmap(*rhs.pb);           // start using a copy of rhs’s bitmap
     return *this;                       // see Item 10
+
+                                        // this 는 함수가 호출된 객체를 
+                                        // 가리키는 포인터 이다.
 }
 ```
+
+# ***this 는 함수가 호출된 객체를 가리키는 포인터 이다.***
+
+
 The self-assignment problem here is that inside operator=, *this (the
 target of the assignment) and rhs could be the same object.  
 이 둘이 같은 객체이면, delete 연산자가 *this 객체의 비트맵에만 적용되는 것이 아나라 rhs의 객체까지 적용됩니다.  
