@@ -56,4 +56,17 @@ The fewer things can see it, the greater flexibility we have to change it,
 
 because our changes directly affect only those things that can see what we change.(***우리가 볼수있는 것만 직접적으로 변경할 수 있기 때문예요.***)  
 
-The second thing to note is that just because concerns about encapsulation dictate that a function be a non-member of one class doesn’t mean it can’t be a member of another class.(***주목할 점은 함수는 클래스의 비멤버가 되어야 한다는 말이 다른 클래스의 멤버가 될수 없다는 말은 아니다.***)
+The second thing to note is that just because concerns about encapsulation dictate that a function be a non-member of one class doesn’t mean it can’t be a member of another class.(***주목할 점은 함수는 클래스의 비멤버가 되어야 한다는 말이 다른 클래스의 멤버가 될수 없다는 말은 아니다.***)  
+
+어쨌든 이 함수가 WebBrowser 클래스의 멤버(혹은 프렌드)가 아니기만 하면 됩니다. WebBrowser가 가진 private 멤버의 캡슐화에 영향을 주지 않는다는 점이 중요하니까요.  
+C++로는 더 자연스런 방법을 구사할 수 있습니다.
+```c++
+namespace WebBrowser
+{
+    class WebBrowser {...};
+    
+    void clearBrowser(WebBrowser& wb); // clearBrowser를 비멤버로 두되, 같은 네임스페이스 안에 두는 것입니다.
+    
+    ...
+}
+```
