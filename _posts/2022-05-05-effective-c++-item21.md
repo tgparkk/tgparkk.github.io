@@ -77,3 +77,10 @@ w = x * y * z;      // same as operator*(operator*(x, y), z)
 이를 해결할 방법은 없는거 아시죠?  
 
 최후의 수단인 정적 객체 또한 스레드 안정성 문제, 
+```c++
+const Rational& operator*(const Rational& lhs,  // warning! more bad
+const Rational& rhs)                            // code!
+{
+    return Rational(lhs.n * rhs.n, lhs.d * rhs.d);
+}
+```
