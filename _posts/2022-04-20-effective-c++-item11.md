@@ -35,11 +35,13 @@ class Derived: public Base { ... };
 void doSomething(const Base& rb, // rb and *pd might actually be
                    Derived* pd); // the same object
 ```
-항목 13 및 14에 나온 조언을 따른다면 여러분은 자원 관리 용도로 항상 객체를 만들어야 할 것이고, 바로 이때 조심해야 하는 것이 대입 연산자입니다.  
+If you follow the advice of Items 13 and 14, you’ll always use objects to
+manage resources,  
+and you’ll make sure that the resource-managing objects behave well when copied.  
+When that’s the case, your assignment operators will probably be self-assignment-safe without your having to think about it.  
 
-어쩌다 보면 자원을 사용하기 전에 덜컥 해제해 버릴 수도 있을지 모릅니다.  
+자원관래 겍체를 사용하지 않는 경우도 있으니 아래 예시를 보죠.
 
-예를 들어 동적 할당된 비트맵을 가리키는 원시 포인터를 데이터 멤버로 갖는 클래스를 보시죠.
 ```c++
 class Bitmap { ... };
 
@@ -65,9 +67,7 @@ Widget::operator=(const Widget& rhs)    // unsafe impl. of operator=
 }
 ```
 
-# ***this 는 함수가 호출된 객체를 가리키는 포인터 이다.***
-
-
+## ***this 는 함수가 호출된 객체를 가리키는 포인터 이다.***
 The self-assignment problem here is that inside operator=, *this (the
 target of the assignment) and rhs could be the same object.  
 이 둘이 같은 객체이면, delete 연산자가 *this 객체의 비트맵에만 적용되는 것이 아나라 rhs의 객체까지 적용됩니다.  
@@ -85,11 +85,11 @@ Widget& Widget::operator=(const Widget& rhs)
 }
 ```
 This works, but I mentioned above that the previous version of operator= wasn’t just self-assignment-unsafe, it was also exception-unsafe,
-and this version continues to have exception trouble.  
-In particular, if
-the “new Bitmap” expression yields an exception (either because there
-is insufficient memory for the allocation or because Bitmap’s copy constructor throws one), the Widget will end up holding a pointer to a
-deleted Bitmap.
+and this version continues to have exception trouble.    
+
+In particular, if the “new Bitmap” expression yields an exception (either because there is insufficient memory for the allocation or because Bitmap’s copy constructor throws one),  
+
+the Widget will end up holding a pointer to a deleted Bitmap.
 
 ```c++
 Widget& Widget::operator=(const Widget& rhs)
@@ -115,3 +115,18 @@ Widget& Widget::operator=(const Widget& rhs)
     return *this;
 }
 ```
+A variation on this theme takes advantage of the facts that   
+(1) a class’s copy assignment operator may be declared to take its argument by value and  
+(2) passing something by value makes a copy of it (see Item 20):
+```c++
+Widget& Widget::operator=(Widget rhs)   // rhs is a copy of the object
+{                                       // passed in — note pass by val
+    swap(rhs);                          // swap *this’s data with
+                                        // the copy’s
+    return *this;
+}
+```
+Personally, I worry that this approach sacrifices clarity at the altar of
+cleverness,  
+but by moving the copying operation from the body of the function to construction of the parameter,
+it’s a fact that compilers can sometimes generate more efficient code(이유 모르겠음)
