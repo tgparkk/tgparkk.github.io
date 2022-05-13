@@ -12,23 +12,26 @@ usemathjax: true
 
 # 항목 12: 객체의 모든 부분을 빠짐없이 복사하자
 In well-designed object-oriented systems that encapsulate(캡슐화하다) the internal
-parts of objects, only two functions copy objects: the aptly(적절히) named
-copy constructor and copy assignment operator.  
+parts of objects, 
+ only two functions copy objects: the aptly(적절히) named
+***copy constructor*** and ***copy assignment operator***.  
 We’ll call these the copying functions.
 ```c++
 void logCall(const std::string& funcName);          // make a log entry
 class Customer {
 public:
     ...
-    Customer(const Customer& rhs);
-    Customer& operator=(const Customer& rhs);
+    Customer(const Customer& rhs);                  // copy constructor
+    Customer& operator=(const Customer& rhs);       // copy assignment operator
     ...
 private:
     std::string name;
 };
 
+
+//customer.cpp
 Customer::Customer(const Customer& rhs)
-    : name(rhs.name) // copy rhs’s data
+    : name(rhs.name)                                // copy rhs’s data
 {
     logCall("Customer copy constructor");
 }
@@ -102,3 +105,4 @@ PriorityCustomer::operator=(const PriorityCustomer& rhs)
 }
 
 ```
+
