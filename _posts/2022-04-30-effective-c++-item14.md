@@ -10,7 +10,7 @@ permalink: /blog/effective-cpp-item14/
 usemathjax: true
 ---
 
-# 항목 13: 자원 관리에는 객체가 그만!
+# 항목 14: 자원 관리 클래스의 복사 동작에 대해 진지하게 고챨하자
 Suppose we’re working with a library for modeling investments (e.g.,
 stocks, bonds, etc.), where the various investment types inherit from a
 root class Investment:  
