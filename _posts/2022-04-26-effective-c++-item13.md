@@ -76,6 +76,7 @@ void f()
 아주 간단한 예제이지만, 자원 관리에 객체를 사용하는 방법의 중요한 두 가지 특징을 보여줍니다.  
 First.  are acquired and immediately turned over to resource-managing objects.
 
+auto_ptr은 폐기 c++17부터
 
 
 
