@@ -20,3 +20,7 @@ void someFunc()
     std::cin >> x;  // read a new value for local x
 }
 ```
+<img src="/assets/img/posts/item33_grobal_somefunc.png" width="300" height="150" title='item33_grobal_somefunc'>
+
+When compilers are in someFunc’s scope and they encounter the name x, they look in the local scope to see if there is something with that name.  
+Because there is, they never examine any other scope.
