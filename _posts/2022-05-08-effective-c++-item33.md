@@ -47,3 +47,14 @@ public:
 ```
 
 <img src="/assets/img/posts/item33_base_derived.png" width="300" height="250" title='item33_base_derived'>
+
+Suppose mf4 in the derived class is implemented, in part, like this:
+```c++
+void Derived::mf4()
+{
+    ...
+    mf2();
+    ...
+}
+```
+When compilers see the use of the name mf2 here, they have to figure out what it refers to.
