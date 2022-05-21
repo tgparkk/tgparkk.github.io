@@ -57,4 +57,9 @@ void Derived::mf4()
     ...
 }
 ```
-When compilers see the use of the name mf2 here, they have to figure out what it refers to.
+When compilers see the use of the name mf2 here, they have to figure out what it refers to.  
+They do that by searching scopes for a declaration of something named mf2.  
+First they look in the local scope (that of mf4), but they find no declaration for anything called mf2. They then search the containing scope, that of the class Derived.  
+They still find nothing named mf2, so they move on to the next containing scope, that of the base class.  
+There they find something named mf2, so the search stops.  
+If there were no mf2 in Base, the search would continue, first to the namespace(s) containing Derived, if any, and finally to the global scope.
