@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Effective c++ item29 - 예외 안전성이 확보되는 그날 위해 싸우고 또 싸우자!"
-summary: " Strive for exception-safe code."
+summary: "Strive for exception-safe code."
 author: tgparkk
 date: '2022-05-17 17:45:23 +0530'
 category: C++
@@ -52,4 +52,17 @@ the call to unlock never gets executed, and the mutex is held forever.
 If “new Image(imgSrc)” throws, bgImage is left pointing to a deleted object.  
 In addition, imageChanges has been incremented,  
 even though it’s not true that a new image has been installed.  
-(On the other hand, the old image has definitely been eliminated, so I suppose you could argue that the image has been “changed.”)
+(On the other hand, the old image has definitely been eliminated, so I suppose you could argue that the image has been “changed.”)  
+
+Item 14 introduces the Lock class as a way to ensure that mutexes are released in a timely fashion:
+```c++
+void PrettyMenu::changeBackground(std::istream& imgSrc)
+{
+    Lock ml(&mutex);    // from Item 14: acquire mutex and
+                        // ensure its later release
+    delete bgImage;
+    ++imageChanges;
+    bgImage = new Image(imgSrc);
+}
+```
+With the resource leak behind us, we can turn our attention to the issue of data structure corruption.  

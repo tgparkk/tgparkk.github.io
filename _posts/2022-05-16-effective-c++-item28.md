@@ -60,3 +60,4 @@ public:
     ...
 };
 ```
+Even so, upperLeft and lowerRight are still returning handles to an object’s internals, and that can be problematic in other ways.
