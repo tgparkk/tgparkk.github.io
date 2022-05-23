@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Effective c++ item17 - new로 생성한 객체를 스마트 포인터에 저장하는 코드는 별도의 한 문장으로 만들자"
-summary: "shared_ptr"
+summary: "Store newed objects in smart pointers in standalone statements."
 author: tgparkk
 date: '2022-04-30 23:52:23 +0530'
 category: C++
@@ -38,3 +38,5 @@ std::tr1::shared_ptr<Widget> pw(new Widget);    // store newed object
 processWidget(pw, priority());                  // this call won’t leak
                                                 // 이제는 자원 누출 걱정이 없습니다.
 ```
+
+ Store newed objects in smart pointers in standalone statements.
