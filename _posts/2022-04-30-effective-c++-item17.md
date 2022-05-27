@@ -39,4 +39,6 @@ processWidget(pw, priority());                  // this call won’t leak
                                                 // 이제는 자원 누출 걱정이 없습니다.
 ```
 
- Store newed objects in smart pointers in standalone statements.
+ Store newed objects in smart pointers in standalone statements.  
+
+ - new로 생성한 객체를 스마트 포인터에 넣기전에 선언하고 담자.

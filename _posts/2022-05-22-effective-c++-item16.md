@@ -27,3 +27,8 @@ When you employ a ***delete*** expression (i.e., use delete), two other things h
 one or more destructors are called for the memory, then the memory is deallocated (via a function named operator delete — see Item 51).  
 The big question for delete is this: how many objects reside in the memory being deleted?  
 The answer to that determines how many destructors must be called.
+
+- new 와 delete 는 세트로
+- 배열로 선언할시엔 delete[]
+- typedef 로 정의된 배열로 된 타입은 new 로 할당하지 마세요
+- 표준 c++ 라이브러리, 예를들어 vector 를 사용하면 됩니다.
