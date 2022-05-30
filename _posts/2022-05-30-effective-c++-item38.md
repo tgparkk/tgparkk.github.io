@@ -32,7 +32,23 @@ template<typename T> // the wrong way to use list for Set
 class Set: public std::list<T> { ... };
 ```
 Everything may seem fine at this point, but in fact there is something quite wrong.  
-As Item 32 explains, if D is-a B, everything true of B is also true of D.  
+As Item 32 explains, if D ***is-a*** B, everything true of B is also true of D.  
 
 However, a list object may contain duplicates, so if the value 3051 is inserted into a list<int> twice, that list will contain two copies of 3051.  
-In contrast, a Set may not contain duplicates, so if the value 3051 is inserted into a Set<int> twice, the set contains only one copy of the value.
+In contrast, a Set may not contain duplicates, so if the value 3051 is inserted into a Set<int> twice, the set contains only one copy of the value.  
+
+The right way is to realize that a Set object can be implemented in terms of a list object:
+```c++
+template<class T>       // the right way to use list for Set
+class Set {
+public:
+    bool member(const T& item) const;
+    void insert(const T& item);
+    void remove(const T& item);
+    std::size_t size() const;
+private:
+    std::list<T> rep;   // representation for Set data 
+};
+```
+- Composition has meanings completely different from that of public inheritance. 
+- In the application domain, composition means has-a. In the implementation domain, it means is-implemented-in-terms-of
