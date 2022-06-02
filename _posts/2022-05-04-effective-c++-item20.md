@@ -74,5 +74,5 @@ bool validateStudent(const Student& s);
 
 
 
-
+- 함수 객체 타입?
 
