@@ -50,3 +50,12 @@ void doProcessing(T& w)
     }
 }
 ```
+Now what can we say about w in doProcessing?
+- The interface that w must support is determined by the operations performed on w in the template.  
+In this example, it appears that w’s type (T) must support the size, normalize, and swap member functions;  
+copy construction (to create temp); and comparison for inequality (for comparison with someNastyWidget).  
+We’ll soon see that this isn’t quite accurate, but it’s true enough for now. What’s important is that the set of expressions that must be valid in order
+for the template to compile is the ***implicit interface*** that T must support.
+-  The calls to functions involving w such as operator> and operator!= may involve instantiating templates to make these calls succeed.  
+Such instantiation occurs during compilation.  
+Because instantiating function templates with different template parameters leads to different functions being called, this is known as ***compile-time polymorphism***.
