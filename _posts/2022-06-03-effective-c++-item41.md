@@ -58,4 +58,20 @@ We’ll soon see that this isn’t quite accurate, but it’s true enough for no
 for the template to compile is the ***implicit interface*** that T must support.
 -  The calls to functions involving w such as operator> and operator!= may involve instantiating templates to make these calls succeed.  
 Such instantiation occurs during compilation.  
-Because instantiating function templates with different template parameters leads to different functions being called, this is known as ***compile-time polymorphism***.
+Because instantiating function templates with different template parameters leads to different functions being called, this is known as ***compile-time polymorphism***.  
+
+```c++
+template<typename T>
+void doProcessing(T& w)
+{
+    if (w.size() > 10 && w != someNastyWidget) { 
+        ...
+```
+The implicit interface for T (w’s type) appears to have these constraints:
+-  must offer a member function named size that returns an integral value.
+-  It must support an operator!= function that compares two objects of type T. (Here, we assume that someNastyWidget is of type T.)  
+
+
+
+
+you can’t try to use an object in a template unless that object supports the implicit interface the template requires (again, the code won’t compile).
