@@ -71,7 +71,7 @@ bool validateStudent(const Student& s);
 위 코드는 새로 만들어지는 객체가 없기 때문에, 생성자와 소멸자가 전혀 호출되지 않아요.
 
 
-
+const참조는 매개변수가 int면 4와같은 상수 대입 가능하다
 
 
 - 함수 객체 타입?
