@@ -76,3 +76,9 @@ const참조는 매개변수가 int면 4와같은 상수 대입 가능하다
 
 - 함수 객체 타입?
 
+
+<img src="/assets/img/posts/item20_value.png" width="600" height="300" title='item20_value'>
+
+<img src="/assets/img/posts/item20_const_reference.png" width="600" height="300" title='item20_const_reference'>
+
+<img src="/assets/img/posts/item20_reference.png" width="600" height="300" title='item20_reference'>
