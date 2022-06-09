@@ -49,8 +49,8 @@ A function can create a new object in only two ways: on the stack or
 on the heap. Creation on the stack is accomplished by defining a local
 variable.
 ```c++
-const Rational& operator*(const Rational& lhs, // warning! bad code!
-const Rational& rhs)
+const Rational& operator*(const Rational& lhs, const Rational& rhs) // warning! bad code!
+
 {
     Rational result(lhs.n * rhs.n, lhs.d * rhs.d);
     return result;
@@ -60,8 +60,7 @@ const Rational& rhs)
 
 자 다음, 힙에 생성해 뒀다가 그 녀석의 참조자를 반환하는 것은 어떨까요?
 ```c++
-const Rational& operator*(const Rational& lhs,  // warning! more bad
-const Rational& rhs)                            // code!
+const Rational& operator*(const Rational& lhs, const Rational& rhs) // warning! more bad code!                            
 {
     Rational *result = new Rational(lhs.n * rhs.n, lhs.d * rhs.d);
     return *result;
@@ -78,8 +77,7 @@ w = x * y * z;      // same as operator*(operator*(x, y), z)
 
 최후의 수단인 정적 객체 또한 스레드 안정성 문제, 
 ```c++
-const Rational& operator*(const Rational& lhs,
-const Rational& rhs)                            
+const Rational& operator*(const Rational& lhs, const Rational& rhs)                            
 {
     return Rational(lhs.n * rhs.n, lhs.d * rhs.d);
 }
