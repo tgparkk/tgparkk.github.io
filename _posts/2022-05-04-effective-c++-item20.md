@@ -78,6 +78,7 @@ const참조는 매개변수가 int면 4와같은 상수 대입 가능하다
 
 
 <img src="/assets/img/posts/item20_value.png" width="600" height="300" title='item20_value'>
+복사생성자도 구현해야지..
 
 <img src="/assets/img/posts/item20_const_reference.png" width="600" height="300" title='item20_const_reference'>
 
