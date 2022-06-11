@@ -82,3 +82,5 @@ const Rational& operator*(const Rational& lhs, const Rational& rhs)
     return Rational(lhs.n * rhs.n, lhs.d * rhs.d);
 }
 ```
+
+- 지역 스택 객체에 대한 포인터나 참조자를 반환하는 일, 혹은 힙에 할당된 객체에 대한 참조자를 반환하는 일, 

@@ -18,4 +18,5 @@ template<typename T> class Widget;  // uses “typename”
 ```
 Answer: nothing. When declaring a template type parameter, class and typename mean exactly the same thing.  
 
-C++ doesn’t always view class and typename as equivalent, however.
+C++ doesn’t always view class and typename as equivalent, however.  
+typename 을 써야만 할 때도 있습니다.
