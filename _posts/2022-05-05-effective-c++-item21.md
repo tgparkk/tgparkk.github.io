@@ -75,7 +75,9 @@ w = x * y * z;      // same as operator*(operator*(x, y), z)
 여기서는 한 문장 안에서 operator* 호출이 두 번 일어나고 있기 때문에, new에 짝을 맞추어 delete를 호출하는 작업도 두 번이 필요합니다.  
 이를 해결할 방법은 없는거 아시죠?  
 
-최후의 수단인 정적 객체 또한 스레드 안정성 문제, 
+최후의 수단인 정적 객체 또한 스레드 안정성 문제,
+
+아래와 같이 객체를 반환
 ```c++
 const Rational& operator*(const Rational& lhs, const Rational& rhs)                            
 {
