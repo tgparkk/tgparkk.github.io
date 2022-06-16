@@ -77,7 +77,7 @@ w = x * y * z;      // same as operator*(operator*(x, y), z)
 
 최후의 수단인 정적 객체 또한 스레드 안정성 문제,
 
-아래와 같이 객체를 반환
+아래와 같이 새로운 객체를 반환
 ```c++
 const Rational& operator*(const Rational& lhs, const Rational& rhs)                            
 {
