@@ -11,7 +11,7 @@ usemathjax: true
 ---
 
 # 항목 42: typename의 두 가지 의미를 제대로 파악하자
-uestion: what is the difference between class and typename in the following template declarations?
+question: what is the difference between class and typename in the following template declarations?
 ```c++
 template<class T> class Widget;     // uses “class”
 template<typename T> class Widget;  // uses “typename”
