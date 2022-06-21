@@ -59,3 +59,5 @@ public:
     void invert() { invert(n); }            // make inline call to base class
 };                                          // version of invert
 ```
+
+typedef template 구현
