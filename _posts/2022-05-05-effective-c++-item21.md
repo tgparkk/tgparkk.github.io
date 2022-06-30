@@ -86,3 +86,5 @@ const Rational& operator*(const Rational& lhs, const Rational& rhs)
 ```
 
 - 지역 스택 객체에 대한 포인터나 참조자를 반환하는 일, 혹은 힙에 할당된 객체에 대한 참조자를 반환하는 일, 
+
+- 참조는 어떤 객체의 또 다른 이름이기 때문에 괄호 안에서 만든 힙 객체를 참조로 반환하면 안되죠.
