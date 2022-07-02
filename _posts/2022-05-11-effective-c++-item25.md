@@ -58,4 +58,20 @@ private:
 To swap the value of two Widget objects, all we really need to do is
 swap their pImpl pointers, but the default swap algorithm has no way
 to know that. Instead, it would copy not only three Widgets, but also
-three WidgetImpl objects. Very inefficient. Not a thrill.
+three WidgetImpl objects. Very inefficient. Not a thrill.  
+
+따라서 std::swap 에다가 알려주는거죠. Widget 객체를 맞바꿀 때는 일방적인 방법을 쓰지 말고 내부의 pImpl 포인터만 맞바꾸라고 말입니다.  
+std::swap을 Widget에 대해 특수화 하는 것인데, 일단 기본 아이디어만 간단히 코드로 보죠
+```c++
+namespace std {
+template<>                      // this is a specialized version
+void swap<Widget>(Widget& a,    // of std::swap for when T is
+                    Widget& b)  // Widget
+{
+    swap(a.pImpl, b.pImpl);     // to swap Widgets, swap their
+}                               // pImpl pointers; 
+                                //this won’t compile
+}
+```
+함수 시작 부분 'template<>' 부분이 std::swap의 완전 템플릿 특수화(total template specialization) 함수라는 것을 컴파일러에게 알려주는 부분 입니다.  
+그리고 뒤에 '<Widget>'은 T가 Widget일 경우에 대한 특수화라는 사실을 알려 주는 부분입니다.
