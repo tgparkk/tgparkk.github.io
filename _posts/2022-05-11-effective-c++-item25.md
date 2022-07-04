@@ -75,3 +75,6 @@ void swap<Widget>(Widget& a,    // of std::swap for when T is
 ```
 함수 시작 부분 'template<>' 부분이 std::swap의 완전 템플릿 특수화(total template specialization) 함수라는 것을 컴파일러에게 알려주는 부분 입니다.  
 그리고 뒤에 '<Widget>'은 T가 Widget일 경우에 대한 특수화라는 사실을 알려 주는 부분입니다.
+
+일반적으로는 std 네임스페이스의 구성요소는 변경할 수 없지만, 직접만든타입(Widget)
+에 대해 표준 템플릿(swap)을 완전 특수화를 허용해요
