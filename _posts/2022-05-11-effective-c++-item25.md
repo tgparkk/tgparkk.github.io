@@ -77,4 +77,28 @@ void swap<Widget>(Widget& a,    // of std::swap for when T is
 그리고 뒤에 '<Widget>'은 T가 Widget일 경우에 대한 특수화라는 사실을 알려 주는 부분입니다.
 
 일반적으로는 std 네임스페이스의 구성요소는 변경할 수 없지만, 직접만든타입(Widget)
-에 대해 표준 템플릿(swap)을 완전 특수화를 허용해요
+에 대해 표준 템플릿(swap)을 완전 특수화를 허용해요.  
+
+방법으로는, Widget 안에 swap 이라는 public 멤버 함수를 선언하고 그 함수가 실제 맞바꾸기를 수행하도록 한 후에, std::swap의 특수화 함수에게 그 멤버 함수를 호출하는 일을 맡깁니다.
+```c++
+class Widget {                  // same as above, except for the
+public:                         // addition of the swap mem func
+...
+void swap(Widget& other)
+{
+    using std::swap;            // the need for this declaration
+                                // is explained later in this Item
+    swap(pImpl, other.pImpl);   // to swap Widgets, swap their
+}                               // pImpl pointers
+...
+};
+namespace std {
+template<>                      // revised specialization of
+void swap<Widget>(Widget& a,    // std::swap
+                    Widget& b)
+{
+    a.swap(b);                  // to swap Widgets, call their
+}                               // swap member function
+
+}
+```
