@@ -102,4 +102,20 @@ void swap<Widget>(Widget& a,    // std::swap
 
 }
 
-템플릿 클래스에 2부
+==============
+std::swap 은 복사 생성자만 지원을 하는 타입이기만 하면 어떤 타입의 객체이든 맞바꾸기 동작을 합니다.  
+std::swap 의 동작은 한 번의 호출에
+```c++
+namespace std {
+    template<typename T>    // typical implementation of std::swap;
+    void swap(T& a, T& b)   // swaps a’s and b’s values
+    {
+        T temp(a);
+        a = b;
+        b = temp;
+    }
+}
+```
+위와 같이 복사가 3번 일어나죠.  
+하지만 어떤 객체가 다른 타입의 실제 데이터를 가리키고 있는 포인터만 가지고 있다면,   
+비효율적인 std::swap 인거죠.
