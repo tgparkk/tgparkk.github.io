@@ -29,6 +29,9 @@ std::string encryptPassword(const std::string& password)
     return encrypted;
 }
 ```
+
+
+아래 방법또한 기본생성자를 호출, 항목4에서 배운 객체의 생성과 초기화를 동시에 하지 않죠.
 ```c++
 // this function postpones encrypted’s definition until it’s truly necessary
 std::string encryptPassword(const std::string& password)
@@ -44,14 +47,17 @@ std::string encryptPassword(const std::string& password)
 }
 ```
 
+아래 코드는 'encrypted' 라는 변수이름으로 변수를 정의함과 초기화를 동시에 하며(복사 생성자 쓰임),
+
 ```c++
 // finally, the best way to define and initialize encrypted
 std::string encryptPassword(const std::string& password)
 {
-    ...                         // import std and check length 
-    string encrypted(password); // define and initialize via copy
-                                // constructor
-    encrypt(encrypted);
+    ...                                 // import std and check length 
+    std::string encrypted(password);    // define and initialize via copy
+                                        // constructor
+
+    encrypt(encrypted);                 // 'encrypted' 를 암호화
     return encrypted;
 }
 ```
