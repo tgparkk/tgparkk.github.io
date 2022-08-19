@@ -40,7 +40,12 @@ class Rectangle {
 ```
 
 Point is a user-defined type, so, mindful of Item 20’s observation that passing user-defined types by reference is typically more efficient than passing them by value,  
-these functions return references to the underlying Point objects:
+these functions return references to the underlying Point objects:  
+
+- 함수 앞에 const , 함수 뒤에 const
+리턴값을 읽기 전용으로 사용하겠다는 의미
+- https://pangtrue.tistory.com/16
+
 ```c++
 class Rectangle {
 public:
@@ -60,4 +65,6 @@ public:
     ...
 };
 ```
-Even so, upperLeft and lowerRight are still returning handles to an object’s internals, and that can be problematic in other ways.
+Even so, upperLeft and lowerRight are still returning handles to an object’s internals, and that can be problematic in other ways.  
+
+객체 내부의 핸들(handle, 다른 객체에 손을 댈 수 있게 하는 매개자) 은 어떤행위를 하든(포인터이든, 참조자이든, 반복자이든, const를 붙였든) 하더라도 조심해야해요.
