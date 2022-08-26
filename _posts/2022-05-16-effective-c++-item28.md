@@ -68,3 +68,27 @@ public:
 Even so, upperLeft and lowerRight are still returning handles to an object’s internals, and that can be problematic in other ways.  
 
 객체 내부의 핸들(handle, 다른 객체에 손을 댈 수 있게 하는 매개자) 은 어떤행위를 하든(포인터이든, 참조자이든, 반복자이든, const를 붙였든) 하더라도 조심해야해요.
+
+- 함수 뒤에 const
+* 해당 멤버 함수 내에서는 모든 멤버 변수를 상수화 시킨다.
+(지역변수는 수정 가능)  
+
+- 함수 앞에 const
+* 함수의 리턴값을 상수화 시킨다.
+```c++
+class A
+{
+    int n;
+    const int func1()
+    {
+        n = 1
+        return n;
+    }
+}
+
+int main()
+{
+    A a;
+    int var = a.func1(); // error
+}
+```
