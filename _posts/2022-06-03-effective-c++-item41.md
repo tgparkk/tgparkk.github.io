@@ -35,8 +35,12 @@ void doProcessing(Widget& w)
 }
 ```
 we can say this about w in doProcessing:
-- Because w is declared to be of type Widget, w must support the Widget interface. We can look up this interface in the source code (e.g., the .h file for Widget) to see exactly what it looks like, so I call this an explicit interface — one explicitly visible in the source code.
+- Because w is declared to be of type Widget, w must support the Widget interface. We can look up this interface in the source code (e.g., the .h file for Widget) to see exactly what it looks like, so I call this an explicit interface — one explicitly visible in the source code.  
+(w는 Widget 타입이므로 w는 Widget 인터페이스를 지원해야 합니다.  
+이 인터페이스는 소스코드(예를들어 Widget.h)에서 찾으면 되죠. 이런 인터페이스를 가리켜 ***명시적 인터페이스*** 라고하죠.(소스코드에 명시적으로 드러나는 인터페이스))  
+
 - Because some of Widget’s member functions are virtual, w’s calls to those functions will exhibit runtime polymorphism: the specific function to call will be determined at runtime based on w’s dynamic type (see Item 37).  
+(Widget의 멤버함수에는 가상함수도 있죠, 이 가상함수에 대한 호출은 **런타임 다형성** 에 의해 이루어지죠. 즉, 특정한 함수에 대한 실제 호출은 w의 동적 타입을 기반으로 프로그램 실행 중, 즉 런타임에 결정됩낟.)
 
 The world of templates and generic programming is fundamentally different. In that world, explicit interfaces and runtime polymorphism continue to exist, but they’re less important. Instead, implicit interfaces and compile-time polymorphism move to the fore.
 ```c++
