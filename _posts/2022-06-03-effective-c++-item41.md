@@ -40,9 +40,10 @@ we can say this about w in doProcessing:
 이 인터페이스는 소스코드(예를들어 Widget.h)에서 찾으면 되죠. 이런 인터페이스를 가리켜 ***명시적 인터페이스*** 라고하죠.(소스코드에 명시적으로 드러나는 인터페이스))  
 
 - Because some of Widget’s member functions are virtual, w’s calls to those functions will exhibit runtime polymorphism: the specific function to call will be determined at runtime based on w’s dynamic type (see Item 37).  
-(Widget의 멤버함수에는 가상함수도 있죠, 이 가상함수에 대한 호출은 **런타임 다형성** 에 의해 이루어지죠. 즉, 특정한 함수에 대한 실제 호출은 w의 동적 타입을 기반으로 프로그램 실행 중, 즉 런타임에 결정됩낟.)
+(Widget의 멤버함수에는 가상함수도 있죠, 이 가상함수에 대한 호출은 **런타임 다형성** 에 의해 이루어지죠. 즉, 특정한 함수에 대한 실제 호출은 w의 동적 타입을 기반으로 프로그램 실행 중, 즉 런타임에 결정되죠.)
 
-The world of templates and generic programming is fundamentally different. In that world, explicit interfaces and runtime polymorphism continue to exist, but they’re less important. Instead, implicit interfaces and compile-time polymorphism move to the fore.
+The world of templates and generic programming is fundamentally different. In that world, explicit interfaces and runtime polymorphism(**) continue to exist, but they’re less important. Instead, implicit interfaces(*암시적 인터페이스*) and compile-time polymorphism(*컴파일 타임 다형성*) move to the fore.  
+To see how this is the case, look what happens when we turn doProcessing from a function into a function template:
 ```c++
 template<typename T>
 void doProcessing(T& w)
@@ -61,7 +62,7 @@ copy construction (to create temp); and comparison for inequality (for compariso
 We’ll soon see that this isn’t quite accurate, but it’s true enough for now. What’s important is that the set of expressions that must be valid in order
 for the template to compile is the ***implicit interface*** that T must support.
 -  The calls to functions involving w such as operator> and operator!= may involve instantiating templates to make these calls succeed.  
-Such instantiation occurs during compilation.  
+Such instantiation occurs during compilation.(w가 수반되는 함수 호출이 일어날 때, 컴파일 시점에 템플릿의 인스턴스화가 일어나요.)  
 Because instantiating function templates with different template parameters leads to different functions being called, this is known as ***compile-time polymorphism***.  
 
 ```c++
@@ -75,7 +76,4 @@ The implicit interface for T (w’s type) appears to have these constraints:
 -  must offer a member function named size that returns an integral value.
 -  It must support an operator!= function that compares two objects of type T. (Here, we assume that someNastyWidget is of type T.)  
 
-
-
-
-you can’t try to use an object in a template unless that object supports the implicit interface the template requires (again, the code won’t compile).
+Thanks to the possibility of operator overloading, neither of these constraints need be satisfied.
