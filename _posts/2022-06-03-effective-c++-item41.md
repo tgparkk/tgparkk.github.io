@@ -72,8 +72,10 @@ void doProcessing(T& w)
     if (w.size() > 10 && w != someNastyWidget) { 
         ...
 ```
-The implicit interface for T (w’s type) appears to have these constraints:
+The implicit interface for T (w’s type) appears to have these constraints:  
+(T 에 대한 암시적 인터페이스는 다음과 같은 제약을 나타내겠지요.)
+
 -  must offer a member function named size that returns an integral value.
 -  It must support an operator!= function that compares two objects of type T. (Here, we assume that someNastyWidget is of type T.)  
 
-Thanks to the possibility of operator overloading, neither of these constraints need be satisfied.
+Thanks to the possibility of operator overloading, neither of these constraints need be satisfied.(연산자 오버로딩덕에 두 제약조건 모두 필요로 하지 않아요.)
