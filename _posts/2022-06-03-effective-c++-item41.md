@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Effective c++ item41 - "템플릿 프로그래밍의 천릿길도 암시적 인터페이스와 컴파일 타임 다형성부터"
-summary: "Understand implicit interfaces and compiletime polymorphism."
+title:  "Effective c++ item41 - 템플릿 프로그래밍의 천릿길도 암시적 인터페이스와 컴파일 타임 다형성부터"
+summary: "."
 author: tgparkk
 date: '2022-09-02 18:45:23 +0530'
 category: C++
