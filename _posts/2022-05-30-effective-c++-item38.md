@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Effective c++ item38 - ""has-a" 혹은 "is-implemented-in-terms-of"를 모형화할 때는 객체 합성을 사용하자"
+title:  "Effective c++ item38 -has-a 혹은 is-implemented-in-terms-of를 모형화할 때는 객체 합성을 사용하자"
 summary: "Model “has-a” or “is-implemented-in-terms of” through composition."
 author: tgparkk
 date: '2022-05-30 18:45:23 +0530'
