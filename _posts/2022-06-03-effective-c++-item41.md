@@ -42,7 +42,11 @@ we can say this about w in doProcessing:
 - Because some of Widget’s member functions are virtual, w’s calls to those functions will exhibit runtime polymorphism: the specific function to call will be determined at runtime based on w’s dynamic type (see Item 37).  
 (Widget의 멤버함수에는 가상함수도 있죠, 이 가상함수에 대한 호출은 **런타임 다형성** 에 의해 이루어지죠. 즉, 특정한 함수에 대한 실제 호출은 w의 동적 타입을 기반으로 프로그램 실행 중, 즉 런타임에 결정되죠.)
 
+
 The world of templates and generic programming is fundamentally different. In that world, explicit interfaces and runtime polymorphism(**) continue to exist, but they’re less important. Instead, implicit interfaces(*암시적 인터페이스*) and compile-time polymorphism(*컴파일 타임 다형성*) move to the fore.  
+*** 
+템플릿과 일반화 프로그래밍의 근본적으로 다른 부분은 암시적 인터페이스와 컴파일 타임 다형성에서 나타나요.(명시적 인터페이스 및 런타임 다형성은 그대로 존재)
+***
 To see how this is the case, look what happens when we turn doProcessing from a function into a function template:
 ```c++
 template<typename T>
@@ -64,6 +68,7 @@ for the template to compile is the ***implicit interface*** that T must support.
 -  The calls to functions involving w such as operator> and operator!= may involve instantiating templates to make these calls succeed.  
 Such instantiation occurs during compilation.(w가 수반되는 함수 호출이 일어날 때, 컴파일 시점에 템플릿의 인스턴스화가 일어나요.)  
 Because instantiating function templates with different template parameters leads to different functions being called, this is known as ***compile-time polymorphism***.  
+(인스턴스화를 진행하는 함수 템플릿에 어떤 템플릿 매개변수가 들어가느냐에 따라 호출되는 함수가 달라지기 때문에, 이것을 ***컴파일 타임 다형성*** 이라고 해요.)
 
 ```c++
 template<typename T>
