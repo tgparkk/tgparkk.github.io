@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Effective c++ item44 - "매개변수에 독립적인 코드는 템플릿으로부터 분리시키자."
+title:  "Effective c++ item44 - 매개변수에 독립적인 코드는 템플릿으로부터 분리시키자."
 summary: "Factor parameter-independent code out of 
 templates."
 author: tgparkk

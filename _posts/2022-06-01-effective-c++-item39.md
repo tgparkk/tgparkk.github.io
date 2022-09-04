@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Effective c++ item39 - "private 상속은 심사숙고해서 구사하자"
+title:  "Effective c++ item39 - private 상속은 심사숙고해서 구사하자"
 summary: "Use private inheritance judiciously."
 author: tgparkk
 date: '2022-06-01 12:45:23 +0530'

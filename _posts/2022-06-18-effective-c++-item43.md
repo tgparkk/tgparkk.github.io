@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Effective c++ item43 - "템플릿으로 만들어진 기본 클래스 안의 이름에 접근하는 방법을 알아 두자"
+title:  "Effective c++ item43 - 템플릿으로 만들어진 기본 클래스 안의 이름에 접근하는 방법을 알아 두자"
 summary: " Know how to access names in templatized base classes."
 author: tgparkk
 date: '2022-06-18 22:45:23 +0530'

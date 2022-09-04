@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Effective c++ item40 - "다중 상속은 심사숙고해서 사용하자"
+title:  "Effective c++ item40 - 다중 상속은 심사숙고해서 사용하자"
 summary: "Use multiple inheritance judiciously."
 author: tgparkk
 date: '2022-06-02 21:45:23 +0530'

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Effective c++ item42 - "typename의 두 가지 의미를 제대로 파악하자"
+title:  "Effective c++ item42 - typename의 두 가지 의미를 제대로 파악하자"
 summary: "Understand the two meanings of typename."
 author: tgparkk
 date: '2022-06-10 18:45:23 +0530'
