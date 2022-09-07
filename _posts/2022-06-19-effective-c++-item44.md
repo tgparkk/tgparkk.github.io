@@ -15,13 +15,13 @@ usemathjax: true
 템플릿의 단점은 ***코드 비대화(code bloat)*** 가 초래되는 것이죠.  
 똑같은(거의 똑같은) 내용의 코드와 데이터가 여러 벌로 중복되어 이진 파일로 생성되는 점 입니다.  
 소스코드의 중복은 명시적이지만, 템플릿은 암시적이므로 판별하기 힘들죠.
-```c++
-template<typename T,    // template for n x n matrices of
-std::size_t n>          // objects of type T; see below for info
-class SquareMatrix {    // on the size_t parameter
+```c++      
+                                        // template for n x n matrices of
+template<typename T, std::size_t n>     // objects of type T; see below for info
+class SquareMatrix {                    // on the size_t parameter
 public:
     ...
-    void invert();      // invert the matrix in place
+    void invert();                      // invert the matrix in place
 };
 ```
 This template takes a type parameter, T, but it also takes a parameter of type size_t — a non-type parameter.  
@@ -59,5 +59,7 @@ public:
     void invert() { invert(n); }            // make inline call to base class
 };                                          // version of invert
 ```
-
-typedef template 구현
+- 행렬의 크기를 매개변수로 받도록 바뀐 invert 함수가 기본 클래스인 SquareMatrixBase에 들어 있죠.  
+- SquareMatrixBase, SquareMatrix 모두 같은 템플릿 이지만 SquareMatrix 행렬의 크기를 매개변수로 받죠.
+- 따라서 같은 타입의 객체를 원소로 갖는 모든 정방행렬은 오직 한 가지의 SquareMatrixBase 클래스를 공유하게 되죠.
+- 다시 말해, 같은 원소 타입의 정방행렬이 사용하는 기본 클래스 버전의 invert 함수도 오직 한 개의 사본이죠.
