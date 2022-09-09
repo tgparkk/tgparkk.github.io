@@ -60,6 +60,10 @@ public:
 };                                          // version of invert
 ```
 - 행렬의 크기를 매개변수로 받도록 바뀐 invert 함수가 기본 클래스인 SquareMatrixBase에 들어 있죠.  
-- SquareMatrixBase, SquareMatrix 모두 같은 템플릿 이지만 SquareMatrix 행렬의 크기를 매개변수로 받죠.
+- SquareMatrixBase, SquareMatrix 모두 같은 템플릿 이지만 SquareMatrix는 행렬의 크기를 매개변수로 받죠.
 - 따라서 같은 타입의 객체를 원소로 갖는 모든 정방행렬은 오직 한 가지의 SquareMatrixBase 클래스를 공유하게 되죠.
-- 다시 말해, 같은 원소 타입의 정방행렬이 사용하는 기본 클래스 버전의 invert 함수도 오직 한 개의 사본이죠.
+- 다시 말해, 같은 원소 타입의 정방행렬이 사용하는 기본 클래스 버전의 invert 함수도 오직 한 개의 사본이죠.  
+---
+- SquareMatrix::invert 함수는 파생 클래스에서 코드 복제를 피할 목적으로만 마련한 장치이기 때문에,  
+public 멤버가 아닌 protected 멤버로 되어 있죠.
+- 참고로, 이 함수의 호출에 드는 추가 비용은 하나도 없어야 합니다. 기본 클래스의 invert함수를 호출하도록 구현된 파생 클래스의 invert 함수가 바로 인라인 함수이니까요.(암시적 인라인)
