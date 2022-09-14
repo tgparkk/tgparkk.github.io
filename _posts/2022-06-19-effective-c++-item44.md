@@ -70,4 +70,19 @@ public 멤버가 아닌 protected 멤버로 되어 있죠.
 ---
 - 아직 해결하지 못한 부분은 SquareMatrixBase::invert 함수는 자신이 상대할 데이터가 어떤 것인지 알려야 하는데(크기는 매개변수로 받지만 진짜 행렬을 저장한 데이터가 어디에 있는지), 알려야해요.
 - 정방행렬의 메모리 위치를 파생 클래스가 기본 클래스로 넘겨주면 되겠죠.
-1. 첫번째 방법으로는 SquareMatrixBase::invert 함수가 매개변수를 하나 더 받도록 하는것이죠
+1. 첫번째 방법으로는 SquareMatrixBase::invert 함수가 매개변수를 하나 더 받도록 하는것이죠.  
+이 매개변수는 아마도 행렬 데이터가 들어 있는 메모리 덩어리의 시작주소를 가리키는 포인터일 것이예요.  
+하지만 SquareMatrix의 함수 중에 invert처럼 행렬 크기에 상관없는 동작방식을 갖기 때문에 SquareMatrixBase에 옮겨 놓아야 하는 함수가 invert 하나만 있지 않겠지요.
+```c++
+template<typename T>
+class SquareMatrixBase {
+protected:
+    SquareMatrixBase(std::size_t n, T *pMem)    // store matrix size and a
+    : size(n), pData(pMem) {}                   // ptr to matrix values
+    void setDataPtr(T *ptr) { pData = ptr; }    // reassign pData
+    ...
+private:
+    std::size_t size;                           // size of matrix
+    T *pData;                                   // pointer to matrix values
+};
+```
