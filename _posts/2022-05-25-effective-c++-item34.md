@@ -102,7 +102,6 @@ public:
     ...
 };
 
-
 void Airplane::fly(const Airport& destination)  // an implementation of
 {                                               // a pure virtual function
     // default code for flying an airplane to the given destination

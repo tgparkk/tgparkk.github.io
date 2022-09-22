@@ -124,7 +124,8 @@ private:
 
 SquareMatrix’s member functions can be simple inline calls to (non-inline) base class versions that are shared with all other matrices holding the same type of data,
 
-
 ---
-
 ---
+At the same time, SquareMatrix objects of different sizes are distinct types, so even though, e.g.,  
+
+SquareMatrix<double, 5> and SquareMatrix<double, 10> objects use the same member functions in SquareMatrixBase<double>, there’s no chance of passing a SquareMatrix<double, 5> object to a function expecting a SquareMatrix<double, 10>
