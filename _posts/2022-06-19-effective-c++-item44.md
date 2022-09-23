@@ -122,10 +122,10 @@ private:
 };                                      // boost::scoped_array
 ```
 
-SquareMatrix’s member functions can be simple inline calls to (non-inline) base class versions that are shared with all other matrices holding the same type of data,
+SquareMatrix’s member functions can be simple inline calls to (non-inline) base class versions that are shared with all other matrices holding the same type of data, regardless of their size.
 
 ---
 ---
-At the same time, SquareMatrix objects of different sizes are distinct types, so even though, e.g.,  
+At the same time, SquareMatrix objects of different sizes are distinct types, so even though, e.g.,(이와 동시에, 다른사이즈의 SquareMatrix 객체는 고유의 타입을 가져요.)
 
 SquareMatrix<double, 5> and SquareMatrix<double, 10> objects use the same member functions in SquareMatrixBase<double>, there’s no chance of passing a SquareMatrix<double, 5> object to a function expecting a SquareMatrix<double, 10>
