@@ -123,3 +123,63 @@ auto& func2 = someFunc;      // func2의 타입은
 ```
 
 ### 이제 다른 점을 보죠.
+```c++
+// 우선, 27을 초기 값으로 해서
+// int 변수를 선언하는 예를 살펴보자.
+ 
+// C++98에서는 다음 두 가지 구문이
+// 가능했다.
+ 
+int x1 = 27;
+int x2(27);
+ 
+// 균일 초기화(uniform initialization)를
+// 지원하는 C++11에서는 위의 두 구문과
+// 더불어 다음과 같은 구문들을 사용할
+// 수도 있다.
+ 
+int x3 = { 27 };
+int x4{ 27 };
+
+// 위 4개를 auto를 사용하면
+auto x1 = 27;
+auto x2(27);
+auto x3 = { 27 };
+auto x4{ 27 };
+// 처음 두 선언문은 실제로 타입이
+// int이고 값이 27인 변수를 선언한다.
+ 
+// 그러나 나머지 둘은 값이 27인 원소 하나를 담은
+// std::initializer_list<int> 타입의 변수를 선언한다!
+
+------------------------------------------------------
+// auto로 선언된 변수의 초기치(initializer)가
+// 중괄호 쌍으로 감싸인 형태이면, 추론된
+// 타입은 std::initializer_list이다.
+ 
+// 만일 그런 타입을 추론할 수 없으면
+// (이를테면 중괄호 초기치의 값들의
+// 타입이 서로 달라서) 컴파일이 거부된다.
+ 
+auto x5 = { 1, 2, 3.0 };    // 오류! std::initializer_list<T>의
+                            // T를 추론할 수 없음
+
+```
+
+```c++
+template <typename T>       // x의 선언에 해당하는 매개변수
+void f(T param);            // 선언을 가진 템플릿
+ 
+f({ 11, 23, 9 });           // 오류! T에 대한 타입을 추론할 수 없음
+
+// 하지만 param의 타입이 어떤 알려지지 않은 T에 대한
+// std::initializer_list<T>인 템플릿에 그 중괄호 초기치를
+// 전달하면 템플릿 타입 추론 규칙들에 의해 T의 타입이
+// 제대로 추론된다.
+ 
+template <typename T>
+void f(std::initializer_list<T> initList);
+ 
+f({ 11, 23, 9 });            // T는 int로 추론되며, initList의 타입은
+                            // std::initializer_list<int>로 추론된다.
+```
