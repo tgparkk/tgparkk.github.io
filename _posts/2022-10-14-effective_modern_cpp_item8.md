@@ -10,7 +10,7 @@ permalink: /blog/effective_modern_cpp_item8/
 usemathjax: true
 ---
 
-# 항목 3: 0과 NULL
+# 항목 8: 0 과 NULL 보다는 nullptr를 선호하라
 비록 c++가 0을 널 포인터로 해석하지만, 0은 int이지만 포인터는 아닙니다.  
 NULL 도 컴파일러에 따라 int 가 아닌 long 으로 정의될수도 있죠.
 
