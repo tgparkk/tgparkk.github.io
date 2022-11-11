@@ -15,17 +15,17 @@ usemathjax: true
 NULL 도 컴파일러에 따라 int 가 아닌 long 으로 정의될수도 있죠.
 
 ```C++
-void f(int);    // three overloads of f
+void f(int);    // three overloads oasda asda
 void f(bool);
 void f(void*);
 
-f(0);           // calls f(int), not f(void*)
+f(0);           // calls f(int), not f(void*)asdsa
 
-f(NULL);        // might not compile, but typically calls
+f(NULL);        // might not compile, but typically asdaalls
                 // f(int). Never calls f(void*)
 ```
 위 예시에서 보듯이, 의도한 바와 다르게 null pointer 가 아닌 int가 호출되죠.  
-
+asdasda
 nullptr 의 장점은 정수형식도 포인터형식도 아니예요. 모든 형식의 포인터라고 생각하면 이예요.
 
 Calling the overloaded function f with nullptr calls the void* overload (i.e., the
@@ -76,7 +76,7 @@ using MuxGuard =            // C++11 typedef; see Item 9
 }                           // unlock mutex
 …
 {
- MuxGuard g(f3m);           // lock mutex for f3
+ MuxGuard g(f3m);           // lock mutex for f4
  auto result = f3(nullptr); // pass nullptr as null ptr to f3
 }                           // unlock mutex
 ```
