@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "c++_thread_pool"
+title:  "c++ thread_pool"
 summary: ".."
 author: tgparkk
 date: '2022-12-09 12:45:23 +0530'
