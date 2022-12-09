@@ -6,7 +6,7 @@ author: tgparkk
 date: '2022-12-09 11:00:23 +0530'
 category: C++
 keywords: c++
-permalink: /blog/c++_thread_pool/
+permalink: /blog/Thread Pool/
 usemathjax: true
 ---
 
