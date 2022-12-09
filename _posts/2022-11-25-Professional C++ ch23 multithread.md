@@ -112,3 +112,28 @@ int main()
 	return 0;
 }
 ```
+
+
+
+int test = 1;  
+atomic<int> test(1);
+atomic<>
+
+bool b = false;
+
+if(!b)
+{
+    b = true;
+}
+
+if(b)
+{
+
+}
+
+
+{
+    ABC a(a);
+    auto b = std::move(a);
+    
+}
