@@ -75,6 +75,7 @@ usemathjax: true
 ## 쓰레드 동기화
 - 뮤텍스(Mutex)
 - 'Mutual Exclusion' 의 줄임 말로써 쓰레드의 동시접근을 허용하지 않아요.
+
 ```c++
 pthread_mutex_lock(&mutex)
 // 임계영역의 시작
