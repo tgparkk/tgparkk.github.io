@@ -183,3 +183,31 @@ int main()
 ```
 
 <img src="/assets/img/posts/whyWeUseMove.PNG" width="200" height="400" title='whyWeUse std::move'>
+
+
+
+```c++
+static 메서드
+```
+객체 정보에 접근하지 않는 멤버함수는 static 으로 정의 할 수 있습니다.
+```c++
+class SpreadSheetCell
+{
+private:
+	static std::string doubleToString(double inValue);
+}
+//
+// static 메서드는 특정 객체에 호출되지 않기 때문에 this 포인터를 가질 수 없어요.
+// 또한, 어떤 객체의 non-static 멤버에 접근하는 용도로 호출할 수 없어요.
+// static 메서드는 근본적으로 일반 함수와 비슷하지만 클래스의 private static 이나 protected static 멤버만 접근할 수 있어요.
+
+// 클래스 밖에서는 메서드이름 앞에 스코프 지정연산자(::) 를 이용하여 클래스 이름을 붙여야 해요.(== 클래스 외부에서 호출 가능)
+```
+
+```c++
+const 메서드
+메서드 안에서 데이터 멤버를 변경하지 않는다고 보장하고 싶을때
+(static 메서드는 근본적으로 클래스의 인스턴스에 속하지 않아 객체 내부의
+값을 변경할 수 없기 때문에 static 메서드에 const 키워드를 붙이는 것은 의미가 없어요.)
+
+```
