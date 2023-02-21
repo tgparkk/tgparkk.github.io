@@ -46,3 +46,5 @@ WHERE o.OrderID = 10249
       ON d.OrderID = o.OrderID
    WHERE d.OrderID = 10249
 ```
+
+![semantic_error](https://user-images.githubusercontent.com/45591830/220256210-20023fa9-bd95-4bc3-b51c-0a1292cf42c3.png)
