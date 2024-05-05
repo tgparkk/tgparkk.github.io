@@ -30,8 +30,8 @@ var store = [{
         "teaser": null
       },{
         "title": "mssql 에서 파일 압축과 전송",
-        "excerpt":" ","categories": ["data-engineering","mssql"],
-        "tags": [],
-        "url": "/data-engineering/mssql/mssql_data_send_compress/",
+        "excerpt":"test   가나다라  ","categories": ["mssql"],
+        "tags": ["sql","mssql","cmd"],
+        "url": "/mssql/mssql_data_send_compress/",
         "teaser": null
       }]
