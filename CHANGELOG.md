@@ -1337,7 +1337,7 @@
 - Add contributing information to `README.md`. [#357](https://github.com/mmistakes/minimal-mistakes/issues/357)
 
 ## [3.2.7](https://github.com/mmistakes/minimal-mistakes/releases/tag/3.2.7)
-
+`
 ### Enhancements
 
 - Add French localized UI text. [#346](https://github.com/mmistakes/minimal-mistakes/pull/346)
