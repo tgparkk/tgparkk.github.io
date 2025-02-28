@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    
+    <!-- 중요: CSS 파일 링크 -->
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | absolute_url }}">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ '/' | relative_url }}">Home</a></li>
+                    <li><a href="{{ '/about/' | relative_url }}">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            {{ content }}
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3>About This Blog</h3>
+                    <p>Deep dives into C++, async multi-threading, rendering, Windows development, and game programming.</p>
+                </div>
+                <div class="footer-section links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="{{ '/' | relative_url }}">Home</a></li>
+                        <li><a href="{{ '/about/' | relative_url }}">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section social">
+                    <h3>Connect</h3>
+                    <div class="social-icons">
+                        <a href="https://github.com/tgparkk" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 자바스크립트 파일 링크 -->
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>
