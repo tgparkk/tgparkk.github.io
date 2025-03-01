@@ -9,7 +9,8 @@ excerpt: "고성능 비동기 네트워크 프로그래밍에서 메모리 관�
 
 # 메모리 풀을 활용한 비동기 네트워크 송신 버퍼 최적화
 
-![Memory Pool Architecture](/assets/images/memory_pool_architecture.png)
+![Memory Pool Architecture](https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Memory_Pool.svg/250px-Memory_Pool.svg.png)
+
 
 고성능 네트워크 애플리케이션을 개발할 때 가장 중요한 요소 중 하나는 효율적인 메모리 관리입니다. 특히 비동기 네트워크 I/O가 많이 발생하는 서버에서는 메모리 할당과 해제가 매우 빈번하게 일어나므로, 이를 최적화하는 것이 전체 시스템 성능에 큰 영향을 미칩니다. 이 글에서는 ASIO 기반 비동기 네트워킹에서 SendBuffer 클래스의 메모리 풀 활용 방법, 그 구현 원리와 성능 이점에 대해 자세히 살펴보겠습니다.
 
@@ -71,7 +72,7 @@ void SendData(const char* data, size_t size) {
 
 우리 서버 아키텍처에서는 다음과 같은 구조로 메모리 풀을 구현했습니다:
 
-![SendBuffer Architecture](/assets/images/sendbuffer_architecture.png)
+![SendBuffer Architecture](/assets/images/SendBufferChunk.svg)
 
 ### SendBufferChunk
 
@@ -241,7 +242,7 @@ TLS를 활용하면:
 | 메모리 풀 (기본) | 1,245 | 32.1 | 62 |
 | 메모리 풀 (TLS 최적화) | 1,587 | 26.8 | 41 |
 
-![Performance Comparison](/assets/images/memory_pool_performance.png)
+![Performance Comparison](/assets/images/MemoryPoolPerformanceComparison.svg)
 
 ### 지연 시간 분포
 
@@ -406,7 +407,7 @@ void SendBufferManager::Init(size_t poolSize)
 ---
 
 ## 참고 자료
-
+- 메모리 풀 아키텍처 이미지: [Wikipedia](https://en.wikipedia.org/wiki/File:Memory_Pool.svg)
 - [Boost.ASIO 공식 문서](https://www.boost.org/doc/libs/release/doc/html/boost_asio.html)
 - [C++ High Performance](https://www.packtpub.com/product/c-high-performance-second-edition/9781839216541)
 - [Game Programming Patterns - Object Pool Pattern](https://gameprogrammingpatterns.com/object-pool.html)
