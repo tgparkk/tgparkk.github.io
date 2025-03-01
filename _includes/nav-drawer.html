@@ -25,9 +25,12 @@
           <ul class="dropdown-menu">
             <li><a href="{{ site.baseurl }}/categories/all/">All Posts</a></li>
             <li class="dropdown-divider"></li>
-            {% for category in site.categories %}
-              <li><a href="{{ site.baseurl }}/categories/{{ category[0] | slugify }}/">{{ category[0] }}</a></li>
-            {% endfor %}
+            <!-- 원하는 카테고리만 표시 -->
+            <li><a href="{{ site.baseurl }}/categories/cpp/">cpp</a></li>
+            <li><a href="{{ site.baseurl }}/categories/async_servers/">async_servers</a></li>
+            <li><a href="{{ site.baseurl }}/categories/gamedev/">gamedev</a></li>
+            <li><a href="{{ site.baseurl }}/categories/rendering/">rendering</a></li>
+            <li><a href="{{ site.baseurl }}/categories/windows/">windows</a></li>
           </ul>
         </li>
       </ul>
