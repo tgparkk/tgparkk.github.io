@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<section class="recent-posts">
+  <div class="container">
+    <h2>Recent Posts</h2>
+    
+    <div class="post-list">
+      {% for post in site.posts %}
+      <div class="post-item">
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <div class="post-meta">
+          <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+          {% if post.categories %}
+          <span class="post-category">
+            {% for category in post.categories %}
+            <a href="{{ '/categories/' | append: category | relative_url }}">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
+            {% endfor %}
+          </span>
+          {% endif %}
+        </div>
+        <div class="post-excerpt">
+          {{ post.excerpt | strip_html | truncatewords: 50 }}
+        </div>
+        <a href="{{ post.url | relative_url }}" class="read-more">Read More →</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

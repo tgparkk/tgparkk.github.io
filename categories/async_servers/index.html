@@ -1,0 +1,80 @@
+---
+layout: default
+title: "async_servers 관련 글"
+---
+
+<div class="category-page">
+  <h1 class="category-title">카테고리: async_servers</h1>
+        
+  <ul class="post-list">
+    {% assign category_posts = site.categories.async_servers %}
+    {% if category_posts.size > 0 %}
+      {% for post in category_posts %}
+        <li>
+          <span class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
+          <h2>
+            <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+          </h2>
+          {% if post.excerpt %}
+            <div class="post-excerpt">
+              {{ post.excerpt | strip_html | truncatewords: 50 }}
+              <a href="{{ post.url | relative_url }}" class="read-more">Read more</a>
+            </div>
+          {% endif %}
+        </li>
+      {% endfor %}
+    {% else %}
+      <li>이 카테고리에 작성된 게시물이 없습니다.</li>
+    {% endif %}
+  </ul>
+</div>
+
+<style>
+  .category-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .category-title {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  
+  .post-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .post-list li {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .post-meta {
+    color: #666;
+    font-size: 0.9em;
+  }
+  
+  .post-link {
+    display: block;
+    font-size: 1.5em;
+    text-decoration: none;
+    margin: 5px 0;
+  }
+  
+  .post-excerpt {
+    margin-top: 10px;
+    color: #444;
+  }
+  
+  .read-more {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 0.9em;
+    text-decoration: none;
+    color: #0366d6;
+  }
+</style>
