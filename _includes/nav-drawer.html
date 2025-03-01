@@ -1,0 +1,226 @@
+<div class="nav-drawer-container">
+  <!-- 햄버거 아이콘 버튼 -->
+  <button id="nav-drawer-toggle" class="nav-drawer-toggle">
+    <span class="hamburger-icon">☰</span>
+  </button>
+  
+  <!-- 드로워 오버레이 (배경 어둡게) -->
+  <div id="nav-drawer-overlay" class="nav-drawer-overlay"></div>
+  
+  <!-- 드로워 콘텐츠 -->
+  <div id="nav-drawer" class="nav-drawer">
+    <div class="nav-drawer-header">
+      <h2>메뉴</h2>
+    </div>
+    <div class="nav-drawer-content">
+      <ul class="nav-links">
+        <li><a href="{{ site.baseurl }}/">Home</a></li>
+        <li><a href="{{ site.baseurl }}/about/">About</a></li>
+        
+        <!-- 카테고리 드롭다운 메뉴 -->
+        <li id="category-dropdown" class="dropdown">
+          <div id="category-toggle" class="dropdown-toggle">
+            Categories <span class="dropdown-icon">▼</span>
+          </div>
+          <ul class="dropdown-menu">
+            <li><a href="{{ site.baseurl }}/categories/all/">All Posts</a></li>
+            <li class="dropdown-divider"></li>
+            {% for category in site.categories %}
+              <li><a href="{{ site.baseurl }}/categories/{{ category[0] | slugify }}/">{{ category[0] }}</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* 드로워 스타일 */
+  .nav-drawer-container {
+    position: relative;
+    z-index: 1000;
+  }
+  
+  .nav-drawer-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1010;
+    background: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .nav-drawer-toggle:hover {
+    background: #f0f0f0;
+  }
+  
+  .hamburger-icon {
+    font-size: 24px;
+  }
+  
+  .nav-drawer {
+    position: fixed;
+    top: 0;
+    left: -280px; /* 초기에는 화면 밖으로 숨김 */
+    width: 280px;
+    height: 100%;
+    background: #fff;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 1020;
+    overflow-y: auto;
+  }
+  
+  .nav-drawer.open {
+    left: 0; /* 드로워 열기 */
+  }
+  
+  .nav-drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1005;
+    display: none;
+  }
+  
+  .nav-drawer-overlay.visible {
+    display: block;
+  }
+  
+  .nav-drawer-header {
+    padding: 20px;
+    background: #f8f8f8;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .nav-drawer-content {
+    padding: 15px;
+  }
+  
+  .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-links li {
+    margin-bottom: 10px;
+  }
+  
+  .nav-links a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s;
+    border-radius: 4px;
+  }
+  
+  .nav-links a:hover {
+    background: #f0f0f0;
+  }
+  
+  /* 드롭다운 메뉴 스타일 */
+  .dropdown {
+    position: relative;
+  }
+  
+  .dropdown-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s;
+    border-radius: 4px;
+  }
+  
+  .dropdown-toggle:hover {
+    background: #f0f0f0;
+  }
+  
+  .dropdown-icon {
+    transition: transform 0.3s;
+    font-size: 12px;
+  }
+  
+  .dropdown.open .dropdown-icon {
+    transform: rotate(180deg);
+  }
+  
+  .dropdown-menu {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-left: 15px;
+  }
+  
+  .dropdown.open .dropdown-menu {
+    display: block;
+    animation: fadeIn 0.3s;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .dropdown-menu a {
+    padding: 8px 10px;
+    font-size: 0.9em;
+  }
+  
+  .dropdown-divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 5px 0;
+  }
+  
+  /* 메인 콘텐츠 패딩 조정 (옵션) */
+  body {
+    padding-left: 20px; /* 햄버거 버튼 공간 확보 */
+  }
+</style>
+
+<script>
+  // 페이지가 완전히 로드된 후 실행
+  document.addEventListener('DOMContentLoaded', function() {
+    // 네비게이션 드로워 토글 버튼
+    var toggleBtn = document.getElementById('nav-drawer-toggle');
+    toggleBtn.addEventListener('click', function() {
+      var drawer = document.getElementById('nav-drawer');
+      var overlay = document.getElementById('nav-drawer-overlay');
+      
+      drawer.classList.toggle('open');
+      overlay.classList.toggle('visible');
+    });
+    
+    // 오버레이 클릭시 드로워 닫기
+    var overlay = document.getElementById('nav-drawer-overlay');
+    overlay.addEventListener('click', function() {
+      var drawer = document.getElementById('nav-drawer');
+      
+      drawer.classList.remove('open');
+      overlay.classList.remove('visible');
+    });
+    
+    // 카테고리 드롭다운 토글
+    var categoryToggle = document.getElementById('category-toggle');
+    categoryToggle.addEventListener('click', function() {
+      var dropdown = document.getElementById('category-dropdown');
+      dropdown.classList.toggle('open');
+    });
+  });
+</script>
