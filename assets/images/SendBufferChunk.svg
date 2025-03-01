@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550">
+  <!-- Background -->
+  <rect width="800" height="550" fill="#f8f9fa" rx="10" ry="10"/>
+  
+  <!-- Memory Pool -->
+  <rect x="50" y="50" width="700" height="150" fill="#e9ecef" stroke="#495057" stroke-width="2" rx="5" ry="5"/>
+  <text x="400" y="35" font-family="Arial" font-size="16" text-anchor="middle" fill="#212529">Memory Pool</text>
+  
+  <!-- Buffer Manager -->
+  <rect x="50" y="250" width="200" height="200" fill="#e9ecef" stroke="#495057" stroke-width="2" rx="5" ry="5"/>
+  <text x="150" y="275" font-family="Arial" font-size="16" text-anchor="middle" fill="#212529">Buffer Manager</text>
+  
+  <!-- SendBufferChunk -->
+  <rect x="400" y="250" width="350" height="200" fill="#e9ecef" stroke="#495057" stroke-width="2" rx="5" ry="5"/>
+  <text x="575" y="275" font-family="Arial" font-size="16" text-anchor="middle" fill="#212529">SendBufferChunk (100 크기)</text>
+  
+  <!-- Memory Chunks in Pool -->
+  <rect x="75" y="80" width="150" height="80" fill="#fff" stroke="#495057" stroke-width="2" rx="3" ry="3"/>
+  <rect x="250" y="80" width="150" height="80" fill="#fff" stroke="#495057" stroke-width="2" rx="3" ry="3"/>
+  <rect x="425" y="80" width="150" height="80" fill="#c5e8f7" stroke="#0d6efd" stroke-width="3" rx="3" ry="3"/>
+  <rect x="600" y="80" width="125" height="80" fill="#fff" stroke="#495057" stroke-width="2" rx="3" ry="3"/>
+  
+  <!-- Allocation Process -->
+  <line x1="150" y1="320" x2="425" y2="120" stroke="#198754" stroke-width="2"/>
+  <polygon points="425,120 415,115 415,125" fill="#198754"/>
+  
+  <!-- sendBuffer in SendBufferChunk -->
+  <rect x="425" y="340" width="300" height="60" fill="#e9ecef" stroke="#0d6efd" stroke-width="1" rx="3" ry="3"/>
+  <rect x="425" y="345" width="60" height="50" fill="#c5e8f7" stroke="#0d6efd" stroke-width="3" rx="3" ry="3"/>
+  <text x="455" y="375" font-family="Arial" font-size="14" text-anchor="middle" fill="#212529">20</text>
+  
+  <!-- Labels for sendBuffer -->
+  <text x="575" y="330" font-family="Arial" font-size="14" text-anchor="middle" fill="#212529">사용 가능 공간: 80</text>
+  <text x="575" y="425" font-family="Arial" font-size="14" text-anchor="middle" fill="#212529">sendBuffer (20 크기만 사용)</text>
+  
+  <!-- Allocation Arrow -->
+  <line x1="500" y1="160" x2="500" y2="345" stroke="#0d6efd" stroke-width="3" stroke-dasharray="8,4"/>
+  <polygon points="500,345 495,335 505,335" fill="#0d6efd"/>
+  
+  <!-- Labels for Memory Chunks -->
+  <text x="150" y="170" font-family="Arial" font-size="12" text-anchor="middle" fill="#495057">Free Chunk</text>
+  <text x="325" y="170" font-family="Arial" font-size="12" text-anchor="middle" fill="#495057">Free Chunk</text>
+  <text x="500" y="170" font-family="Arial" font-size="12" text-anchor="middle" fill="#0d6efd">Allocated Chunk (100)</text>
+  <text x="662" y="170" font-family="Arial" font-size="12" text-anchor="middle" fill="#495057">Free Chunk</text>
+  
+  <!-- Process Steps - Moved to bottom of diagram -->
+  <circle cx="70" cy="480" r="15" fill="#212529"/>
+  <text x="70" y="485" font-family="Arial" font-size="12" text-anchor="middle" fill="#fff">1</text>
+  <text x="95" y="485" font-family="Arial" font-size="12" text-anchor="start" fill="#212529">Buffer Manager requests memory chunk</text>
+  
+  <circle cx="70" cy="510" r="15" fill="#212529"/>
+  <text x="70" y="515" font-family="Arial" font-size="12" text-anchor="middle" fill="#fff">2</text>
+  <text x="95" y="515" font-family="Arial" font-size="12" text-anchor="start" fill="#212529">Memory chunk allocated from pool (100 크기)</text>
+  
+  <circle cx="400" cy="480" r="15" fill="#212529"/>
+  <text x="400" y="485" font-family="Arial" font-size="12" text-anchor="middle" fill="#fff">3</text>
+  <text x="425" y="485" font-family="Arial" font-size="12" text-anchor="start" fill="#212529">SendBufferChunk created</text>
+  
+  <circle cx="400" cy="510" r="15" fill="#212529"/>
+  <text x="400" y="515" font-family="Arial" font-size="12" text-anchor="middle" fill="#fff">4</text>
+  <text x="425" y="515" font-family="Arial" font-size="12" text-anchor="start" fill="#212529">sendBuffer allocated within chunk (only 20 of 100)</text>
+  
+  <!-- Size Markers -->
+  <line x1="425" y1="330" x2="725" y2="330" stroke="#495057" stroke-width="1"/>
+  <text x="575" y="318" font-family="Arial" font-size="12" text-anchor="middle" fill="#495057">100</text>
+  
+  <line x1="425" y1="410" x2="485" y2="410" stroke="#0d6efd" stroke-width="1"/>
+  <text x="455" y="422" font-family="Arial" font-size="12" text-anchor="middle" fill="#0d6efd">20</text>
+</svg>
