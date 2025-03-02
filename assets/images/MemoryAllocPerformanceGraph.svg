@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 700">
+  <!-- 배경 -->
+  <rect width="800" height="700" fill="white"/>
+  
+  <!-- 제목 -->
+  <text x="400" y="30" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle">메모리 풀 성능 테스트 결과</text>
+  
+  <!-- 패킷 처리량 그래프 -->
+  <g transform="translate(50, 70)">
+    <text x="350" y="0" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">초당 처리 패킷 수</text>
+    
+    <!-- 눈금선 -->
+    <line x1="100" y1="20" x2="100" y2="170" stroke="#ccc" stroke-width="1"/>
+    <line x1="100" y1="170" x2="600" y2="170" stroke="#ccc" stroke-width="1"/>
+    
+    <!-- Y축 레이블 -->
+    <text x="90" y="170" font-family="Arial" font-size="12" text-anchor="end">0</text>
+    <text x="90" y="130" font-family="Arial" font-size="12" text-anchor="end">5,000</text>
+    <text x="90" y="90" font-family="Arial" font-size="12" text-anchor="end">10,000</text>
+    <text x="90" y="50" font-family="Arial" font-size="12" text-anchor="end">15,000</text>
+    <text x="90" y="20" font-family="Arial" font-size="12" text-anchor="end">20,000</text>
+    
+    <!-- Y축 이름 -->
+    <text x="40" y="95" font-family="Arial" font-size="14" text-anchor="middle" transform="rotate(-90, 40, 95)">패킷/초</text>
+    
+    <!-- 막대 그래프 -->
+    <rect x="200" y="50" width="100" height="120" fill="#8884d8"/>
+    <rect x="400" y="12" width="100" height="158" fill="#82ca9d"/>
+    
+    <!-- X축 레이블 -->
+    <text x="250" y="190" font-family="Arial" font-size="14" text-anchor="middle">메모리 풀 없음</text>
+    <text x="450" y="190" font-family="Arial" font-size="14" text-anchor="middle">메모리 풀 사용</text>
+    
+    <!-- 데이터 값 표시 -->
+    <text x="250" y="110" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">15,000</text>
+    <text x="450" y="90" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">21,000</text>
+  </g>
+  
+  <!-- 지연 시간 그래프 -->
+  <g transform="translate(50, 280)">
+    <text x="350" y="0" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">평균 지연 시간 (ms)</text>
+    
+    <!-- 눈금선 -->
+    <line x1="100" y1="20" x2="100" y2="170" stroke="#ccc" stroke-width="1"/>
+    <line x1="100" y1="170" x2="600" y2="170" stroke="#ccc" stroke-width="1"/>
+    
+    <!-- Y축 레이블 -->
+    <text x="90" y="170" font-family="Arial" font-size="12" text-anchor="end">0</text>
+    <text x="90" y="140" font-family="Arial" font-size="12" text-anchor="end">30</text>
+    <text x="90" y="110" font-family="Arial" font-size="12" text-anchor="end">60</text>
+    <text x="90" y="80" font-family="Arial" font-size="12" text-anchor="end">90</text>
+    <text x="90" y="50" font-family="Arial" font-size="12" text-anchor="end">120</text>
+    <text x="90" y="20" font-family="Arial" font-size="12" text-anchor="end">150</text>
+    
+    <!-- Y축 이름 -->
+    <text x="40" y="95" font-family="Arial" font-size="14" text-anchor="middle" transform="rotate(-90, 40, 95)">밀리초 (ms)</text>
+    
+    <!-- 막대 그래프 -->
+    <rect x="200" y="50" width="100" height="120" fill="#8884d8"/>
+    <rect x="400" y="80" width="100" height="90" fill="#82ca9d"/>
+    
+    <!-- X축 레이블 -->
+    <text x="250" y="190" font-family="Arial" font-size="14" text-anchor="middle">메모리 풀 없음</text>
+    <text x="450" y="190" font-family="Arial" font-size="14" text-anchor="middle">메모리 풀 사용</text>
+    
+    <!-- 데이터 값 표시 -->
+    <text x="250" y="110" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">120</text>
+    <text x="450" y="125" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">90</text>
+  </g>
+  
+  <!-- 성능 개선 비율 그래프 -->
+  <g transform="translate(50, 490)">
+    <text x="350" y="0" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">성능 개선 비율 (%)</text>
+    
+    <!-- 눈금선 -->
+    <line x1="100" y1="20" x2="100" y2="120" stroke="#ccc" stroke-width="1"/>
+    <line x1="100" y1="120" x2="600" y2="120" stroke="#ccc" stroke-width="1"/>
+    
+    <!-- Y축 레이블 -->
+    <text x="90" y="120" font-family="Arial" font-size="12" text-anchor="end">0%</text>
+    <text x="90" y="95" font-family="Arial" font-size="12" text-anchor="end">100%</text>
+    <text x="90" y="70" font-family="Arial" font-size="12" text-anchor="end">200%</text>
+    <text x="90" y="45" font-family="Arial" font-size="12" text-anchor="end">300%</text>
+    <text x="90" y="20" font-family="Arial" font-size="12" text-anchor="end">400%</text>
+    
+    <!-- 막대 그래프 -->
+    <rect x="150" y="20" width="80" height="100" fill="#8dd1e1"/>
+    <rect x="300" y="64" width="80" height="56" fill="#82ca9d"/>
+    <rect x="450" y="70" width="80" height="50" fill="#a4de6c"/>
+    
+    <!-- X축 레이블 -->
+    <text x="190" y="140" font-family="Arial" font-size="12" text-anchor="middle">할당 시간 감소</text>
+    <text x="340" y="140" font-family="Arial" font-size="12" text-anchor="middle">처리량 향상</text>
+    <text x="490" y="140" font-family="Arial" font-size="12" text-anchor="middle">지연 시간 감소</text>
+    
+    <!-- 데이터 값 표시 -->
+    <text x="190" y="70" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="black">300%</text>
+    <text x="340" y="92" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="black">140%</text>
+    <text x="490" y="95" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="black">125%</text>
+  </g>
+  
+  <!-- 범례 설명 -->
+  <g transform="translate(50, 650)">
+    <text x="350" y="0" font-family="Arial" font-size="12" text-anchor="middle">* 할당 시간 감소 300%는 3배 빠른 속도를 의미합니다.</text>
+    <text x="350" y="20" font-family="Arial" font-size="12" text-anchor="middle">* 처리량 향상 140%는 40% 더 많은 처리량을 의미합니다.</text>
+    <text x="350" y="40" font-family="Arial" font-size="12" text-anchor="middle">* 지연 시간 감소 125%는 25% 감소된 지연 시간을 의미합니다.</text>
+  </g>
+</svg>
