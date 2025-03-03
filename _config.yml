@@ -1,6 +1,5 @@
 # Google Analytics
-google_analytics: 
-  id: G-0797LLHMZP  # 여기에 측정 ID를 입력하세요
+google_analytics: G-0797LLHMZP  # 여기에 측정 ID를 입력하세요
 
 # 사이트 설정
 title: TG's Programming Blog
@@ -17,6 +16,7 @@ highlighter: rouge
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
 
 # 테마 설정
 sass:
