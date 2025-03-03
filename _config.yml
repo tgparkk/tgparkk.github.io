@@ -1,5 +1,6 @@
 # Google Analytics
-google_analytics: G-0797LLHMZP  # 여기에 측정 ID를 입력하세요
+google_analytics: 
+  id: G-0797LLHMZP  # 여기에 측정 ID를 입력하세요
 
 # 사이트 설정
 title: TG's Programming Blog
