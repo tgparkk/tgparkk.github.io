@@ -1,0 +1,92 @@
+name: API Endpoint
+
+on:
+  page_build:
+  workflow_dispatch:
+
+jobs:
+  deploy-endpoint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Create API endpoint using GitHub Pages
+        run: |
+          mkdir -p api
+          cat > api/likes.html << 'EOL'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>Blog Likes API</title>
+            <script>
+              // CORS 헤더를 추가하기 위한 Proxy
+              document.addEventListener('DOMContentLoaded', function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const action = urlParams.get('action');
+                const postId = urlParams.get('postId');
+                const change = parseInt(urlParams.get('change') || '0');
+                
+                if (action === 'update' && postId && !isNaN(change)) {
+                  // GitHub Repository Dispatch API 호출
+                  fetch('https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO/dispatches', {
+                    method: 'POST',
+                    headers: {
+                      'Accept': 'application/vnd.github.v3+json',
+                      'Authorization': 'token PROXY_TOKEN'
+                    },
+                    body: JSON.stringify({
+                      event_type: 'update-likes',
+                      client_payload: {
+                        postId: postId,
+                        change: change
+                      }
+                    })
+                  })
+                  .then(response => {
+                    const result = {
+                      success: response.status === 204,
+                      message: response.status === 204 ? 'Update request sent' : 'Failed to send update request'
+                    };
+                    document.getElementById('result').textContent = JSON.stringify(result);
+                  })
+                  .catch(error => {
+                    document.getElementById('result').textContent = JSON.stringify({
+                      success: false,
+                      message: error.message
+                    });
+                  });
+                } else if (action === 'get') {
+                  // Gist에서 데이터 가져오기 (공개 Gist이므로 토큰 필요 없음)
+                  fetch('https://api.github.com/gists/YOUR_GIST_ID')
+                    .then(response => response.json())
+                    .then(data => {
+                      const likesData = JSON.parse(data.files['blog-likes.json'].content);
+                      document.getElementById('result').textContent = JSON.stringify(likesData);
+                    })
+                    .catch(error => {
+                      document.getElementById('result').textContent = JSON.stringify({
+                        error: error.message
+                      });
+                    });
+                }
+              });
+            </script>
+          </head>
+          <body>
+            <pre id="result"></pre>
+          </body>
+          </html>
+          EOL
+          
+          sed -i 's/YOUR_USERNAME/${{ github.repository_owner }}/g' api/likes.html
+          sed -i 's/YOUR_REPO/${{ github.event.repository.name }}/g' api/likes.html
+          sed -i 's/YOUR_GIST_ID/${{ secrets.GIST_ID }}/g' api/likes.html
+          sed -i 's/PROXY_TOKEN/${{ secrets.PROXY_TOKEN }}/g' api/likes.html
+          
+      - name: Deploy API endpoint
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./api
+          destination_dir: api

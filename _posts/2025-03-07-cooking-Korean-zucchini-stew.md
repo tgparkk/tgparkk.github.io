@@ -4,7 +4,7 @@ title: "건강한 한끼, 애호박찌개 만들기"
 date: 2025-03-07 21:00:00 +0900
 categories: cooking
 tags: [애호박찌개, 돼지고기, 한식요리, 찌개, 건강식]
-image: /assets/img/aehobak-jjigae.jpg
+image: /assets/images/koreanZucchiniStew/완성1.jpg
 excerpt : "애호박찌개는 계절에 상관없이 언제든지 즐길 수 있는 한국의 대표적인 가정식입니다. 특히 여름철 제철 애호박으로 만들면 더욱 맛있답니다. 영양가도 높고 조리도 간단해 바쁜 일상 속에서도 건강한 한 끼를 챙길 수 있는 요리입니다." 
 ---
 
