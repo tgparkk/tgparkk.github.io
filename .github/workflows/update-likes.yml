@@ -1,0 +1,59 @@
+name: Update Blog Likes
+
+on:
+  repository_dispatch:
+    types: [update-likes]
+
+jobs:
+  update-likes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Update likes in Gist
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GIST_TOKEN }}
+          script: |
+            const postId = context.payload.client_payload.postId;
+            const change = context.payload.client_payload.change;
+            
+            try {
+              // 1. 현재 Gist 가져오기
+              const gist = await github.rest.gists.get({
+                gist_id: '${{ secrets.GIST_ID }}'
+              });
+              
+              // 2. 좋아요 데이터 파싱
+              const fileName = 'blog-likes.json';
+              const fileContent = gist.data.files[fileName].content;
+              const likesData = JSON.parse(fileContent);
+              
+              // 3. 좋아요 수 업데이트
+              if (!likesData.likes[postId]) {
+                likesData.likes[postId] = 0;
+              }
+              likesData.likes[postId] += change;
+              
+              // 최소값 0으로 제한
+              if (likesData.likes[postId] < 0) {
+                likesData.likes[postId] = 0;
+              }
+              
+              // 4. Gist 업데이트
+              await github.rest.gists.update({
+                gist_id: '${{ secrets.GIST_ID }}',
+                files: {
+                  [fileName]: {
+                    content: JSON.stringify(likesData, null, 2)
+                  }
+                }
+              });
+              
+              console.log(`Updated likes for post ${postId}: ${likesData.likes[postId]}`);
+            } catch (error) {
+              core.setFailed(`Action failed with error: ${error}`);
+            }
