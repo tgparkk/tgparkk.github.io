@@ -1,0 +1,240 @@
+---
+layout: page
+title: Image Converter - Free Online Image Format Converter
+description: Convert images between JPEG, PNG, WebP, and BMP formats directly in your browser. No upload required, 100% private and secure image conversion.
+permalink: /image-converter/
+---
+
+<div class="image-converter">
+  <h2>Image Format Converter</h2>
+  <p>Upload an image to convert it to different formats. All processing is done locally in your browser.</p>
+  <div class="format-info">
+    <p><strong>Note about TIFF:</strong> Due to browser limitations, TIFF images are initially processed as PNG and then saved with a .tif extension. For professional TIFF editing with full features, consider using dedicated software.</p>
+  </div>
+  
+  <div class="upload-section">
+    <label for="image-input" class="upload-button">
+      Select Image
+      <input type="file" id="image-input" accept="image/*" style="display:none;">
+    </label>
+    <span id="file-name">No file selected</span>
+  </div>
+  
+  <div class="preview-section" id="preview-container" style="display:none;">
+    <h3>Preview</h3>
+    <div class="image-preview">
+      <img id="preview-image" src="#" alt="Preview">
+    </div>
+    <div class="image-info">
+      <p>Original Format: <span id="original-format">-</span></p>
+      <p>Size: <span id="image-size">-</span></p>
+      <p>Dimensions: <span id="image-dimensions">-</span></p>
+    </div>
+  </div>
+  
+  <div class="conversion-section" id="conversion-options" style="display:none;">
+    <h3>Convert To</h3>
+    <div class="format-buttons">
+      <button class="format-button" data-format="jpeg">JPEG</button>
+      <button class="format-button" data-format="png">PNG</button>
+      <button class="format-button" data-format="webp">WebP</button>
+      <button class="format-button" data-format="bmp">BMP</button>
+      <button class="format-button" data-format="tiff">TIFF</button>
+    </div>
+    
+    <div class="quality-section">
+      <label for="quality-slider">Quality: <span id="quality-value">100%</span></label>
+      <input type="range" id="quality-slider" min="1" max="100" value="100">
+    </div>
+    
+    <div class="resize-section">
+      <h4>Resize Options</h4>
+      <div class="resize-inputs">
+        <div class="input-group">
+          <label for="resize-width">Width:</label>
+          <input type="number" id="resize-width" placeholder="Auto">
+        </div>
+        <div class="input-group">
+          <label for="resize-height">Height:</label>
+          <input type="number" id="resize-height" placeholder="Auto">
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="maintain-ratio" checked>
+          <label for="maintain-ratio">Maintain aspect ratio</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="result-section" id="result-container" style="display:none;">
+    <h3>Converted Image</h3>
+    <div class="result-preview">
+      <img id="result-image" src="#" alt="Result">
+    </div>
+    <div class="result-info">
+      <p>Format: <span id="result-format">-</span></p>
+      <p>Size: <span id="result-size">-</span></p>
+      <p>Dimensions: <span id="result-dimensions">-</span></p>
+    </div>
+    <button id="download-button" class="download-button">Download Converted Image</button>
+  </div>
+</div>
+
+<style>
+  .image-converter {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .upload-section {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .upload-button {
+    display: inline-block;
+    background-color: #4285f4;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .upload-button:hover {
+    background-color: #3367d6;
+  }
+  
+  #file-name {
+    margin-left: 10px;
+    color: #666;
+  }
+  
+  .preview-section, .conversion-section, .result-section {
+    margin: 30px 0;
+    padding: 15px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .image-preview, .result-preview {
+    text-align: center;
+    margin: 15px 0;
+    border: 1px dashed #ccc;
+    padding: 10px;
+  }
+  
+  .image-preview img, .result-preview img {
+    max-width: 100%;
+    max-height: 400px;
+  }
+  
+  .format-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+  }
+  
+  .format-button {
+    padding: 8px 16px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .format-button:hover {
+    background-color: #e3e3e3;
+  }
+  
+  .format-button.active {
+    background-color: #4285f4;
+    color: white;
+    border-color: #4285f4;
+  }
+  
+  .quality-section, .resize-section {
+    margin: 20px 0;
+  }
+  
+  .resize-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-group input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100px;
+  }
+  
+  .checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .checkbox-group input {
+    margin-right: 8px;
+  }
+  
+  .download-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #34a853;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+  }
+  
+  .download-button:hover {
+    background-color: #2d9147;
+  }
+  
+  #quality-slider {
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .image-info, .result-info, .format-info {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 15px;
+  }
+  
+  .image-info p, .result-info p, .format-info p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  
+  .format-info {
+    background-color: #fff8e1;
+    border-left: 4px solid #ffc107;
+  }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/browser-image-compression/2.0.0/browser-image-compression.js"></script>
+<script src="{{ '/assets/js/image-converter.js' | relative_url }}"></script>
