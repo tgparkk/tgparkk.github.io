@@ -5,11 +5,26 @@ description: Convert images between JPEG, PNG, WebP, and BMP formats directly in
 permalink: /image-converter/
 ---
 
+<script src="{{ '/assets/js/tiff.min.js' | relative_url }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/browser-image-compression/2.0.0/browser-image-compression.js"></script>
+
+
 <div class="image-converter">
   <h2>Image Format Converter</h2>
   <p>Upload an image to convert it to different formats. All processing is done locally in your browser.</p>
   <div class="format-info">
     <p><strong>Note about TIFF:</strong> Due to browser limitations, TIFF images are initially processed as PNG and then saved with a .tif extension. For professional TIFF editing with full features, consider using dedicated software.</p>
+  </div>
+
+  <div id="debug-info" class="debug-panel" style="display: none;">
+    <h4>Troubleshooting Information</h4>
+    <p id="debug-message"></p>
+  </div>
+  
+  <!-- 로딩 스피너 추가 -->
+  <div id="loading-spinner" class="loading-indicator" style="display: none;">
+    <div class="spinner"></div>
+    <p>Processing image, please wait...</p>
   </div>
   
   <div class="upload-section">
@@ -235,6 +250,34 @@ permalink: /image-converter/
     border-left: 4px solid #ffc107;
   }
 </style>
+
+<!-- head 태그 안에 직접 넣기 -->
+<head>
+  <script>
+    // TIFF.js 가 성공적으로 로드되었는지 확인하는 함수
+    function checkTiffLoaded() {
+      if (typeof Tiff === 'undefined') {
+        console.error('TIFF.js library is not loaded!');
+        document.getElementById('debug-info').style.display = 'block';
+        document.getElementById('debug-message').innerHTML = 'TIFF.js 라이브러리가 로드되지 않았습니다. 다른 브라우저에서 시도해보세요.';
+      } else {
+        console.log('TIFF.js library loaded successfully!');
+      }
+    }
+  </script>
+  
+  <!-- 여러 CDN 시도 (첫 번째가 실패하면 두 번째 사용) -->
+  <script src="https://unpkg.com/tiff.js@1.0.0/dist/tiff.min.js" onerror="console.error('Failed to load TIFF.js from unpkg')"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tiff.js@1.0.0/dist/tiff.min.js" onerror="console.error('Failed to load TIFF.js from jsdelivr')"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tiff.js/1.0.0/tiff.min.js" onerror="console.error('Failed to load TIFF.js from cdnjs')"></script>
+  
+  <!-- 스크립트 로드 후 검사 -->
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(checkTiffLoaded, 1000);
+    });
+  </script>
+</head>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/browser-image-compression/2.0.0/browser-image-compression.js"></script>
 <script src="{{ '/assets/js/image-converter.js' | relative_url }}"></script>
