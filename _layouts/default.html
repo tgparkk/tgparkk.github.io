@@ -5,67 +5,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
     
-    <!-- 중요: CSS 파일 링크 -->
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | absolute_url }}">
+    <!-- 폰트 추가 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    
+    <!-- CSS 파일 링크 -->
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | absolute_url }}">
+    
     {% include google-adsense.html %}
     {% include header.html %}
-
 </head>
 <body>
+    <!-- 네비게이션 드로어 - 헤더 외부에 배치 -->
     {% include nav-drawer.html %}
+    
+    <!-- 헤더 -->
     <header>
         <div class="container">
             <div class="logo">
-                <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+                <a href="{{ '/' | relative_url }}">
+                    <span>{{ site.title }}</span>
+                </a>
             </div>
             <nav>
                 <ul>
                     <li><a href="{{ '/' | relative_url }}">Home</a></li>
                     <li><a href="{{ '/about/' | relative_url }}">About</a></li>
+                    <li><a href="{{ '/categories/all/' | relative_url }}">All Posts</a></li>
                     <li><a href="{{ '/image-converter/' | relative_url }}">Image Converter</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <!-- 메인 콘텐츠 -->
     <main>
         <div class="container">
             {{ content }}
         </div>
     </main>
 
+    <!-- 푸터 -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section about">
                     <h3>About This Blog</h3>
-                    <p>Deep dives into C++, async multi-threading, rendering, Windows development, and game programming.</p>
-                </div>
-                <div class="footer-section links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="{{ '/' | relative_url }}">Home</a></li>
-                        <li><a href="{{ '/about/' | relative_url }}">About</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section social">
-                    <h3>Connect</h3>
+                    <p>Deep dives into C++, async multi-threading, rendering, Windows development, game programming, and more.</p>
                     <div class="social-icons">
                         <a href="https://github.com/tgparkk" target="_blank"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
+                <div class="footer-section links">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="{{ '/categories/cpp/' | relative_url }}">C++</a></li>
+                        <li><a href="{{ '/categories/async_servers/' | relative_url }}">Async Servers</a></li>
+                        <li><a href="{{ '/categories/gamedev/' | relative_url }}">Game Development</a></li>
+                        <li><a href="{{ '/categories/rendering/' | relative_url }}">Rendering</a></li>
+                        <li><a href="{{ '/categories/windows/' | relative_url }}">Windows</a></li>
+                        <li><a href="{{ '/categories/cooking/' | relative_url }}">요리</a></li>
+                        <li><a href="{{ '/categories/stock/' | relative_url }}">주식</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section quick-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="{{ '/' | relative_url }}">Home</a></li>
+                        <li><a href="{{ '/about/' | relative_url }}">About</a></li>
+                        <li><a href="{{ '/categories/all/' | relative_url }}">All Posts</a></li>
+                        <li><a href="{{ '/image-converter/' | relative_url }}">Image Converter</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+                <p>Designed with <i class="fas fa-heart" style="color: #7780EB;"></i> by tgparkk</p>
             </div>
         </div>
     </footer>
 
-    <!-- 자바스크립트 파일 링크 -->
+    <!-- 테마 전환 버튼 (다크/라이트 모드) -->
+    <div class="theme-toggle" id="theme-toggle">
+        <svg class="theme-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 9c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3m0-2c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l1.06 1.06c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l1.06 1.06c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.06-1.06z" id="theme-icon-path"></path>
+        </svg>
+    </div>
+
+    <!-- 자바스크립트 파일 -->
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+    
+    <!-- 테마 전환 스크립트 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+            const themeIconPath = document.getElementById('theme-icon-path');
+            
+            // 저장된 테마 확인
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            
+            // 초기 테마 적용
+            if (savedTheme === 'dark') {
+                htmlElement.setAttribute('data-theme', 'dark');
+                updateThemeIcon(true);
+            }
+            
+            // 테마 토글 이벤트
+            themeToggle.addEventListener('click', function() {
+                const isDark = htmlElement.getAttribute('data-theme') === 'dark';
+                
+                if (isDark) {
+                    htmlElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    updateThemeIcon(false);
+                } else {
+                    htmlElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateThemeIcon(true);
+                }
+            });
+            
+            // 테마 아이콘 업데이트 함수
+            function updateThemeIcon(isDark) {
+                if (isDark) {
+                    // 달 아이콘으로 변경
+                    themeIconPath.setAttribute('d', 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z');
+                } else {
+                    // 태양 아이콘으로 변경
+                    themeIconPath.setAttribute('d', 'M12 9c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3m0-2c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l1.06 1.06c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l1.06 1.06c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.06-1.06z');
+                }
+            }
+            
+            // AOS 라이브러리 초기화 (애니메이션)
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    once: true,
+                    duration: 800
+                });
+            }
+        });
+    </script>
 </body>
 </html>

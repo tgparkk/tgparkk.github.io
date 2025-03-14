@@ -1,6 +1,54 @@
+<!-- 필수 메타 태그 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- 기본 스타일 시트 -->
 <link rel="stylesheet" href="{{ "/assets/css/syntax.css" | relative_url }}">
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- 파비콘 -->
+<link rel="icon" type="image/x-icon" href="{{ "/assets/images/favicon.ico" | relative_url }}">
+
+<!-- SEO 메타 태그 -->
+{% if page.description %}
+<meta name="description" content="{{ page.description }}">
+{% else %}
+<meta name="description" content="A development blog focusing on C++, async servers, rendering, game development, and more.">
+{% endif %}
+
+<meta name="author" content="{{ site.author | default: 'tgparkk' }}">
+
+{% if page.keywords %}
+<meta name="keywords" content="{{ page.keywords }}">
+{% endif %}
+
+<!-- Open Graph 메타 태그 -->
+<meta property="og:title" content="{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+{% if page.image %}
+<meta property="og:image" content="{{ page.image | absolute_url }}">
+{% else %}
+<meta property="og:image" content="{{ "/assets/images/og-image.jpg" | absolute_url }}">
+{% endif %}
+{% if page.description %}
+<meta property="og:description" content="{{ page.description }}">
+{% else %}
+<meta property="og:description" content="A development blog focusing on C++, async servers, rendering, game development, and more.">
+{% endif %}
+
+<!-- Twitter 카드 메타 태그 -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}">
+{% if page.description %}
+<meta name="twitter:description" content="{{ page.description }}">
+{% else %}
+<meta name="twitter:description" content="A development blog focusing on C++, async servers, rendering, game development, and more.">
+{% endif %}
+{% if page.image %}
+<meta name="twitter:image" content="{{ page.image | absolute_url }}">
+{% endif %}
+
+<!-- Google 애널리틱스 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0797LLHMZP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -8,3 +56,43 @@
   gtag('js', new Date());
   gtag('config', 'G-0797LLHMZP');
 </script>
+
+<!-- 구조화된 데이터 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{% if page.layout == 'post' %}BlogPosting{% else %}WebPage{% endif %}",
+  "headline": "{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}",
+  "description": "{% if page.description %}{{ page.description }}{% else %}A development blog focusing on C++, async servers, rendering, game development, and more.{% endif %}",
+  "url": "{{ page.url | absolute_url }}",
+  {% if page.layout == 'post' %}
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  {% if page.last_modified_at %}
+  "dateModified": "{{ page.last_modified_at | date_to_xmlschema }}",
+  {% endif %}
+  {% if page.author %}
+  "author": {
+    "@type": "Person",
+    "name": "{{ page.author }}"
+  },
+  {% endif %}
+  {% endif %}
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.title }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ "/assets/images/logo.png" | absolute_url }}"
+    }
+  }
+}
+</script>
+
+<!-- 프리로드 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+<!-- CSS 애니메이션을 위한 라이브러리 (AOS) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
