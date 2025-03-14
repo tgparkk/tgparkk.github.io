@@ -2,14 +2,24 @@
 layout: default
 ---
 <article class="post">
-  <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
-    <div class="post-meta">
-      <span class="post-date">{{ page.date | date: "%B %d, %Y" }}</span>
+  <div class="post-header">
+    <div class="post-category-badge">
+      {% for category in page.categories limit:1 %}
+        <a href="{{ '/categories/' | append: category | relative_url }}/">{{ category }}</a>
+      {% endfor %}
+    </div>
+    <h1 class="post-title" data-aos="fade-up">{{ page.title }}</h1>
+    <div class="post-meta" data-aos="fade-up" data-aos-delay="100">
+      <span class="post-date">
+        <i class="far fa-calendar-alt"></i> {{ page.date | date: "%B %d, %Y" }}
+      </span>
       {% if page.last_modified_at %}
-      <span class="post-updated">Updated: {{ page.last_modified_at | date: "%B %d, %Y" }}</span>
+      <span class="post-updated">
+        <i class="fas fa-sync-alt"></i> Updated: {{ page.last_modified_at | date: "%B %d, %Y" }}
+      </span>
       {% endif %}
       <span class="post-reading-time">
+        <i class="far fa-clock"></i>
         {% assign words = content | number_of_words %}
         {% if words < 360 %}
         1 min read
@@ -18,46 +28,87 @@ layout: default
         {% endif %}
       </span>
     </div>
-  </header>
+  </div>
+
+  {% if page.image %}
+  <div class="post-featured-image" data-aos="fade-up" data-aos-delay="200">
+    <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+  </div>
+  {% endif %}
 
   {% if page.toc %}
-  <div class="table-of-contents">
-    <h2>Table of Contents</h2>
+  <div class="table-of-contents" data-aos="fade-up" data-aos-delay="300">
+    <h2 class="toc-title">Table of Contents</h2>
     <div id="toc"></div>
   </div>
   {% endif %}
 
-  <div class="post-content">
+  <div class="post-content" data-aos="fade-up" data-aos-delay="300">
     {{ content }}
   </div>
 
   <!-- 좋아요 버튼 포함 -->
-  <div class="like-button-container">
+  <div class="like-button-container" data-aos="fade-up">
     <button id="like-button" class="like-button" data-post-id="{{ page.url | slugify }}">
       <span class="heart-icon">♥</span>
       <span id="like-count">0</span>
     </button>
   </div>
 
-  <div class="post-navigation">
+  <!-- 태그 및 공유 -->
+  <div class="post-footer" data-aos="fade-up">
     <div class="post-tags">
-      <h3>Tags</h3>
-      {% for tag in page.tags %}
-      <span class="tag">{{ tag }}</span>
-      {% endfor %}
+      <h3><i class="fas fa-tags"></i> Tags</h3>
+      <div class="tags-list">
+        {% for tag in page.tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
     </div>
     <div class="share">
-      <h3>Share</h3>
-      <ul>
-        <li><a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.url }}{{ page.url | url_encode }}" target="_blank"><i class="fab fa-twitter"></i></a></li>
-        <li><a href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.url }}{{ page.url | url_encode }}&title={{ page.title | url_encode }}" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-        <li><a href="https://www.reddit.com/submit?url={{ site.url }}{{ page.url | url_encode }}&title={{ page.title | url_encode }}" target="_blank"><i class="fab fa-reddit-alien"></i></a></li>
+      <h3><i class="fas fa-share-alt"></i> Share</h3>
+      <ul class="share-buttons">
+        <li>
+          <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.url }}{{ page.url | url_encode }}" target="_blank" title="Share on Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.url }}{{ page.url | url_encode }}&title={{ page.title | url_encode }}" target="_blank" title="Share on LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.reddit.com/submit?url={{ site.url }}{{ page.url | url_encode }}&title={{ page.title | url_encode }}" target="_blank" title="Share on Reddit">
+            <i class="fab fa-reddit-alien"></i>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:?subject={{ page.title | url_encode }}&body=Check out this article: {{ site.url }}{{ page.url | url_encode }}" title="Share via Email">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
   
-  <div class="related-posts">
-    <h2>Related Posts</h2>
+  <!-- 저자 정보 -->
+  <div class="author-box" data-aos="fade-up">
+    <div class="author-avatar">
+      <img src="{{ '/assets/images/avatar.jpg' | relative_url }}" alt="Author Avatar">
+    </div>
+    <div class="author-info">
+      <h3>{{ site.author | default: 'tgparkk' }}</h3>
+      <p>Developer passionate about C++, multi-threading, rendering, and game programming. Sharing insights and experiences through this blog.</p>
+      <div class="author-social">
+        <a href="https://github.com/tgparkk" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 관련 게시물 -->
+  <div class="related-posts" data-aos="fade-up">
+    <h2 class="section-title">Related Posts</h2>
     <div class="post-grid">
       {% assign maxRelated = 3 %}
       {% assign minCommonTags = 1 %}
@@ -74,72 +125,526 @@ layout: default
         {% endfor %}
         
         {% if sameTagCount >= minCommonTags and maxRelatedCounter < maxRelated %}
-          <div class="post-card">
-            <div class="post-meta">
-              <span class="post-category">{{ post.categories | first }}</span>
-              <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
+          <div class="post-card" data-aos="fade-up" data-aos-delay="{{ forloop.index | times: 100 }}">
+            {% if post.image %}
+              <div class="post-card-image-container">
+                <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="post-card-image">
+              </div>
+            {% else %}
+              <div class="post-card-image-container default-image">
+                <i class="fas fa-file-alt default-icon"></i>
+              </div>
+            {% endif %}
+            
+            <div class="post-card-content">
+              <div class="post-card-meta">
+                <span class="post-date"><i class="far fa-calendar-alt"></i> {{ post.date | date: "%Y-%m-%d" }}</span>
+                {% if post.categories.size > 0 %}
+                <span class="post-category">
+                  {% for category in post.categories limit:1 %}
+                    <a href="{{ '/categories/' | append: category | relative_url }}/">{{ category }}</a>
+                  {% endfor %}
+                </span>
+                {% endif %}
+              </div>
+              
+              <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+              
+              <a href="{{ post.url | relative_url }}" class="read-more">Read More</a>
             </div>
-            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-            <p>{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
           </div>
           {% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
         {% endif %}
       {% endfor %}
     </div>
   </div>
+
+  <!-- 댓글 섹션 (선택적) -->
+  {% if site.comments_enabled %}
+  <div class="comments-section" data-aos="fade-up">
+    <h2 class="section-title">Comments</h2>
+    <div id="comments">
+      <!-- 여기에 댓글 시스템 코드 추가 -->
+    </div>
+  </div>
+  {% endif %}
 </article>
 
-<!-- 좋아요 시스템 스타일 -->
 <style>
-  .like-button-container {
-    margin: 20px 0;
-    text-align: center;
+  /* 포스트 페이지 스타일 */
+  .post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 0 80px;
   }
   
-  .like-button {
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
+  .post-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .post-category-badge {
+    margin-bottom: 20px;
+  }
+  
+  .post-category-badge a {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+  }
+  
+  .post-category-badge a:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+  }
+  
+  .post-title {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  
+  .post-meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    color: var(--text-light);
+    margin-bottom: 30px;
+  }
+  
+  .post-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .post-meta i {
+    color: var(--accent-color);
+  }
+  
+  .post-featured-image {
+    margin: 0 -20px 40px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+  }
+  
+  .post-featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* 목차 스타일 */
+  .table-of-contents {
+    background-color: rgba(119, 128, 235, 0.05);
+    border-left: 4px solid var(--accent-color);
+    padding: 20px 25px;
+    margin: 40px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .toc-title {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+  }
+  
+  #toc ul {
+    margin-bottom: 0;
+    padding-left: 20px;
+  }
+  
+  #toc li {
+    margin-bottom: 8px;
+  }
+  
+  #toc a {
+    color: var(--text-color);
+    transition: all 0.2s;
+  }
+  
+  #toc a:hover {
+    color: var(--accent-color);
+  }
+  
+  /* 포스트 콘텐츠 스타일 */
+  .post-content {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 60px;
+  }
+  
+  .post-content h2 {
+    font-size: 2rem;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  .post-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--accent-color);
+  }
+  
+  .post-content h3 {
+    font-size: 1.5rem;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+  }
+  
+  .post-content p {
+    margin-bottom: 24px;
+  }
+  
+  .post-content img {
+    max-width: 100%;
+    height: auto;
     border-radius: 8px;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    margin: 30px 0;
+    box-shadow: var(--card-shadow);
+  }
+  
+  .post-content blockquote {
+    border-left: 4px solid var(--accent-color);
+    padding: 20px 30px;
+    margin: 30px 0;
+    background-color: rgba(119, 128, 235, 0.05);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+  }
+  
+  .post-content blockquote p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .post-content ul,
+  .post-content ol {
+    margin-left: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .post-content li {
+    margin-bottom: 10px;
+  }
+  
+  .post-content a {
+    color: var(--accent-color);
+    border-bottom: 1px dashed var(--accent-color);
+    padding-bottom: 2px;
+    transition: all 0.2s;
+  }
+  
+  .post-content a:hover {
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
+  }
+  
+  /* 코드 블록 스타일 */
+  .post-content pre {
+    margin: 30px 0;
+    border-radius: 8px;
+    position: relative;
+  }
+  
+  /* 태그 및 공유 스타일 */
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+    margin: 60px 0;
+    padding: 30px 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .post-tags, .share {
+    flex: 1;
+  }
+  
+  .post-footer h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+  
+  .post-footer h3 i {
+    color: var(--accent-color);
+  }
+  
+  .tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .tag {
+    display: inline-block;
+    padding: 5px 12px;
+    background-color: rgba(119, 128, 235, 0.1);
+    color: var(--primary-color);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+  }
+  
+  .tag:hover {
+    background-color: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+  }
+  
+  .share {
+    text-align: right;
+  }
+  
+  .share-buttons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+  }
+  
+  .share-buttons li a {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(119, 128, 235, 0.1);
+    color: var(--primary-color);
+    transition: all 0.3s;
   }
   
-  .like-button:hover {
-    background-color: #f1f1f1;
+  .share-buttons li a:hover {
+    background-color: var(--accent-color);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(119, 128, 235, 0.3);
   }
   
-  .like-button.liked {
-    background-color: #ffebee;
-    border-color: #ffcdd2;
+  /* 저자 정보 스타일 */
+  .author-box {
+    display: flex;
+    gap: 20px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 60px;
   }
   
-  .heart-icon {
-    color: #ccc;
-    font-size: 18px;
-    transition: all 0.3s ease;
+  .author-avatar {
+    flex-shrink: 0;
   }
   
-  .liked .heart-icon {
-    color: #e53935;
-    animation: pulse 0.4s ease;
+  .author-avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   }
   
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.3); }
-    100% { transform: scale(1); }
+  .author-info h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
   }
   
-  #like-count {
-    font-size: 14px;
-    font-weight: bold;
+  .author-info p {
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    color: var(--text-light);
+  }
+  
+  .author-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(119, 128, 235, 0.1);
+    color: var(--accent-color);
+    margin-right: 10px;
+    transition: all 0.3s;
+  }
+  
+  .author-social a:hover {
+    background-color: var(--accent-color);
+    color: white;
+    transform: translateY(-3px);
+  }
+  
+  /* 관련 게시물 스타일 */
+  .related-posts {
+    margin-top: 60px;
+  }
+  
+  .related-posts .section-title {
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+  }
+  
+  .related-posts .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+  }
+  
+  .related-posts .post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+  }
+  
+  /* 댓글 섹션 스타일 */
+  .comments-section {
+    margin-top: 80px;
+  }
+  
+  /* 반응형 스타일 */
+  @media (max-width: 768px) {
+    .post-title {
+      font-size: 2rem;
+    }
+    
+    .post-meta {
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .post-footer {
+      flex-direction: column;
+      gap: 30px;
+    }
+    
+    .share {
+      text-align: left;
+    }
+    
+    .share-buttons {
+      justify-content: flex-start;
+    }
+    
+    .author-box {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .author-social {
+      justify-content: center;
+      display: flex;
+    }
+    
+    .related-posts .post-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 
-<!-- JavaScript 파일 포함 -->
+<!-- JavaScript for Table of Contents -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // AOS 라이브러리 초기화
+    if (typeof AOS !== 'undefined') {
+      AOS.init({
+        once: true,
+        duration: 800
+      });
+    }
+    
+    // 목차 생성 함수
+    function generateTableOfContents() {
+      const headings = document.querySelectorAll('.post-content h2, .post-content h3');
+      const toc = document.getElementById('toc');
+      
+      if (toc && headings.length > 0) {
+        const ul = document.createElement('ul');
+        
+        headings.forEach((heading, index) => {
+          // 앵커 ID 생성
+          const id = `heading-${index}`;
+          heading.id = id;
+          
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          
+          a.href = `#${id}`;
+          a.textContent = heading.textContent;
+          
+          // h3는 들여쓰기
+          if (heading.tagName.toLowerCase() === 'h3') {
+            li.style.marginLeft = '15px';
+          }
+          
+          li.appendChild(a);
+          ul.appendChild(li);
+        });
+        
+        toc.appendChild(ul);
+      }
+    }
+    
+    // TOC가 활성화된 경우에만 생성
+    const tocContainer = document.querySelector('.table-of-contents');
+    if (tocContainer) {
+      generateTableOfContents();
+    }
+    
+    // 코드 블록에 복사 버튼 추가
+    const codeBlocks = document.querySelectorAll('pre');
+    codeBlocks.forEach(block => {
+      const button = document.createElement('button');
+      button.className = 'copy-code-button';
+      button.textContent = 'Copy';
+      
+      button.addEventListener('click', () => {
+        const code = block.querySelector('code') ? 
+                     block.querySelector('code').textContent : 
+                     block.textContent;
+        
+        navigator.clipboard.writeText(code).then(() => {
+          button.textContent = 'Copied!';
+          setTimeout(() => {
+            button.textContent = 'Copy';
+          }, 2000);
+        });
+      });
+      
+      block.appendChild(button);
+    });
+  });
+</script>
+
+<!-- JavaScript for like button -->
 <script src="{{ '/assets/js/like-system.js' | relative_url }}"></script>

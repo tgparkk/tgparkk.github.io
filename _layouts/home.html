@@ -2,30 +2,396 @@
 layout: default
 ---
 
-<div class="home">
-  {%- if page.title -%}
-    <h1 class="page-heading">{{ page.title }}</h1>
-  {%- endif -%}
+<!-- 히어로 섹션 -->
+<section class="hero-section">
+  <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+    <h1>Welcome to <span class="highlight">{{ site.title }}</span></h1>
+    <p class="hero-subtitle">Deep dives into programming, tech, and more</p>
+    <div class="hero-buttons">
+      <a href="{{ '/categories/all/' | relative_url }}" class="btn btn-primary">Browse Articles</a>
+      <a href="{{ '/about/' | relative_url }}" class="btn btn-secondary">About Me</a>
+    </div>
+  </div>
+</section>
 
-  {{ content }}
+<!-- 카테고리 내비게이션 -->
+<section class="category-nav-section">
+  <div class="section-title-container" data-aos="fade-up" data-aos-duration="800">
+    <h2 class="section-title">Explore Topics</h2>
+  </div>
+  <div class="category-nav" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+    <a href="{{ '/categories/cpp/' | relative_url }}" class="category-item">
+      <div class="category-icon"><i class="fas fa-code"></i></div>
+      <span>C++</span>
+    </a>
+    <a href="{{ '/categories/async_servers/' | relative_url }}" class="category-item">
+      <div class="category-icon"><i class="fas fa-server"></i></div>
+      <span>Async Servers</span>
+    </a>
+    <a href="{{ '/categories/gamedev/' | relative_url }}" class="category-item">
+      <div class="category-icon"><i class="fas fa-gamepad"></i></div>
+      <span>Game Dev</span>
+    </a>
+    <a href="{{ '/categories/rendering/' | relative_url }}" class="category-item">
+      <div class="category-icon"><i class="fas fa-paint-brush"></i></div>
+      <span>Rendering</span>
+    </a>
+    <a href="{{ '/categories/windows/' | relative_url }}" class="category-item">
+      <div class="category-icon"><i class="fab fa-windows"></i></div>
+      <span>Windows</span>
+    </a>
+    <a href="{{ '/categories/cooking/' | relative_url }}" class="category-item">
+      <div class="category-icon"><i class="fas fa-utensils"></i></div>
+      <span>요리</span>
+    </a>
+    <a href="{{ '/categories/stock/' | relative_url }}" class="category-item">
+      <div class="category-icon"><i class="fas fa-chart-line"></i></div>
+      <span>주식</span>
+    </a>
+  </div>
+</section>
 
-  {%- if site.posts.size > 0 -%}
-    <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
-    <ul class="post-list">
-      {%- for post in site.posts -%}
-      <li>
-        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </h3>
-        {%- if site.show_excerpts -%}
-          {{ post.excerpt }}
-        {%- endif -%}
-      </li>
-      {%- endfor -%}
-    </ul>
-  {%- endif -%}
-</div>
+<!-- 최근 게시물 -->
+<section class="recent-posts-section">
+  <div class="section-title-container" data-aos="fade-up" data-aos-duration="800">
+    <h2 class="section-title">Recent Posts</h2>
+    <a href="{{ '/categories/all/' | relative_url }}" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <div class="post-grid">
+    {% for post in site.posts limit:6 %}
+      <div class="post-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{{ forloop.index | times: 100 }}">
+        {% if post.image %}
+          <div class="post-card-image-container">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="post-card-image">
+          </div>
+        {% else %}
+          <div class="post-card-image-container default-image">
+            <i class="fas fa-file-alt default-icon"></i>
+          </div>
+        {% endif %}
+        
+        <div class="post-card-content">
+          <div class="post-card-meta">
+            <span class="post-date"><i class="far fa-calendar-alt"></i> {{ post.date | date: "%Y-%m-%d" }}</span>
+            {% if post.categories.size > 0 %}
+            <span class="post-category">
+              {% for category in post.categories limit:1 %}
+                <a href="{{ '/categories/' | append: category | relative_url }}/">{{ category }}</a>
+              {% endfor %}
+            </span>
+            {% endif %}
+          </div>
+          
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          
+          {% if post.excerpt %}
+            <div class="post-excerpt">
+              {{ post.excerpt | strip_html | truncatewords: 20 }}
+            </div>
+          {% endif %}
+          
+          <a href="{{ post.url | relative_url }}" class="read-more">Read More</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- 뉴스레터 구독 섹션 -->
+<section class="newsletter-section">
+  <div class="newsletter-container" data-aos="fade-up" data-aos-duration="1000">
+    <div class="newsletter-content">
+      <h2>Stay Updated</h2>
+      <p>Subscribe to my newsletter for latest articles and updates.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Your email address" required>
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+      <p class="newsletter-notice">No spam, unsubscribe at any time.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* 히어로 섹션 스타일 */
+  .hero-section {
+    padding: 100px 0 80px;
+    text-align: center;
+    background-color: var(--bg-color);
+    border-radius: 0 0 50% 50% / 60px;
+  }
+  
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .hero-section h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+  }
+  
+  .highlight {
+    color: var(--accent-color);
+    position: relative;
+    display: inline-block;
+  }
+  
+  .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background-color: rgba(119, 128, 235, 0.2);
+    z-index: -1;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    color: var(--text-light);
+  }
+  
+  .hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  
+  /* 카테고리 내비게이션 스타일 */
+  .category-nav-section {
+    padding: 80px 0;
+  }
+  
+  .section-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  
+  .section-title {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+  }
+  
+  .view-all {
+    font-weight: 600;
+    color: var(--accent-color);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .view-all:hover {
+    color: var(--primary-color);
+  }
+  
+  .view-all i {
+    font-size: 0.8rem;
+    transition: transform 0.3s;
+  }
+  
+  .view-all:hover i {
+    transform: translateX(3px);
+  }
+  
+  .category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+  
+  .category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s;
+    width: 120px;
+    text-align: center;
+  }
+  
+  .category-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    color: var(--accent-color);
+  }
+  
+  .category-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(119, 128, 235, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+    font-size: 20px;
+    transition: all 0.3s;
+  }
+  
+  .category-item:hover .category-icon {
+    background-color: var(--accent-color);
+    color: white;
+    transform: scale(1.1);
+  }
+  
+  .category-item span {
+    font-weight: 500;
+  }
+  
+  /* 최근 게시물 섹션 스타일 */
+  .recent-posts-section {
+    padding: 80px 0;
+  }
+  
+  /* 포스트 카드 디폴트 이미지 */
+  .post-card-image-container.default-image {
+    height: 200px;
+    background-color: rgba(119, 128, 235, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .default-icon {
+    font-size: 40px;
+    color: var(--accent-color);
+    opacity: 0.4;
+  }
+  
+  /* 뉴스레터 섹션 스타일 */
+  .newsletter-section {
+    padding: 80px 0;
+    background-color: var(--bg-color);
+  }
+  
+  .newsletter-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(37, 38, 94, 0.2);
+  }
+  
+  .newsletter-content h2 {
+    margin-bottom: 15px;
+    color: white;
+  }
+  
+  .newsletter-content p {
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .newsletter-form {
+    display: flex;
+    gap: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .newsletter-form input {
+    flex-grow: 1;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .newsletter-form .btn {
+    padding: 15px 25px;
+    background-color: var(--accent-color);
+    border: none;
+  }
+  
+  .newsletter-form .btn:hover {
+    background-color: var(--secondary-accent);
+  }
+  
+  .newsletter-notice {
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  /* 반응형 스타일 */
+  @media (max-width: 768px) {
+    .hero-section h1 {
+      font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.1rem;
+    }
+    
+    .hero-buttons {
+      flex-direction: column;
+      gap: 10px;
+      max-width: 250px;
+      margin: 30px auto 0;
+    }
+    
+    .category-nav {
+      gap: 10px;
+    }
+    
+    .category-item {
+      width: calc(50% - 10px);
+      padding: 15px;
+    }
+    
+    .newsletter-form {
+      flex-direction: column;
+    }
+    
+    .newsletter-container {
+      padding: 30px 20px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // AOS 라이브러리 초기화
+    AOS.init({
+      once: true
+    });
+    
+    // 뉴스레터 폼 제출 처리 (데모용)
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        alert('뉴스레터 구독 기능은 현재 준비 중입니다.\n입력하신 이메일: ' + email);
+      });
+    }
+  });
+</script>
