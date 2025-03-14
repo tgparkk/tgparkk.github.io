@@ -196,7 +196,28 @@ document.addEventListener('DOMContentLoaded', function() {
         reader.readAsArrayBuffer(file);
       } else {
         // 기존 일반 이미지 처리 코드 유지
-        // ...
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          previewImage.src = e.target.result;
+          previewContainer.style.display = 'block';
+          conversionOptions.style.display = 'block';
+          
+          // 이미지 크기 정보 가져오기
+          const img = new Image();
+          img.onload = function() {
+            originalImageWidth = img.width;
+            originalImageHeight = img.height;
+            aspectRatio = originalImageWidth / originalImageHeight;
+            originalImageObj = img;
+            
+            imageDimensions.textContent = `${originalImageWidth} x ${originalImageHeight} px`;
+            
+            // 초기 포맷 버튼 활성화
+            formatButtons[0].click();
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
       }
     }
 
