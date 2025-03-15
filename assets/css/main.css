@@ -253,8 +253,8 @@ nav ul li a:hover::after {
 .post-category a {
   display: inline-block;
   padding: 4px 10px;
-  background-color: var(--accent-color);
-  color: white;
+  background-color: rgba(119, 128, 235, 0.1); /* 더 밝은 배경색 */
+  color: var(--accent-color); /* 글자색을 accent 색상으로 변경 */
   border-radius: 30px;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -264,8 +264,8 @@ nav ul li a:hover::after {
 }
 
 .post-category a:hover {
-  background-color: var(--primary-color);
-  color: white;
+  background-color: var(--accent-color); /* 호버 시 원래의 진한 배경색 */
+  color: white; /* 호버 시 흰색 글자 */
 }
 
 .post-excerpt {

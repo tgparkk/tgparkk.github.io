@@ -25,7 +25,96 @@ layout: default
         </div>
         <a href="{{ post.url | relative_url }}" class="read-more">Read More →</a>
       </div>
+      
+      {% unless forloop.last %}
+      <hr class="post-divider">
+      {% endunless %}
+      
       {% endfor %}
     </div>
   </div>
 </section>
+
+<style>
+  .recent-posts {
+    padding: 40px 0;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .post-list {
+    margin-top: 30px;
+  }
+  
+  .post-item {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+  }
+  
+  .post-item h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  
+  .post-item h3 a {
+    color: var(--heading-color);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .post-item h3 a:hover {
+    color: var(--accent-color);
+  }
+  
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+  
+  .post-category a {
+    color: var(--accent-color);
+    text-decoration: none;
+  }
+  
+  .post-excerpt {
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+  
+  .read-more {
+    display: inline-block;
+    color: var(--accent-color);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  
+  .read-more:hover {
+    color: var(--primary-color);
+    transform: translateX(5px);
+  }
+  
+  /* 게시글 구분선 스타일 */
+  .post-divider {
+    height: 1px;
+    background-color: #e1e4e8; 
+    border: none;
+    margin: 30px 0;
+    display: block;
+    width: 100%;
+  }
+  
+  /* 다크 모드에서의 구분선 색상 */
+  [data-theme="dark"] .post-divider {
+    background-color: #3f3f3f;
+  }
+</style>
