@@ -2,7 +2,7 @@
 layout: post
 title: "메모리 풀 : part 2 - 구현 및 성능 분석"
 date: 2025-03-16
-categories: cpp, 
+categories: cpp
 tags: [c++, memory-pool, performance, multi-threading, implementation]
 excerpt: "메모리 풀의 실제 구현과 성능 분석 결과를 통해 효율성을 검증해봅니다."
 ---
@@ -391,6 +391,666 @@ private:
 ---
 
 이번 글에서는 C++에서 메모리 풀을 구현하는 방법과 그 성능을 분석해보았습니다. 결과적으로 커스텀 메모리 풀은 표준 할당자에 비해 상당한 성능 향상을 제공하며, 특히 멀티스레드 환경과 빈번한 할당/해제가 있는 시나리오에서 더욱 효과적임을 확인했습니다.
+
+
+<details>
+    <summary> 소스 보기 </summary>
+{% highlight cpp linenos %}
+#include <iostream>
+#include <vector>
+#include <chrono>
+#include <thread>
+#include <mutex>
+#include <cstdlib>
+#include <cstdint>
+#include <stdlib.h>  // rand, srand
+#include <ctime>     // time
+
+using namespace std;
+using namespace std::chrono;
+
+//---------------------------------------------------------------------------
+// MemoryHeader: 할당된 메모리 앞에 붙여 할당 크기를 기록합니다.
+//---------------------------------------------------------------------------
+struct MemoryHeader {
+    int allocSize;
+};
+
+inline void* AttachHeader(MemoryHeader* header, int allocSize) {
+    header->allocSize = allocSize;
+    // 헤더 바로 뒤의 영역을 사용자에게 반환
+    return static_cast<void*>(header + 1);
+}
+
+inline MemoryHeader* DetachHeader(void* ptr) {
+    return (static_cast<MemoryHeader*>(ptr)) - 1;
+}
+
+//---------------------------------------------------------------------------
+// MemoryPool: 단순한 스레드 안전 메모리풀 구현 (_aligned_malloc/_aligned_free 사용)
+//---------------------------------------------------------------------------
+class MemoryPool {
+public:
+    // poolSize: 관리할 블록의 크기(헤더 포함X)
+    MemoryPool(int poolSize) : _poolSize(poolSize) {}
+
+    ~MemoryPool() {
+        for (MemoryHeader* header : _pool)
+            _aligned_free(header);
+    }
+
+    MemoryHeader* Pop() {
+        lock_guard<mutex> lock(_mutex);
+        if (!_pool.empty()) {
+            MemoryHeader* header = _pool.back();
+            _pool.pop_back();
+            return header;
+        }
+        // 풀에 없으면 새로 할당
+        MemoryHeader* header = reinterpret_cast<MemoryHeader*>(_aligned_malloc(_poolSize, 16));
+        return header;
+    }
+
+    void Push(MemoryHeader* header) {
+        lock_guard<mutex> lock(_mutex);
+        _pool.push_back(header);
+    }
+
+private:
+    int _poolSize;
+    mutex _mutex;
+    vector<MemoryHeader*> _pool;
+};
+
+//---------------------------------------------------------------------------
+// Memory: 여러 MemoryPool을 관리하여 요청 크기에 맞게 할당합니다.
+//---------------------------------------------------------------------------
+
+class Memory {
+public:
+    enum { MAX_ALLOC_SIZE = 4096 }; // 최대 관리 크기
+
+    Memory() {
+        int currentKey = 0;
+        // [1단계] 32 ~ 1024 바이트: 32 단위 증가
+        for (int s = 32; s <= 1024; s += 32) {
+            MemoryPool* pool = new MemoryPool(s);
+            _pools.push_back(pool);
+            while (currentKey <= s && currentKey <= MAX_ALLOC_SIZE) {
+                _poolTable[currentKey] = pool;
+                currentKey++;
+            }
+        }
+        // [2단계] 1024 초과 ~ 2048: 128 단위 증가
+        for (int s = 1024 + 128; s <= 2048; s += 128) {
+            MemoryPool* pool = new MemoryPool(s);
+            _pools.push_back(pool);
+            while (currentKey <= s && currentKey <= MAX_ALLOC_SIZE) {
+                _poolTable[currentKey] = pool;
+                currentKey++;
+            }
+        }
+        // [3단계] 2048 초과 ~ 4096: 256 단위 증가
+        for (int s = 2048 + 256; s <= 4096; s += 256) {
+            MemoryPool* pool = new MemoryPool(s);
+            _pools.push_back(pool);
+            while (currentKey <= s && currentKey <= MAX_ALLOC_SIZE) {
+                _poolTable[currentKey] = pool;
+                currentKey++;
+            }
+        }
+    }
+
+    ~Memory() {
+        for (auto pool : _pools)
+            delete pool;
+        _pools.clear();
+    }
+
+    // request: 헤더 제외한 요청 크기
+    void* Allocate(int request) {
+        int allocSize = request + sizeof(MemoryHeader);
+        MemoryHeader* header = nullptr;
+        if (allocSize > MAX_ALLOC_SIZE) {
+            header = reinterpret_cast<MemoryHeader*>(_aligned_malloc(allocSize, 16));
+        }
+        else {
+            header = _poolTable[allocSize]->Pop();
+        }
+        return AttachHeader(header, allocSize);
+    }
+
+    void Release(void* ptr) {
+        MemoryHeader* header = DetachHeader(ptr);
+        int allocSize = header->allocSize;
+        if (allocSize > MAX_ALLOC_SIZE) {
+            _aligned_free(header);
+        }
+        else {
+            _poolTable[allocSize]->Push(header);
+        }
+    }
+
+private:
+    vector<MemoryPool*> _pools;
+    MemoryPool* _poolTable[MAX_ALLOC_SIZE + 1];
+};
+
+Memory* gMemory = nullptr;
+
+//---------------------------------------------------------------------------
+// 시간 측정 유틸리티 (마이크로초 단위)
+//---------------------------------------------------------------------------
+template <typename Func>
+long long measureTime(Func f) {
+    auto start = high_resolution_clock::now();
+    f();
+    auto end = high_resolution_clock::now();
+    return duration_cast<microseconds>(end - start).count();
+}
+
+const int ITERATIONS = 100000;
+
+//---------------------------------------------------------------------------
+// [기본 테스트] 단일 스레드 테스트: custom allocator
+//---------------------------------------------------------------------------
+void testCustomAllocatorSingleThread(int size) {
+    vector<void*> allocated;
+    allocated.reserve(ITERATIONS);
+
+    long long allocTime = measureTime([&]() {
+        for (int i = 0; i < ITERATIONS; i++) {
+            void* ptr = gMemory->Allocate(size);
+            allocated.push_back(ptr);
+        }
+        });
+
+    long long deallocTime = measureTime([&]() {
+        for (auto ptr : allocated) {
+            gMemory->Release(ptr);
+        }
+        });
+
+    long long combinedTime = measureTime([&]() {
+        for (int i = 0; i < ITERATIONS; i++) {
+            void* ptr = gMemory->Allocate(size);
+            gMemory->Release(ptr);
+        }
+        });
+
+    cout << "== Custom Allocator (Size " << size << ") Single-thread ==" << endl;
+    cout << " Allocation: " << allocTime << " µs" << endl;
+    cout << " Deallocation: " << deallocTime << " µs" << endl;
+    cout << " Combined (alloc+dealloc): " << combinedTime << " µs" << endl;
+    cout << " Total (alloc + dealloc): " << (allocTime + deallocTime) << " µs" << endl;
+    cout << endl;
+}
+
+//---------------------------------------------------------------------------
+// [기본 테스트] 단일 스레드 테스트: std::vector 이용
+//---------------------------------------------------------------------------
+void testStdVectorSingleThread(int size) {
+    vector<vector<char>*> allocated;
+    allocated.reserve(ITERATIONS);
+
+    long long allocTime = measureTime([&]() {
+        for (int i = 0; i < ITERATIONS; i++) {
+            vector<char>* vec = new vector<char>(size);
+            allocated.push_back(vec);
+        }
+        });
+
+    long long deallocTime = measureTime([&]() {
+        for (auto vec : allocated) {
+            delete vec;
+        }
+        });
+
+    long long combinedTime = measureTime([&]() {
+        for (int i = 0; i < ITERATIONS; i++) {
+            vector<char>* vec = new vector<char>(size);
+            delete vec;
+        }
+        });
+
+    cout << "== std::vector Allocator (Size " << size << ") Single-thread ==" << endl;
+    cout << " Allocation: " << allocTime << " µs" << endl;
+    cout << " Deallocation: " << deallocTime << " µs" << endl;
+    cout << " Combined (alloc+dealloc): " << combinedTime << " µs" << endl;
+    cout << " Total (alloc + dealloc): " << (allocTime + deallocTime) << " µs" << endl;
+    cout << endl;
+}
+
+//---------------------------------------------------------------------------
+// [기본 테스트] 멀티 스레드 테스트용 결과 구조체 및 함수
+//---------------------------------------------------------------------------
+struct ThreadResult {
+    long long allocTime;
+    long long deallocTime;
+    long long combinedTime;
+};
+
+void customAllocatorThread(int size, int iterations, ThreadResult& result) {
+    vector<void*> allocated;
+    allocated.reserve(iterations);
+
+    result.allocTime = measureTime([&]() {
+        for (int i = 0; i < iterations; i++) {
+            void* ptr = gMemory->Allocate(size);
+            allocated.push_back(ptr);
+        }
+        });
+
+    result.deallocTime = measureTime([&]() {
+        for (auto ptr : allocated)
+            gMemory->Release(ptr);
+        });
+
+    result.combinedTime = measureTime([&]() {
+        for (int i = 0; i < iterations; i++) {
+            void* ptr = gMemory->Allocate(size);
+            gMemory->Release(ptr);
+        }
+        });
+}
+
+void stdVectorThread(int size, int iterations, ThreadResult& result) {
+    vector<vector<char>*> allocated;
+    allocated.reserve(iterations);
+
+    result.allocTime = measureTime([&]() {
+        for (int i = 0; i < iterations; i++) {
+            vector<char>* vec = new vector<char>(size);
+            allocated.push_back(vec);
+        }
+        });
+
+    result.deallocTime = measureTime([&]() {
+        for (auto vec : allocated)
+            delete vec;
+        });
+
+    result.combinedTime = measureTime([&]() {
+        for (int i = 0; i < iterations; i++) {
+            vector<char>* vec = new vector<char>(size);
+            delete vec;
+        }
+        });
+}
+
+void testCustomAllocatorMultiThread(int size, int numThreads) {
+    vector<thread> threads;
+    vector<ThreadResult> results(numThreads);
+    int iterationsPerThread = ITERATIONS / numThreads;
+
+    auto start = high_resolution_clock::now();
+    for (int i = 0; i < numThreads; i++) {
+        threads.emplace_back(customAllocatorThread, size, iterationsPerThread, ref(results[i]));
+    }
+    for (auto& t : threads)
+        t.join();
+    auto end = high_resolution_clock::now();
+    long long overallElapsed = duration_cast<microseconds>(end - start).count();
+
+    long long totalAlloc = 0, totalDealloc = 0, totalCombined = 0;
+    for (const auto& r : results) {
+        totalAlloc += r.allocTime;
+        totalDealloc += r.deallocTime;
+        totalCombined += r.combinedTime;
+    }
+
+    cout << "== Custom Allocator (Size " << size << ") Multi-thread (" << numThreads << " threads) ==" << endl;
+    cout << " Total Allocation (sum): " << totalAlloc << " µs" << endl;
+    cout << " Total Deallocation (sum): " << totalDealloc << " µs" << endl;
+    cout << " Total Combined (sum): " << totalCombined << " µs" << endl;
+    cout << " Overall elapsed time: " << overallElapsed << " µs" << endl;
+    cout << endl;
+}
+
+void testStdVectorMultiThread(int size, int numThreads) {
+    vector<thread> threads;
+    vector<ThreadResult> results(numThreads);
+    int iterationsPerThread = ITERATIONS / numThreads;
+
+    auto start = high_resolution_clock::now();
+    for (int i = 0; i < numThreads; i++) {
+        threads.emplace_back(stdVectorThread, size, iterationsPerThread, ref(results[i]));
+    }
+    for (auto& t : threads)
+        t.join();
+    auto end = high_resolution_clock::now();
+    long long overallElapsed = duration_cast<microseconds>(end - start).count();
+
+    long long totalAlloc = 0, totalDealloc = 0, totalCombined = 0;
+    for (const auto& r : results) {
+        totalAlloc += r.allocTime;
+        totalDealloc += r.deallocTime;
+        totalCombined += r.combinedTime;
+    }
+
+    cout << "== std::vector Allocator (Size " << size << ") Multi-thread (" << numThreads << " threads) ==" << endl;
+    cout << " Total Allocation (sum): " << totalAlloc << " µs" << endl;
+    cout << " Total Deallocation (sum): " << totalDealloc << " µs" << endl;
+    cout << " Total Combined (sum): " << totalCombined << " µs" << endl;
+    cout << " Overall elapsed time: " << overallElapsed << " µs" << endl;
+    cout << endl;
+}
+
+//---------------------------------------------------------------------------
+// [추가 스트레스 테스트] 
+// 1. 일부 해제 후 재할당: 단일 스레드
+//---------------------------------------------------------------------------
+void testStressCustomAllocatorSingleThread(int size) {
+    vector<void*> allocated;
+    allocated.reserve(ITERATIONS);
+
+    long long initialAllocTime = measureTime([&]() {
+        for (int i = 0; i < ITERATIONS; i++) {
+            allocated.push_back(gMemory->Allocate(size));
+        }
+        });
+
+    long long partialFreeTime = measureTime([&]() {
+        // 전체의 약 1/3을 해제 (매 3번째)
+        for (int i = 0; i < ITERATIONS; i += 3) {
+            gMemory->Release(allocated[i]);
+            allocated[i] = nullptr;
+        }
+        });
+
+    long long reAllocTime = measureTime([&]() {
+        // 해제된 슬롯에 대해 재할당
+        for (int i = 0; i < ITERATIONS; i += 3) {
+            allocated[i] = gMemory->Allocate(size);
+        }
+        });
+
+    long long finalFreeTime = measureTime([&]() {
+        for (int i = 0; i < ITERATIONS; i++) {
+            gMemory->Release(allocated[i]);
+        }
+        });
+
+    cout << "== Custom Allocator Stress Test (Size " << size << ") Single-thread ==" << endl;
+    cout << " Initial Allocation: " << initialAllocTime << " µs" << endl;
+    cout << " Partial Free (every 3rd): " << partialFreeTime << " µs" << endl;
+    cout << " Re-allocation: " << reAllocTime << " µs" << endl;
+    cout << " Final Free: " << finalFreeTime << " µs" << endl;
+    cout << " Total Stress Test Time: " << (initialAllocTime + partialFreeTime + reAllocTime + finalFreeTime) << " µs" << endl;
+    cout << endl;
+}
+
+void testStressStdVectorSingleThread(int size) {
+    vector<vector<char>*> allocated;
+    allocated.reserve(ITERATIONS);
+
+    long long initialAllocTime = measureTime([&]() {
+        for (int i = 0; i < ITERATIONS; i++) {
+            allocated.push_back(new vector<char>(size));
+        }
+        });
+
+    long long partialFreeTime = measureTime([&]() {
+        for (int i = 0; i < ITERATIONS; i += 3) {
+            delete allocated[i];
+            allocated[i] = nullptr;
+        }
+        });
+
+    long long reAllocTime = measureTime([&]() {
+        for (int i = 0; i < ITERATIONS; i += 3) {
+            allocated[i] = new vector<char>(size);
+        }
+        });
+
+    long long finalFreeTime = measureTime([&]() {
+        for (int i = 0; i < ITERATIONS; i++) {
+            delete allocated[i];
+        }
+        });
+
+    cout << "== std::vector Stress Test (Size " << size << ") Single-thread ==" << endl;
+    cout << " Initial Allocation: " << initialAllocTime << " µs" << endl;
+    cout << " Partial Free (every 3rd): " << partialFreeTime << " µs" << endl;
+    cout << " Re-allocation: " << reAllocTime << " µs" << endl;
+    cout << " Final Free: " << finalFreeTime << " µs" << endl;
+    cout << " Total Stress Test Time: " << (initialAllocTime + partialFreeTime + reAllocTime + finalFreeTime) << " µs" << endl;
+    cout << endl;
+}
+
+//---------------------------------------------------------------------------
+// [추가 테스트] 혼합 크기 스트레스 테스트 (단일 스레드, custom allocator)
+// 여러 크기를 랜덤하게 선택하여 할당/해제하여 단편화 현상을 관찰할 수 있습니다.
+void testMixedSizeStressSingleThread() {
+    vector<int> sizes = { 32, 64, 128, 256, 512, 1024, 2048, 4096 };
+    vector<void*> allocated;
+    allocated.reserve(ITERATIONS);
+
+    long long initialAllocTime = measureTime([&]() {
+        for (int i = 0; i < ITERATIONS; i++) {
+            int idx = rand() % sizes.size();
+            void* ptr = gMemory->Allocate(sizes[idx]);
+            allocated.push_back(ptr);
+        }
+        });
+
+    long long partialFreeTime = measureTime([&]() {
+        for (int i = 0; i < ITERATIONS; i++) {
+            if (rand() % 100 < 30) { // 약 30% 해제
+                gMemory->Release(allocated[i]);
+                allocated[i] = nullptr;
+            }
+        }
+        });
+
+    long long reAllocTime = measureTime([&]() {
+        for (int i = 0; i < ITERATIONS; i++) {
+            if (allocated[i] == nullptr) {
+                int idx = rand() % sizes.size();
+                allocated[i] = gMemory->Allocate(sizes[idx]);
+            }
+        }
+        });
+
+    long long finalFreeTime = measureTime([&]() {
+        for (int i = 0; i < ITERATIONS; i++) {
+            gMemory->Release(allocated[i]);
+        }
+        });
+
+    long long totalTime = initialAllocTime + partialFreeTime + reAllocTime + finalFreeTime;
+    cout << "== Custom Allocator Mixed Size Stress Test Single-thread ==" << endl;
+    cout << " Initial Allocation: " << initialAllocTime << " µs" << endl;
+    cout << " Partial Free: " << partialFreeTime << " µs" << endl;
+    cout << " Re-allocation: " << reAllocTime << " µs" << endl;
+    cout << " Final Free: " << finalFreeTime << " µs" << endl;
+    cout << " Total Time: " << totalTime << " µs" << endl;
+    cout << endl;
+}
+
+//---------------------------------------------------------------------------
+// [멀티 스레드 스트레스 테스트] 결과 구조체 및 함수
+//---------------------------------------------------------------------------
+struct ThreadStressResult {
+    long long initialAllocTime;
+    long long partialFreeTime;
+    long long reAllocTime;
+    long long finalFreeTime;
+};
+
+void customAllocatorStressThread(int size, int iterations, ThreadStressResult& result) {
+    vector<void*> allocated;
+    allocated.reserve(iterations);
+
+    result.initialAllocTime = measureTime([&]() {
+        for (int i = 0; i < iterations; i++) {
+            allocated.push_back(gMemory->Allocate(size));
+        }
+        });
+
+    result.partialFreeTime = measureTime([&]() {
+        for (int i = 0; i < iterations; i += 3) {
+            gMemory->Release(allocated[i]);
+            allocated[i] = nullptr;
+        }
+        });
+
+    result.reAllocTime = measureTime([&]() {
+        for (int i = 0; i < iterations; i += 3) {
+            allocated[i] = gMemory->Allocate(size);
+        }
+        });
+
+    result.finalFreeTime = measureTime([&]() {
+        for (int i = 0; i < iterations; i++) {
+            gMemory->Release(allocated[i]);
+        }
+        });
+}
+
+void stdVectorStressThread(int size, int iterations, ThreadStressResult& result) {
+    vector<vector<char>*> allocated;
+    allocated.reserve(iterations);
+
+    result.initialAllocTime = measureTime([&]() {
+        for (int i = 0; i < iterations; i++) {
+            allocated.push_back(new vector<char>(size));
+        }
+        });
+
+    result.partialFreeTime = measureTime([&]() {
+        for (int i = 0; i < iterations; i += 3) {
+            delete allocated[i];
+            allocated[i] = nullptr;
+        }
+        });
+
+    result.reAllocTime = measureTime([&]() {
+        for (int i = 0; i < iterations; i += 3) {
+            allocated[i] = new vector<char>(size);
+        }
+        });
+
+    result.finalFreeTime = measureTime([&]() {
+        for (int i = 0; i < iterations; i++) {
+            delete allocated[i];
+        }
+        });
+}
+
+void testCustomAllocatorStressMultiThread(int size, int numThreads) {
+    vector<thread> threads;
+    vector<ThreadStressResult> results(numThreads);
+    int iterationsPerThread = ITERATIONS / numThreads;
+
+    auto start = high_resolution_clock::now();
+    for (int i = 0; i < numThreads; i++) {
+        threads.emplace_back(customAllocatorStressThread, size, iterationsPerThread, ref(results[i]));
+    }
+    for (auto& t : threads)
+        t.join();
+    auto end = high_resolution_clock::now();
+    long long overallElapsed = duration_cast<microseconds>(end - start).count();
+
+    long long totalInitial = 0, totalPartial = 0, totalReAlloc = 0, totalFinal = 0;
+    for (const auto& r : results) {
+        totalInitial += r.initialAllocTime;
+        totalPartial += r.partialFreeTime;
+        totalReAlloc += r.reAllocTime;
+        totalFinal += r.finalFreeTime;
+    }
+
+    cout << "== Custom Allocator Stress Test (Size " << size << ") Multi-thread (" << numThreads << " threads) ==" << endl;
+    cout << " Total Initial Allocation: " << totalInitial << " µs" << endl;
+    cout << " Total Partial Free: " << totalPartial << " µs" << endl;
+    cout << " Total Re-allocation: " << totalReAlloc << " µs" << endl;
+    cout << " Total Final Free: " << totalFinal << " µs" << endl;
+    cout << " Overall elapsed time: " << overallElapsed << " µs" << endl;
+    cout << endl;
+}
+
+void testStdVectorStressMultiThread(int size, int numThreads) {
+    vector<thread> threads;
+    vector<ThreadStressResult> results(numThreads);
+    int iterationsPerThread = ITERATIONS / numThreads;
+
+    auto start = high_resolution_clock::now();
+    for (int i = 0; i < numThreads; i++) {
+        threads.emplace_back(stdVectorStressThread, size, iterationsPerThread, ref(results[i]));
+    }
+    for (auto& t : threads)
+        t.join();
+    auto end = high_resolution_clock::now();
+    long long overallElapsed = duration_cast<microseconds>(end - start).count();
+
+    long long totalInitial = 0, totalPartial = 0, totalReAlloc = 0, totalFinal = 0;
+    for (const auto& r : results) {
+        totalInitial += r.initialAllocTime;
+        totalPartial += r.partialFreeTime;
+        totalReAlloc += r.reAllocTime;
+        totalFinal += r.finalFreeTime;
+    }
+
+    cout << "== std::vector Stress Test (Size " << size << ") Multi-thread (" << numThreads << " threads) ==" << endl;
+    cout << " Total Initial Allocation: " << totalInitial << " µs" << endl;
+    cout << " Total Partial Free: " << totalPartial << " µs" << endl;
+    cout << " Total Re-allocation: " << totalReAlloc << " µs" << endl;
+    cout << " Total Final Free: " << totalFinal << " µs" << endl;
+    cout << " Overall elapsed time: " << overallElapsed << " µs" << endl;
+    cout << endl;
+}
+
+//---------------------------------------------------------------------------
+// main: 전역 메모리 객체 초기화 및 각 테스트 실행
+//---------------------------------------------------------------------------
+int main() {
+    srand((unsigned)time(NULL));
+
+    // 전역 메모리 풀 생성
+    gMemory = new Memory();
+
+    vector<int> testSizes = { 32, 64, 128, 256, 512, 1024, 2048, 4096 };
+    int numThreads = thread::hardware_concurrency();
+    if (numThreads == 0)
+        numThreads = 4;
+
+    cout << "===== Single-thread Basic Tests =====" << endl;
+    for (int size : testSizes) {
+        testCustomAllocatorSingleThread(size);
+        testStdVectorSingleThread(size);
+        cout << "---------------------------------" << endl;
+    }
+
+    cout << "\n===== Multi-thread Basic Tests =====" << endl;
+    for (int size : testSizes) {
+        testCustomAllocatorMultiThread(size, numThreads);
+        testStdVectorMultiThread(size, numThreads);
+        cout << "---------------------------------" << endl;
+    }
+
+    cout << "\n===== Single-thread Stress Tests =====" << endl;
+    for (int size : testSizes) {
+        testStressCustomAllocatorSingleThread(size);
+        testStressStdVectorSingleThread(size);
+        cout << "---------------------------------" << endl;
+    }
+
+    cout << "\n===== Multi-thread Stress Tests =====" << endl;
+    for (int size : testSizes) {
+        testCustomAllocatorStressMultiThread(size, numThreads);
+        testStdVectorStressMultiThread(size, numThreads);
+        cout << "---------------------------------" << endl;
+    }
+
+    cout << "\n===== Mixed Size Stress Test (Custom Allocator) Single-thread =====" << endl;
+    testMixedSizeStressSingleThread();
+
+    delete gMemory;
+
+    return 0;
+}
+{% endhighlight %}
+</details>```
 
 
 ## 참고 자료
