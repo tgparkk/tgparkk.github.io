@@ -570,6 +570,34 @@ layout: default
       grid-template-columns: 1fr;
     }
   }
+
+  details {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  border: 1px solid #e1e4e8;
+}
+
+details summary {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+details[open] summary {
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+[data-theme="dark"] details {
+  background-color: #2a2a2a;
+  border-color: #3f3f3f;
+}
+
+[data-theme="dark"] details[open] summary {
+  border-color: #3f3f3f;
+}
 </style>
 
 <!-- JavaScript for Table of Contents -->

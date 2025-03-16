@@ -814,3 +814,31 @@ footer {
   background-color: var(--primary-color);
   transform: translateY(-2px);
 }
+
+pre {
+  background-color: #f6f8fa;
+  border-radius: 6px;
+  padding: 16px;
+  overflow: auto;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+.highlight {
+  background-color: #f6f8fa;
+}
+
+.highlight .lineno {
+  color: #6a737d;
+  display: inline-block;
+  padding-right: 10px;
+  margin-right: 10px;
+  border-right: 1px solid #ddd;
+  text-align: right;
+  -webkit-user-select: none;
+  user-select: none;
+}
