@@ -842,3 +842,44 @@ code {
   -webkit-user-select: none;
   user-select: none;
 }
+
+/* 검색 결과 스타일 */
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: var(--card-bg);
+  border-radius: 0 0 8px 8px;
+  box-shadow: var(--card-shadow);
+  z-index: 1001;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+.search-item {
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.search-item:last-child {
+  border-bottom: none;
+}
+
+.search-item h4 {
+  margin: 0 0 5px 0;
+  color: var(--accent-color);
+}
+
+.search-item p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.search-item small {
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
