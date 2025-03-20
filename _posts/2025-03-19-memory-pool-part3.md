@@ -7,7 +7,7 @@ tags: [c++, memory-pool, performance, multi-threading, implementation]
 excerpt: "원시 포인터, 스마트 포인터."
 ---
 
-[이전 글](/cpp/2025/03/12/memory-pool-part2.html)
+[이전 글](/cpp/2025/03/16/memory-pool-part2.html)
 
 
 # Memory Pool Part 3: 원시 포인터는 쉽게, 스마트 포인터는 왜 어려운가?
