@@ -12,7 +12,7 @@
 {% if page.description %}
 <meta name="description" content="{{ page.description }}">
 {% else %}
-<meta name="description" content="A development blog focusing on C++, async servers, rendering, game development, and more.">
+<meta name="description" content="A development blog focusing on async servers, rendering, game , and more.">
 {% endif %}
 
 <meta name="author" content="{{ site.author | default: 'tgparkk' }}">
@@ -33,7 +33,7 @@
 {% if page.description %}
 <meta property="og:description" content="{{ page.description }}">
 {% else %}
-<meta property="og:description" content="A development blog focusing on C++, async servers, rendering, game development, and more.">
+<meta property="og:description" content="A development blog focusing on async servers, rendering, game , and more.">
 {% endif %}
 
 <!-- Twitter 카드 메타 태그 -->
@@ -42,7 +42,7 @@
 {% if page.description %}
 <meta name="twitter:description" content="{{ page.description }}">
 {% else %}
-<meta name="twitter:description" content="A development blog focusing on C++, async servers, rendering, game development, and more.">
+<meta name="twitter:description" content="A development blog focusing on async servers, rendering, game , and more.">
 {% endif %}
 {% if page.image %}
 <meta name="twitter:image" content="{{ page.image | absolute_url }}">
@@ -63,7 +63,7 @@
   "@context": "https://schema.org",
   "@type": "{% if page.layout == 'post' %}BlogPosting{% else %}WebPage{% endif %}",
   "headline": "{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}",
-  "description": "{% if page.description %}{{ page.description }}{% else %}A development blog focusing on C++, async servers, rendering, game development, and more.{% endif %}",
+  "description": "{% if page.description %}{{ page.description }}{% else %}A development blog focusing on async servers, rendering, game , and more.{% endif %}",
   "url": "{{ page.url | absolute_url }}",
   {% if page.layout == 'post' %}
   "datePublished": "{{ page.date | date_to_xmlschema }}",
