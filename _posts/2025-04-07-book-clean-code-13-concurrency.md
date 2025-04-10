@@ -22,7 +22,6 @@ excerpt: "그동안 컴퓨터 책을 참 많이도 샀습니다. 마침 회사�
 - 동시성은 결합을 없애는 전략으로, 무엇(what)과 언제(when)를 분리
   - 스레드가 하나인 프로그램은 무엇과 언제가 서로 밀접하게 결합
   - 무엇과 언제를 분리하면 애플리케이션 구조와 효율이 극적으로 개선
-  - 예: 웹 애플리케이션이 표준으로 사용하는 서블릿 모델
 - 동시성은 구조적 개선만이 아닌 응답시간과 작업 처리량 개선이 필요할 때도 사용
 
 ## 동시성에 관한 미신과 오해
@@ -85,125 +84,68 @@ int main() {
 - 동시성 관련 코드는 다른 코드와 분리해야 함
 
 ```cpp
-// 잘못된 예: 비즈니스 로직과 동시성 코드가 혼합
-class OrderProcessor {
+// 잘못된 예: 과일 구매 로직과 동시성 코드가 혼합
+class FruitBuyer  {
 public:
-    void processOrder(Order& order) {
+    void buyFruit(Fruit& friut) {
         std::lock_guard<std::mutex> lock(mutex);
-        validateOrder(order);
-        calculateTotal(order);
-        saveToDatabase(order);
+        checkFruit(friut);
+        payFruit(friut);
+        getFruit(friut);
     }
     
 private:
     std::mutex mutex;
-    void validateOrder(Order& order) { /* ... */ }
-    void calculateTotal(Order& order) { /* ... */ }
-    void saveToDatabase(Order& order) { /* ... */ }
+    void checkFruit(Fruit& friut) { /* ... */ }
+    void payFruit(Fruit& friut) { /* ... */ }
+    void getFruit(Fruit& friut) { /* ... */ }
 };
 
-// 개선된 예: 동시성 관리는 별도 클래스로
-class OrderProcessor {
+
+// 과일 사기 비즈니스 로직
+class FruitBuyer {
 public:
-    void processOrder(Order& order) {
-        validateOrder(order);
-        calculateTotal(order);
-        saveToDatabase(order);
+    void buyFruit(const std::string& fruit) {
+        checkFruit(fruit);
+        payFruit(fruit);
+        getFruit(fruit);
     }
-    
+
 private:
-    void validateOrder(Order& order) { /* ... */ }
-    void calculateTotal(Order& order) { /* ... */ }
-    void saveToDatabase(Order& order) { /* ... */ }
+    void checkFruit(const std::string& fruit);
+    void payFruit(const std::string& fruit);
+    void getFruit(const std::string& fruit);
 };
 
-class ConcurrentOrderProcessor {
+// 동시성 처리 담당 클래스
+class ConcurrentFruitBuyer {
 public:
-    ConcurrentOrderProcessor(OrderProcessor& processor) : processor(processor) {}
-    
-    void processOrderConcurrently(Order& order) {
+    ConcurrentFruitBuyer(FruitBuyer& buyer) : buyer(buyer) {}
+
+    void buyFruitSafely(const std::string& fruit) {
         std::lock_guard<std::mutex> lock(mutex);
-        processor.processOrder(order);
+        buyer.buyFruit(fruit);                   
     }
-    
+
 private:
-    OrderProcessor& processor;
+    FruitBuyer& buyer;
     std::mutex mutex;
 };
 ```
+- 과일 구매는 FruitBuyer
+- 동시성 처리는 ConcurrentFruitBuyer
+
 
 ### 자료 범위 제한
-- 공유 객체를 사용하는 코드 내 임계영역을 최소화
-- 공유 자원에 대한 접근을 캡슐화
+- 공유 데이터를 줄이는 것이 가장 좋고, 꼭 공유해야 한다면 임계영역으로 보호하세요.
 
-```cpp
-// 잘못된 예: 공유 자원(account)이 외부에 노출됨
-class BankService {
-public:
-    Account* getAccount(const std::string& id) {
-        // 계좌 검색 및 반환
-        return &accounts[id];
-    }
-    
-private:
-    std::map<std::string, Account> accounts;
-};
-
-// 클라이언트 코드
-// 여러 스레드에서 account 객체에 직접 접근 가능
-Account* account = bankService.getAccount("12345");
-account->withdraw(100.0);
-
-// 개선된 예: 공유 자원 접근을 캡슐화
-class BankService {
-public:
-    void transfer(const std::string& fromId, const std::string& toId, double amount) {
-        std::lock_guard<std::mutex> lock(mutex);
-        Account& from = accounts[fromId];
-        Account& to = accounts[toId];
-        from.debit(amount);
-        to.credit(amount);
-    }
-    
-private:
-    std::map<std::string, Account> accounts;
-    std::mutex mutex;
-};
-```
+### 자료 사본을 사용
+- 공유 데이터를 직접 수정하기보다, 복사본을 만들어 작업한 후 필요할 때만 반영하는 것이 안전합니다
 
 ### 스레드는 가능한 독립적으로 구현
+- 지역 변수를 사용하세요.
 - 다른 스레드와 자원을 공유하지 않는 스레드 사용 (TLS: Thread Local Storage)
-- 스레드 간 통신을 최소화
 
-```cpp
-#include <thread>
-#include <iostream>
-
-// 스레드 로컬 변수 사용 예
-thread_local int userID = 0;
-
-void processRequest(int requestUserID) {
-    // 각 스레드마다 독립적인 userID 설정
-    userID = requestUserID;
-    
-    // 처리 로직
-    std::cout << "스레드 ID: " << std::this_thread::get_id() 
-              << ", 사용자 ID: " << userID << std::endl;
-}
-
-int main() {
-    // 여러 스레드에서 동시에 다른 사용자 요청 처리
-    std::thread t1(processRequest, 1001);
-    std::thread t2(processRequest, 1002);
-    std::thread t3(processRequest, 1003);
-    
-    t1.join();
-    t2.join();
-    t3.join();
-    
-    return 0;
-}
-```
 
 ## 실행 모델 이해하기
 
@@ -215,720 +157,110 @@ int main() {
 - **라이브락**: 스레드가 계속 동작하지만 진전은 없는 상태
 
 ### 모델1: 생산자-소비자
-생산자 스레드는 작업을 생성하여 대기열에 추가하고, 소비자 스레드는 대기열에서 작업을 가져와 처리합니다.
-
-```cpp
-#include <iostream>
-#include <queue>
-#include <thread>
-#include <mutex>
-#include <condition_variable>
-
-template<typename T>
-class ThreadSafeQueue {
-private:
-    std::queue<T> queue;
-    std::mutex mutex;
-    std::condition_variable cv;  // 하나의 조건 변수만 사용
-    size_t max_size;
-
-public:
-    ThreadSafeQueue(size_t max_size = 10) : max_size(max_size) {}
-    
-    // 아이템 추가
-    void push(T item) {
-        {
-            std::unique_lock<std::mutex> lock(mutex);
-            // 큐가 가득 찼으면 대기
-            cv.wait(lock, [this] { return queue.size() < max_size; });
-            
-            // 아이템 추가
-            queue.push(item);
-            std::cout << "생산: " << item << std::endl;
-        }
-        // 다른 스레드에게 큐 상태가 변경됐음을 알림
-        cv.notify_one();
-    }
-    
-    // 아이템 가져오기
-    T pop() {
-        T item;
-        {
-            std::unique_lock<std::mutex> lock(mutex);
-            // 큐가 비어있으면 대기
-            cv.wait(lock, [this] { return !queue.empty(); });
-            
-            // 아이템 가져오기
-            item = queue.front();
-            queue.pop();
-            std::cout << "소비: " << item << std::endl;
-        }
-        // 다른 스레드에게 큐 상태가 변경됐음을 알림
-        cv.notify_one();
-        return item;
-    }
-};
-
-int main() {
-    ThreadSafeQueue<int> queue(5);  // 최대 크기 5인 큐 생성
-    
-    // 생산자 스레드
-    std::thread producer([&queue] {
-        for (int i = 0; i < 10; i++) {
-            queue.push(i);
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        }
-    });
-    
-    // 소비자 스레드
-    std::thread consumer([&queue] {
-        for (int i = 0; i < 10; i++) {
-            int item = queue.pop();
-            std::this_thread::sleep_for(std::chrono::milliseconds(150));
-        }
-    });
-    
-    producer.join();
-    consumer.join();
-    
-    return 0;
-}
-```
+- 생산자 스레드는 작업을 생성해 대기열에 추가, 소비자 스레드는 대기열에서 작업을 가져와 처리합니다.
+- 대기열이 가득 찻는데 소비자에게 알림을 전달 못하거나, 대기열이 비었는데 생산자에게 알림을 전달 못함 -> 데드락 발생
 
 ### 모델2: 읽기-쓰기
-여러 스레드가 읽기 작업을 동시에 수행할 수 있지만, 쓰기 작업은 배타적으로 수행되어야 합니다.
-
-```cpp
-#include <shared_mutex>
-
-class ReadWriteData {
-public:
-    // 읽기 작업: 여러 스레드가 동시에 가능
-    int read() const {
-        std::shared_lock<std::shared_mutex> lock(mutex);
-        return data;
-    }
-    
-    // 쓰기 작업: 한 번에 한 스레드만 가능
-    void write(int new_value) {
-        std::unique_lock<std::shared_mutex> lock(mutex);
-        data = new_value;
-    }
-    
-private:
-    int data = 0;
-    mutable std::shared_mutex mutex;
-};
-```
+- 읽기-쓰기 모델은 읽기는 동시에 가능하고 쓰기는 혼자 해야 하는 구조입니다
+- 처리율을 높이려고 읽기를 계속 허용하다 보면, 쓰기가 계속 기다리게 되어 기아가 발생할 수 있습니다.
 
 ### 모델3: 식사하는 철학자들
-원형 테이블에 앉은 철학자들이 각자 왼쪽과 오른쪽의 포크를 모두 집어야 식사가 가능한 모델입니다.
-
-```cpp
-#include <iostream>
-#include <thread>
-#include <mutex>
-#include <array>
-#include <chrono>
-
-const int NUM_PHILOSOPHERS = 5;
-
-class DiningPhilosophers {
-public:
-    DiningPhilosophers() {
-        for (int i = 0; i < NUM_PHILOSOPHERS; i++) {
-            fork_status[i] = true; // 모든 포크 사용 가능
-        }
-    }
-    
-    void philosopher(int id) {
-        int left_fork = id;
-        int right_fork = (id + 1) % NUM_PHILOSOPHERS;
-        
-        // 데드락 방지: 짝수 번호 철학자는 왼쪽 포크부터, 홀수 번호는 오른쪽 포크부터
-        if (id % 2 == 0) {
-            std::swap(left_fork, right_fork);
-        }
-        
-        for (int i = 0; i < 3; i++) { // 3번 식사
-            think(id);
-            
-            // 첫 번째 포크 집기
-            {
-                std::lock_guard<std::mutex> lock(mutex);
-                while (!fork_status[left_fork]) {
-                    std::this_thread::yield();
-                }
-                fork_status[left_fork] = false;
-                std::cout << "철학자 " << id << "가 포크 " << left_fork << "를 집었습니다." << std::endl;
-            }
-            
-            // 두 번째 포크 집기
-            {
-                std::lock_guard<std::mutex> lock(mutex);
-                while (!fork_status[right_fork]) {
-                    std::this_thread::yield();
-                }
-                fork_status[right_fork] = false;
-                std::cout << "철학자 " << id << "가 포크 " << right_fork << "를 집었습니다." << std::endl;
-            }
-            
-            eat(id);
-            
-            // 포크 내려놓기
-            {
-                std::lock_guard<std::mutex> lock(mutex);
-                fork_status[left_fork] = true;
-                fork_status[right_fork] = true;
-                std::cout << "철학자 " << id << "가 포크를 내려놓았습니다." << std::endl;
-            }
-        }
-    }
-    
-private:
-    std::mutex mutex;
-    std::array<bool, NUM_PHILOSOPHERS> fork_status;
-    
-    void think(int id) {
-        std::cout << "철학자 " << id << "가 생각 중입니다." << std::endl;
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
-    
-    void eat(int id) {
-        std::cout << "철학자 " << id << "가 식사 중입니다." << std::endl;
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    }
-};
-```
+![식사하는 철학자](/assets/images/cleanCode13_concurrency/competing_philosophers.png)
+- 여러 스레드가 제한된 자원을 사용해야 할 때 발생하는 대표적인 동기화 문제입니다. (철학자 = 스레드 / 포크 = 자원)
+- 각 철학자가 양쪽 포크를 집어야 식사를 할 수 있는데, 모두가 동시에 한쪽 포크만 들고 다른 포크를 기다리면 → 데드락 발생
+- 또는 누군가 계속 식사하고 다른 철학자가 기회를 못 받으면 → 기아(Starvation) 발생
 
 ## 동기화하는 메서드 사이의 의존성 관리
 
-공유 객체의 여러 메서드를 호출해야 할 때 세 가지 접근법을 사용할 수 있습니다:
+네 완전히 이해했습니다!  
+앞에서 정리하신 스타일을 그대로 살려서 깔끔하게 정리해볼게요.
 
-### 1. 클라이언트 측 잠금
+---
 
-```cpp
-class BankAccount {
-public:
-    void deposit(double amount) {
-        balance += amount;
-    }
-    
-    bool withdraw(double amount) {
-        if (balance >= amount) {
-            balance -= amount;
-            return true;
-        }
-        return false;
-    }
-    
-    double getBalance() const {
-        return balance;
-    }
-    
-private:
-    double balance = 0.0;
-};
+## 원칙: 동기화하는 메서드 사이에 존재하는 의존성을 이해하라
+- 공유 객체는 동기화 문제가 없도록 메서드를 하나만 제공하는 것이 가장 안전합니다.  
+- 하지만 여러 메서드가 필요한 상황이라면, 동기화 방식에 대한 설계가 중요합니다.
 
-// 클라이언트 측 잠금 예시
-void transferMoney(BankAccount& from, BankAccount& to, double amount, std::mutex& lock) {
-    // 클라이언트가 잠금 관리
-    std::lock_guard<std::mutex> guard(lock);
-    
-    if (from.withdraw(amount)) {
-        to.deposit(amount);
-        std::cout << "이체 성공: " << amount << "원" << std::endl;
-    } else {
-        std::cout << "이체 실패: 잔액 부족" << std::endl;
-    }
-}
-```
+#### 해결 방법
 
-### 2. 서버 측 잠금
-
-```cpp
-class BankAccount {
-public:
-    void deposit(double amount) {
-        std::lock_guard<std::mutex> guard(mutex);
-        balance += amount;
-    }
-    
-    bool withdraw(double amount) {
-        std::lock_guard<std::mutex> guard(mutex);
-        if (balance >= amount) {
-            balance -= amount;
-            return true;
-        }
-        return false;
-    }
-    
-    double getBalance() const {
-        std::lock_guard<std::mutex> guard(mutex);
-        return balance;
-    }
-    
-private:
-    mutable std::mutex mutex;
-    double balance = 0.0;
-};
-
-// 서버 측 잠금 사용 예시
-void transferMoney(BankAccount& from, BankAccount& to, double amount) {
-    // 각 메서드에서 자체적으로 잠금 관리
-    if (from.withdraw(amount)) {
-        to.deposit(amount);
-        std::cout << "이체 성공: " << amount << "원" << std::endl;
-    } else {
-        std::cout << "이체 실패: 잔액 부족" << std::endl;
-    }
-}
-```
-
-### 3. 적응적 서버
-
-```cpp
-class BankAccount {
-public:
-    void deposit(double amount) {
-        std::lock_guard<std::mutex> guard(mutex);
-        depositImpl(amount);
-    }
-    
-    bool withdraw(double amount) {
-        std::lock_guard<std::mutex> guard(mutex);
-        return withdrawImpl(amount);
-    }
-    
-    double getBalance() const {
-        std::lock_guard<std::mutex> guard(mutex);
-        return balance;
-    }
-    
-    // 복합 작업을 위한 원자적 메서드
-    bool transfer(BankAccount& to, double amount) {
-        // 두 계좌의 잠금 순서 결정 (데드락 방지)
-        BankAccount* first = (this < &to) ? this : &to;
-        BankAccount* second = (this < &to) ? &to : this;
-        
-        std::lock_guard<std::mutex> lock1(first->mutex);
-        std::lock_guard<std::mutex> lock2(second->mutex);
-        
-        if (this->balance >= amount) {
-            this->balance -= amount;
-            to.balance += amount;
-            return true;
-        }
-        return false;
-    }
-    
-private:
-    mutable std::mutex mutex;
-    double balance = 0.0;
-    
-    // 내부 구현 메서드 (잠금 없음)
-    void depositImpl(double amount) {
-        balance += amount;
-    }
-    
-    bool withdrawImpl(double amount) {
-        if (balance >= amount) {
-            balance -= amount;
-            return true;
-        }
-        return false;
-    }
-};
-```
+|방법|설명|
+|---|---|
+|클라이언트에서 잠금|사용하는 쪽(호출부)에서 락을 걸고 여러 메서드를 호출|
+|서버에서 잠금|공유 객체 내부에서 각 메서드마다 락을 걸어 동기화|
+|연결 서버(또는 관리자 서버)|공유 객체 접근을 전담하는 별도의 스레드나 서버를 두고 요청만 전달|
 
 ## 동기화 부분을 작게 만들기
+- 락을 거는 코드(임계영역)가 클수록 처리 속도가 느려지고, 다른 스레드가 오래 기다리게 됩니다.
+- 꼭 필요한 코드에만 락을 걸어 동기화 범위를 최소화하는 것이 좋습니다.
 
-임계영역이 커질수록 스레드 간 경쟁이 심해지고 성능이 저하됩니다. 따라서 동기화 영역을 최소화해야 합니다.
+
+#### 예시 상황  
+은행 계좌(balance)를 여러 스레드가 접근하는 상황입니다.
+
+#### 안 좋은 예시 (동기화 범위가 너무 넓음)
+- 동기화 범위가 크면 불필요하게 오래 기다림
 
 ```cpp
-#include <mutex>
-#include <vector>
-#include <algorithm>
-
-class DataProcessor {
-public:
-    // 잘못된 예: 전체 메서드에 잠금 적용
-    void processBad(const std::vector<int>& inputData) {
-        std::lock_guard<std::mutex> lock(mutex);
-        
-        // 1. 무거운 전처리 작업 (잠금 불필요)
-        std::vector<int> processedData;
-        for (int value : inputData) {
-            // CPU 집약적 연산
-            int result = 0;
-            for (int i = 0; i < 10000; i++) {
-                result += (value * i) % 7;
-            }
-            processedData.push_back(result);
-        }
-        
-        // 2. 공유 자원 업데이트 (잠금 필요)
-        results.insert(results.end(), processedData.begin(), processedData.end());
-        
-        // 3. 무거운 후처리 작업 (잠금 불필요)
-        std::sort(results.begin(), results.end());
-    }
-    
-    // 개선된 예: 필요한 부분만 잠금 적용
-    void processGood(const std::vector<int>& inputData) {
-        // 1. 무거운 전처리 작업 (잠금 불필요)
-        std::vector<int> processedData;
-        for (int value : inputData) {
-            // CPU 집약적 연산
-            int result = 0;
-            for (int i = 0; i < 10000; i++) {
-                result += (value * i) % 7;
-            }
-            processedData.push_back(result);
-        }
-        
-        // 2. 공유 자원 업데이트 (잠금 필요)
-        {
-            std::lock_guard<std::mutex> lock(mutex);
-            results.insert(results.end(), processedData.begin(), processedData.end());
-        }
-        
-        // 3. 무거운 후처리 작업 (결과의 로컬 복사본 사용)
-        std::vector<int> localResults;
-        {
-            std::lock_guard<std::mutex> lock(mutex);
-            localResults = results;
-        }
-        std::sort(localResults.begin(), localResults.end());
-    }
-    
-private:
-    std::mutex mutex;
-    std::vector<int> results;
-};
+void deposit(int amount) {
+    std::lock_guard<std::mutex> lock(mtx);
+    balance += amount;
+    /*
+    여러 작업 처리
+    */
+}
 ```
+
+#### 개선된 예시 (동기화 범위 최소화)
+- 공유 자원(balance)만 잠금  
+- 출력은 락 없이 처리 가능  
+
+```cpp
+void deposit(int amount) {
+   // 공유 자원 접근만 잠금
+    std::lock_guard<std::mutex> lock(mtx);
+    balance += amount;
+}
+/*
+여러 작업 처리
+*/
+```
+
+
+
+---
 
 ## 올바른 종료 코드 구현의 어려움
+- 부모 스레드가 여러 자식 스레드를 만들고, 자식 스레드가 모두 종료된 후 부모가 자원을 해제하는 상황을 가정 합니다.
+- 하지만 자식 스레드가 데드락에 걸렸거나, 자식 스레드끼리 생산자-소비자 관계로 묶여 있다면?
 
-부모 스레드가 여러 자식 스레드를 생성하고 모든 자식 스레드가 종료될 때까지 기다린 후 자원을 해제하는 시스템에서, 자식 스레드 하나가 데드락에 빠지면 전체 시스템이 블록될 수 있습니다.
+---
 
-```cpp
-#include <iostream>
-#include <thread>
-#include <vector>
-#include <mutex>
-#include <chrono>
-#include <atomic>
+### 문제 상황1 — 자식 스레드가 데드락에 걸린 경우
+- 부모는 자식 스레드 종료를 기다리는데, 자식 스레드가 데드락에 걸려 영원히 종료되지 않음
 
-class TaskManager {
-public:
-    TaskManager() : running(true) {}
-    
-    void start(int numWorkers) {
-        std::cout << "작업 관리자 시작..." << std::endl;
-        
-        // 여러 작업자 스레드 생성
-        for (int i = 0; i < numWorkers; i++) {
-            workers.push_back(std::thread(&TaskManager::workerFunction, this, i));
-        }
-    }
-    
-    ~TaskManager() {
-        // 종료 신호 전송
-        running = false;
-        
-        std::cout << "모든 작업자 종료 대기 중..." << std::endl;
-        
-        // 모든 스레드 종료 대기 - 여기서 문제 발생 가능!
-        for (auto& worker : workers) {
-            // 스레드 중 하나가 데드락에 빠지면 영원히 대기하게 됨
-            if (worker.joinable()) {
-                worker.join();
-            }
-        }
-        
-        std::cout << "작업 관리자 종료됨" << std::endl;
-    }
-    
-private:
-    void workerFunction(int id) {
-        std::cout << "작업자 " << id << " 시작" << std::endl;
-        
-        // 작업자 0은 의도적으로 데드락 발생
-        if (id == 0) {
-            std::cout << "작업자 0: 데드락 시뮬레이션" << std::endl;
-            std::mutex mtx;
-            mtx.lock();
-            mtx.lock();  // 같은 뮤텍스를 두 번 잠그려 시도 -> 데드락!
-        } else {
-            // 정상 작동하는 작업자
-            while (running) {
-                // 작업 수행
-                std::this_thread::sleep_for(std::chrono::milliseconds(500));
-                std::cout << "작업자 " << id << " 작업 중..." << std::endl;
-            }
-            std::cout << "작업자 " << id << " 정상 종료" << std::endl;
-        }
-    }
-    
-    std::vector<std::thread> workers;
-    std::atomic<bool> running;
-};
+---
 
-// 위 문제를 해결하기 위한 개선된 버전 - 타임아웃 추가
-class TaskManagerImproved {
-public:
-    TaskManagerImproved() : running(true) {}
-    
-    void start(int numWorkers) {
-        std::cout << "개선된 작업 관리자 시작..." << std::endl;
-        
-        for (int i = 0; i < numWorkers; i++) {
-            workers.push_back(std::thread(&TaskManagerImproved::workerFunction, this, i));
-        }
-    }
-    
-    ~TaskManagerImproved() {
-        // 종료 신호 전송
-        running = false;
-        
-        std::cout << "모든 작업자 종료 대기 중 (타임아웃 적용)..." << std::endl;
-        
-        // 각 스레드마다 타임아웃 적용
-        for (auto& worker : workers) {
-            // detach는 권장되지 않지만 데드락 방지를 위한 마지막 수단
-            if (worker.joinable()) {
-                std::thread watchdog([&worker]() {
-                    auto timeoutPoint = std::chrono::system_clock::now() + std::chrono::seconds(2);
-                    if (worker.joinable()) {
-                        std::cout << "작업자 스레드 join 시도 중..." << std::endl;
-                        worker.join();
-                    }
-                });
-                
-                // 워치독 스레드를 detach - 타임아웃 초과 시 프로그램 종료
-                watchdog.detach();
-                std::this_thread::sleep_for(std::chrono::seconds(3));
-            }
-        }
-        
-        std::cout << "작업 관리자 종료됨" << std::endl;
-    }
-    
-private:
-    void workerFunction(int id) {
-        std::cout << "작업자 " << id << " 시작" << std::endl;
-        
-        if (id == 0) {
-            std::cout << "작업자 0: 데드락 시뮬레이션" << std::endl;
-            std::mutex mtx;
-            mtx.lock();
-            mtx.lock();  // 데드락 발생
-        } else {
-            while (running) {
-                std::this_thread::sleep_for(std::chrono::milliseconds(500));
-                std::cout << "작업자 " << id << " 작업 중..." << std::endl;
-            }
-            std::cout << "작업자 " << id << " 정상 종료" << std::endl;
-        }
-    }
-    
-    std::vector<std::thread> workers;
-    std::atomic<bool> running;
-};
-```
+### 문제 상황2 — 생산자-소비자 관계인 자식 스레드
+- 부모가 자식 스레드 모두 종료하라고 알렸는데  
+- 소비자는 버퍼가 비어서 생산자를 기다리고 있고  
+- 생산자는 이미 종료했거나 멈춰있는 상황 → 서로 대기 → 데드락 또는 무한 대기 
+
+---
 
 ## 스레드 코드 테스트하기
 
 동시성 코드는 테스트하기 어렵습니다:
 - 문제를 노출하는 테스트 케이스 작성
+→ 예: 스레드 함수 안에 sleep 같은 지연을 넣어서 타이밍 충돌 유도
 - 프로그램 설정, 시스템 설정, 부하를 다양하게 변경하며 테스트
 - 다양한 환경에서 반복 테스트 필요
 
-```cpp
-#include <gtest/gtest.h>
-#include <thread>
-#include <vector>
-#include <mutex>
-#include <atomic>
-
-// 테스트 대상 클래스
-class Counter {
-public:
-    void increment() {
-        std::lock_guard<std::mutex> lock(mutex);
-        value++;
-    }
-    
-    int getValue() const {
-        std::lock_guard<std::mutex> lock(mutex);
-        return value;
-    }
-    
-private:
-    mutable std::mutex mutex;
-    int value = 0;
-};
-
-// 기본 테스트
-TEST(CounterTest, BasicIncrement) {
-    Counter counter;
-    const int NUM_INCREMENTS = 1000;
-    
-    for (int i = 0; i < NUM_INCREMENTS; i++) {
-        counter.increment();
-    }
-    
-    EXPECT_EQ(counter.getValue(), NUM_INCREMENTS);
-}
-
-// 스트레스 테스트 - 여러 스레드에서 동시에 증가
-TEST(CounterTest, ConcurrentIncrement) {
-    Counter counter;
-    const int NUM_THREADS = 10;
-    const int INCREMENTS_PER_THREAD = 1000;
-    
-    std::vector<std::thread> threads;
-    for (int i = 0; i < NUM_THREADS; i++) {
-        threads.push_back(std::thread([&]() {
-            for (int j = 0; j < INCREMENTS_PER_THREAD; j++) {
-                counter.increment();
-            }
-        }));
-    }
-    
-    for (auto& t : threads) {
-        t.join();
-    }
-    
-    EXPECT_EQ(counter.getValue(), NUM_THREADS * INCREMENTS_PER_THREAD);
-}
-
-// 교차 테스트 - 서로 다른 시점에 실행
-TEST(CounterTest, InterleavedTest) {
-    Counter counter;
-    std::atomic<bool> threadADone(false);
-    
-    // 스레드 A: 증가 500번 수행
-    std::thread threadA([&]() {
-        for (int i = 0; i < 500; i++) {
-            counter.increment();
-        }
-        threadADone = true;
-    });
-    
-    // 스레드 B: 스레드 A가 절반 정도 진행될 때까지 대기 후 증가 500번 수행
-    std::thread threadB([&]() {
-        // 스레드 A가 진행되도록 약간 대기
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
-        
-        for (int i = 0; i < 500; i++) {
-            counter.increment();
-        }
-    });
-    
-    threadA.join();
-    threadB.join();
-    
-    EXPECT_EQ(counter.getValue(), 1000);
-}
-
-// 시스템 부하 테스트 - CPU 사용률이 높은 상황에서 동시성 테스트
-TEST(CounterTest, HighLoadTest) {
-    Counter counter;
-    const int NUM_THREADS = 20;
-    
-    // 시스템에 부하를 주는 스레드들
-    std::vector<std::thread> loadThreads;
-    for (int i = 0; i < 4; i++) {
-        loadThreads.push_back(std::thread([]() {
-            std::vector<int> data;
-            for (int j = 0; j < 10000000; j++) {
-                data.push_back(j);
-                if (data.size() > 1000000) data.clear();
-            }
-        }));
-    }
-    
-    // 테스트 대상 스레드들
-    std::vector<std::thread> testThreads;
-    for (int i = 0; i < NUM_THREADS; i++) {
-        testThreads.push_back(std::thread([&]() {
-            for (int j = 0; j < 100; j++) {
-                counter.increment();
-            }
-        }));
-    }
-    
-    for (auto& t : testThreads) {
-        t.join();
-    }
-    
-    for (auto& t : loadThreads) {
-        t.join();
-    }
-    
-    EXPECT_EQ(counter.getValue(), NUM_THREADS * 100);
-}
-```
 
 ## 동시성 코드 구현 지침
 
 1. **일회성 오류도 넘기지 마라**: 간헐적으로 발생하는 동시성 문제는 무시하지 말고 반드시 해결해야 합니다.
 
 2. **다중 스레드를 고려하지 않은 순차 코드부터 제대로 구현**: 먼저 단일 스레드 코드가 올바르게 동작하는지 확인한 후, 동시성 지원을 추가합니다.
-
-```cpp
-// 1. 먼저 기능이 올바르게 작동하는 단일 스레드 코드 작성
-class Calculator {
-public:
-    int add(int a, int b) {
-        return a + b;
-    }
-    
-    int subtract(int a, int b) {
-        return a - b;
-    }
-    
-    int getLastResult() const {
-        return lastResult;
-    }
-    
-    void storeResult(int result) {
-        lastResult = result;
-    }
-    
-private:
-    int lastResult = 0;
-};
-
-// 2. 동시성 지원 추가
-class ThreadSafeCalculator {
-public:
-    int add(int a, int b) {
-        int result = calculator.add(a, b);
-        std::lock_guard<std::mutex> lock(mutex);
-        calculator.storeResult(result);
-        return result;
-    }
-    
-    int subtract(int a, int b) {
-        int result = calculator.subtract(a, b);
-        std::lock_guard<std::mutex> lock(mutex);
-        calculator.storeResult(result);
-        return result;
-    }
-    
-    int getLastResult() const {
-        std::lock_guard<std::mutex> lock(mutex);
-        return calculator.getLastResult();
-    }
-    
-private:
-    Calculator calculator;
-    mutable std::mutex mutex;
-};
-```
 
 3. **다중 스레드를 쓰는 코드 부분을 다양한 환경에 쉽게 넣을 수 있도록 구현**: 동시성 코드를 모듈화하고 환경에 따라 설정 가능하게 만듭니다.
 
@@ -939,61 +271,6 @@ private:
 6. **다른 플랫폼에서 돌려 테스트**: 서로 다른 운영 체제, 하드웨어에서 테스트하여 플랫폼 의존적 문제를 발견합니다.
 
 7. **코드에 보조 코드를 넣어 강제로 실패를 유발하는 테스트**: 스레드 스케줄링을 인위적으로 변경하여 경쟁 상태를 발생시키는 테스트를 수행합니다.
-
-```cpp
-#include <thread>
-#include <atomic>
-#include <chrono>
-
-class TestHarness {
-public:
-    // 스레드 간 경쟁 상태를 강제로 유발하는 도구
-    static void forceConcurrencyIssue(int threadId, int point) {
-        if (shouldInjectDelay.load()) {
-            if (threadId % 2 == 0 && point == injectionPoint) {
-                // 짝수 ID 스레드에 지연 주입
-                std::this_thread::sleep_for(std::chrono::milliseconds(5));
-            }
-        }
-    }
-    
-    static void enableDelayInjection(int point) {
-        shouldInjectDelay.store(true);
-        injectionPoint = point;
-    }
-    
-    static void disableDelayInjection() {
-        shouldInjectDelay.store(false);
-    }
-    
-private:
-    static std::atomic<bool> shouldInjectDelay;
-    static int injectionPoint;
-};
-
-std::atomic<bool> TestHarness::shouldInjectDelay(false);
-int TestHarness::injectionPoint = 0;
-
-// 사용 예시
-void workerWithDebugging(int id, SharedData& data) {
-    // 작업 시작
-    TestHarness::forceConcurrencyIssue(id, 1);
-    
-    // 공유 데이터 읽기
-    int value = data.getValue();
-    TestHarness::forceConcurrencyIssue(id, 2);
-    
-    // 연산 수행
-    value++;
-    TestHarness::forceConcurrencyIssue(id, 3);
-    
-    // 결과 저장
-    data.setValue(value);
-}
-```
-
-이러한 지침을 따르면 동시성 코드의 가독성, 유지보수성, 그리고 무엇보다 정확성을 향상시킬 수 있습니다.
-
 
 
 # 클린코드를 넘어서: 최신 동시성 문제 해결 기법
