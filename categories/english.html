@@ -1,19 +1,19 @@
 ---
 layout: default
-title: stock Articles
+title: english Articles
 ---
 
 <div class="category-page">
-  <h1>stock Articles</h1>
+  <h1>english Articles</h1>
   
   <div class="category-description">
     <p>
-        stock Various fields
+        english Various fields
     </p>
   </div>
   
   <div class="post-grid">
-    {% for post in site.categories.stock %}
+    {% for post in site.categories.english %}
       <div class="post-card">
         <div class="post-meta">
           <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
@@ -27,7 +27,7 @@ title: stock Articles
         </div>
       </div>
     {% else %}
-      <p>No stock articles yet. Check back soon!</p>
+      <p>No english articles yet. Check back soon!</p>
     {% endfor %}
   </div>
 </div>
