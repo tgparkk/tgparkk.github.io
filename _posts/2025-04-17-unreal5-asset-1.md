@@ -5,6 +5,7 @@ date: 2025-04-17
 categories: gamedev
 tags: [gamedev, unreal, asset]
 excerpt: "에셋 기본 개념과 활용법."
+comments: true
 ---
 
 ## 1. 언리얼 엔진에서 에셋(Asset)이란?

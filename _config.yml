@@ -37,3 +37,7 @@ defaults:
       type: "pages"
     values:
       layout: "default"
+
+# Disqus 설정
+disqus:
+  shortname: tgparkk-github-io

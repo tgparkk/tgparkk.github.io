@@ -5,6 +5,7 @@ date: 2025-03-28
 categories: gamedev
 tags: [c##, game, unity]
 excerpt: "모바일 오목게임, 유니티 게임, Awake() 함수"
+comments: true
 ---
 
 

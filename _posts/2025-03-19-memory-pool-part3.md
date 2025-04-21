@@ -5,6 +5,7 @@ date: 2025-03-19
 categories: cpp
 tags: [c++, memory-pool, performance, multi-threading, implementation]
 excerpt: "원시 포인터, 스마트 포인터."
+comments: true
 ---
 
 [이전 글](/cpp/2025/03/16/memory-pool-part2.html)

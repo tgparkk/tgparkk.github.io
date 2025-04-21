@@ -5,6 +5,7 @@ date: 2025-03-16
 categories: cpp
 tags: [c++, memory-pool, performance, multi-threading, implementation]
 excerpt: "메모리 풀의 실제 구현과 성능 분석 결과를 통해 효율성을 검증해봅니다."
+comments: true
 ---
 
 [이전 글](/cpp/2025/03/12/memory-pool-part1.html)에서는 메모리 풀이 필요한 이유와 메모리 단편화 문제에 대해 알아보았습니다. 이번 글에서는 실제 C++에서 메모리 풀을 어떻게 구현하는지, 그리고 그 성능은 어떠한지 분석해보겠습니다.

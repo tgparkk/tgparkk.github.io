@@ -5,6 +5,7 @@ date: 2025-03-30
 categories: windows
 tags: [windows, win32, message]
 excerpt: "윈도우즈 프로그램의 원리"
+comments: true
 ---
 
 # 윈도우 프로그래밍의 여정: 단계별로 이해하는 메시지 시스템

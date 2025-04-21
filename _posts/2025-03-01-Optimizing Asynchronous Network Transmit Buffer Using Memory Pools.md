@@ -5,6 +5,7 @@ date: 2025-03-01
 categories: async_servers
 tags: [c++, asio, memory-pool, performance, network-programming, multi-threading]
 excerpt: "고성능 비동기 네트워크 프로그래밍에서 메모리 관리는 성능에 중요한 영향을 미칩니다. 이 글에서는 ASIO 기반 비동기 서버에서 SendBuffer 클래스의 메모리 풀 활용 방식과 그 성능 이점을 설명합니다."
+comments: true
 ---
 
 # 메모리 풀을 활용한 비동기 네트워크 송신 버퍼 최적화
