@@ -5,6 +5,7 @@ date: 2025-03-25
 categories: gamedev
 tags: [c##, game, unity]
 excerpt: "모바일 오목게임, 유니티 게임, 씬(scene)."
+comments: true
 ---
 
 

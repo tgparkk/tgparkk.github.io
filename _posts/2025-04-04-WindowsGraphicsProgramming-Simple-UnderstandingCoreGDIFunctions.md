@@ -5,6 +5,7 @@ date: 2025-04-04
 categories: windows
 tags: [windows, win32, rendering, FillRect, SelectObject, DeleteObject, BitBlt]
 excerpt: "윈도우즈 프로그램의 렌더링링 원리"
+comments: true
 ---
 
 # 초보자를 위한 Windows 그래픽 함수 이해하기: FillRect, SelectObject, DeleteObject, BitBlt

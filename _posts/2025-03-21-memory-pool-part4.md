@@ -5,6 +5,7 @@ date: 2025-03-21
 categories: cpp
 tags: [c++, memory-pool, performance, smart-pointers, game-engines, high-performance]
 excerpt: "표준 스마트 포인터의 한계와 고성능 시스템에서의 대안적 접근법 탐색."
+comments: true
 ---
 
 [이전 글](/cpp/2025/03/19/memory-pool-part3.html)

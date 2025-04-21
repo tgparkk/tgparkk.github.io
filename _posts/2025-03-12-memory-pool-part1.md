@@ -5,6 +5,7 @@ date: 2025-03-12
 categories: cpp
 tags: [c++, asio, memory-pool, performance, network-programming, multi-threading]
 excerpt: "메모리 폴은 빈번한 new, delete 를 하는곳에 구현하면 시간 단축을 할 수 있습니다."
+comments: true
 ---
 
 ## 메모리 할당 및 해제 동작과 메모리 단편화 예시
