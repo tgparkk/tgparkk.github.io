@@ -3,7 +3,7 @@ layout: post
 title: "윈도우 프로그래밍의 핵심: 단계별로 이해하는 메시지 시스템"
 date: 2025-03-30
 categories: windows
-tags: [windows, win32, message]
+tags: [windows, win32, message, 윈도우, 메시지지]
 excerpt: "윈도우즈 프로그램의 원리"
 comments: true
 ---

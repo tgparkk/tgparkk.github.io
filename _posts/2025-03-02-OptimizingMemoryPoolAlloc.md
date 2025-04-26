@@ -3,7 +3,7 @@ layout: post
 title: "메모리 풀을 활용한 비동기 네트워크 송신 버퍼 최적화2"
 date: 2025-03-02
 categories: async_servers
-tags: [c++, asio, memory-pool, performance, network-programming, multi-threading]
+tags: [c++, asio, memory-pool, performance, network-programming, multi-threading, 비동기 서버, 메모리 풀, 멀티스레드]
 excerpt: "고성능 서버 애플리케이션에서 효율적인 메모리 관리는 최적의 성능을 달성하는 데 매우 중요합니다. 네트워크 프로그래밍의 주요 과제 중 하나는 비동기 데이터 전송을 위한 버퍼 관리입니다. 이 글에서는 네트워크 전송 버퍼의 할당과 재사용을 최적화하기 위해 설계된 메모리 풀 시스템의 구현에 대해 알아보겠습니다.
 "
 comments: true

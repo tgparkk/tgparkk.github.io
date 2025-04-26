@@ -3,7 +3,7 @@ layout: post
 title: "Unity로 오목 만들기 – Part 3: 승리조건, Awake() 함수, NullReferenceException 해결"
 date: 2025-03-28
 categories: gamedev
-tags: [c##, game, unity]
+tags: [c##, game, unity, 오목, 게임, 유니티, 씨샵]
 excerpt: "모바일 오목게임, 유니티 게임, Awake() 함수"
 comments: true
 ---

@@ -3,7 +3,7 @@ layout: post
 title: "MFC DIB 섹션 & BYTE 사용법: 300×400 비트맵으로 알아보는 픽셀 단위 그래픽 렌더링 및 화면 채우기 원리"
 date: 2025-04-01
 categories: windows
-tags: [windows, win32, rendering, bitmap]
+tags: [windows, win32, rendering, bitmap, 윈도우, 렌더링, 비트맵]
 excerpt: "300×400 크기의 화면(비트맵)에서 `BYTE* pBits`를 사용해 픽셀 단위로 그림을 그리는 원리를 정리한 내용입니다. 특히, BITMAPINFOHEADER의 biHeight 필드가 픽셀 오프셋 계산에 어떤 영향을 주는지에 대해 알아봅니다."
 comments: true
 ---

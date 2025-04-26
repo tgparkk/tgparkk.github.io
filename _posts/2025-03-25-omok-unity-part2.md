@@ -3,7 +3,7 @@ layout: post
 title: "Unity로 오목 만들기 – Part 2: 기본 기능 구현 및 씬 추가"
 date: 2025-03-25
 categories: gamedev
-tags: [c##, game, unity]
+tags: [c##, game, unity, 오목, 게임, 유니티, 씨샵]
 excerpt: "모바일 오목게임, 유니티 게임, 씬(scene)."
 comments: true
 ---

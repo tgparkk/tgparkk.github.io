@@ -3,7 +3,7 @@ layout: post
 title: "언리얼 엔진 5.4: 에셋 기본 개념과 활용법"
 date: 2025-04-17
 categories: gamedev
-tags: [gamedev, unreal, asset]
+tags: [gamedev, unreal, asset, 게임개발, 언리얼, 에셋]
 excerpt: "에셋 기본 개념과 활용법."
 comments: true
 ---

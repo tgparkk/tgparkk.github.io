@@ -3,7 +3,7 @@ layout: post
 title: "Unity로 오목 만들기 – Part 1: 환경 설정 및 기획"
 date: 2025-03-24
 categories: gamedev
-tags: [c##, game, unity]
+tags: [c##, game, unity, 오목, 게임, 유니티, 씨샵]
 excerpt: "모바일 오목게임, 유니티 게임 ."
 comments: true
 ---

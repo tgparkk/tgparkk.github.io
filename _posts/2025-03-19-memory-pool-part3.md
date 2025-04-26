@@ -3,7 +3,7 @@ layout: post
 title: "메모리 풀 : part 3 -원시 포인터, 스마트 포인터"
 date: 2025-03-19
 categories: cpp
-tags: [c++, memory-pool, performance, multi-threading, implementation]
+tags: [c++, memory-pool, performance, multi-threading, implementation, 비동기 서버, 메모리 풀, 멀티스레드]
 excerpt: "원시 포인터, 스마트 포인터."
 comments: true
 ---

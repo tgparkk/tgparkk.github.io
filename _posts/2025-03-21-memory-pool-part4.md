@@ -3,7 +3,7 @@ layout: post
 title: "메모리 풀 : part 4 - 표준 스마트 포인터의 한계와 다른 시스템의 해결책"
 date: 2025-03-21
 categories: cpp
-tags: [c++, memory-pool, performance, smart-pointers, game-engines, high-performance]
+tags: [c++, memory-pool, performance, smart-pointers, game-engines, high-performance, 비동기 서버, 메모리 풀, 멀티스레드]
 excerpt: "표준 스마트 포인터의 한계와 고성능 시스템에서의 대안적 접근법 탐색."
 comments: true
 ---
