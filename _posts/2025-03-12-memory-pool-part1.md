@@ -3,7 +3,7 @@ layout: post
 title: "메모리 풀 : part 1 - 필요한 이유"
 date: 2025-03-12
 categories: cpp
-tags: [c++, asio, memory-pool, performance, network-programming, multi-threading]
+tags: [c++, asio, memory-pool, performance, network-programming, multi-threading, 비동기 서버, 메모리 풀, 멀티스레드]
 excerpt: "메모리 폴은 빈번한 new, delete 를 하는곳에 구현하면 시간 단축을 할 수 있습니다."
 comments: true
 ---

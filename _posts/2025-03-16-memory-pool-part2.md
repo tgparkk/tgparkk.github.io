@@ -3,7 +3,7 @@ layout: post
 title: "메모리 풀 : part 2 - 구현 및 성능 분석"
 date: 2025-03-16
 categories: cpp
-tags: [c++, memory-pool, performance, multi-threading, implementation]
+tags: [c++, memory-pool, performance, multi-threading, implementation, 비동기 서버, 메모리 풀, 멀티스레드]
 excerpt: "메모리 풀의 실제 구현과 성능 분석 결과를 통해 효율성을 검증해봅니다."
 comments: true
 ---

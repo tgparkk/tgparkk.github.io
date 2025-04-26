@@ -3,7 +3,7 @@ layout: post
 title: "윈도우: DLL과 LIB 파일의 기본 개념"
 date: 2025-04-03
 categories: windows
-tags: [windows, dll, lib, programming, system]
+tags: [windows, dll, lib, programming, system, 윈도우]
 excerpt: "윈도우 프로그래밍의 핵심 요소인 DLL과 LIB 파일의 기본 개념과 역사적 배경, 장단점 비교, 그리고 적절한 사용 상황에 대해 알아봅니다."
 comments: true
 ---

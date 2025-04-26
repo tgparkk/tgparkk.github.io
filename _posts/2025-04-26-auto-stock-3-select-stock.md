@@ -3,7 +3,7 @@ layout: post
 title: "한국투자증권 API로 자동 매매 시스템 개발하기 – 3: 종목 선정하기"
 date: 2025-04-26
 categories: stock
-tags: [stock, python]
+tags: [stock, python, 주식, 파이썬]
 excerpt: "재테크 하고 싶어요... 종목 고르고 싶어요..."
 comments: true
 ---

@@ -3,7 +3,7 @@ layout: post
 title: "C++14와 MFC에서 std::thread를 활용한 파일 다운로드 구현하기"
 date: 2025-04-10
 categories: windows
-tags: [windows, win32, http, thread, async]
+tags: [windows, win32, http, thread, async, 윈도우, 스레드, 비동기]
 excerpt: "윈도우 app에서 비동기 다운로드 기능을 구현하는 시간을 가져 보려고 합니다."
 comments: true
 ---
