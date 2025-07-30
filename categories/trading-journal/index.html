@@ -1,0 +1,34 @@
+---
+layout: default
+title: Trading Journal
+permalink: /categories/trading-journal/
+---
+
+<div class="category-page">
+  <h1>주식 매매일지</h1>
+  
+  <div class="category-description">
+    <p>
+        실제 매매 경험과 투자 분석, 수익/손실 기록을 정리한 매매일지입니다.
+    </p>
+  </div>
+  
+  <div class="post-grid">
+    {% for post in site.categories.trading-journal %}
+      <div class="post-card">
+        <div class="post-meta">
+          <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
+        </div>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <p>{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
+        <div class="post-tags">
+          {% for tag in post.tags limit:3 %}
+          <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <p>아직 매매일지가 없습니다. 곧 업데이트됩니다!</p>
+    {% endfor %}
+  </div>
+</div>
