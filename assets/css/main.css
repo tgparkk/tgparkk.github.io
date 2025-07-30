@@ -883,3 +883,93 @@ code {
   font-size: 0.8rem;
   color: var(--text-light);
 }
+
+/* 테이블 스타일 */
+table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+table th,
+table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+table th {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+table tbody tr:hover {
+  background-color: rgba(119, 128, 235, 0.05);
+}
+
+table tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="dark"] table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* 테이블 내 강조 텍스트 */
+table strong {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* 상태 아이콘 */
+table .status-icon {
+  font-size: 1.1rem;
+  margin-right: 8px;
+}
+
+/* 수익률 색상 */
+table .profit {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+table .loss {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+table .neutral {
+  color: var(--text-light);
+}
+
+/* 반응형 테이블 */
+@media (max-width: 768px) {
+  table {
+    font-size: 0.85rem;
+  }
+  
+  table th,
+  table td {
+    padding: 8px 12px;
+  }
+  
+  table th {
+    font-size: 0.8rem;
+  }
+}
