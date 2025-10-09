@@ -3,8 +3,8 @@ layout: post
 title: "RoboTrader 개발일지 – 1: 70개 종목, 시스템이 멈춘 날"
 date: 2025-10-09
 categories: [robotrader]
-tags: [stock, python, 자동매매, API, 최적화, RoboTrader, 한국투자증권]
-excerpt: "조건검색에서 70개 종목이 선정되자 시스템이 에러를 토해냈다. API 제한 초당 20개를 875% 초과한 순간, 나는 동적 배치 시스템을 만들기로 했다."
+tags: [stock, python, 자동매매, API, 최적화, RoboTrader, 한국투자증권, KIS, KIS API, 한국투자증권API]
+excerpt: "조건검색에서 70개 종목이 선정되자 시스템이 에러를 토해냈다. 한국투자증권 KIS API 제한 초당 20개를 875% 초과한 순간, 나는 동적 배치 시스템을 만들기로 했다."
 comments: true
 ---
 
@@ -12,7 +12,7 @@ comments: true
 
 ## 🤖 RoboTrader 소개
 
-[RoboTrader](https://github.com/tgparkk/RoboTrader)는 한국투자증권 API를 활용한 Python 기반 주식 자동매매 시스템입니다. 눌림목 캔들패턴을 기반으로 한 단타 전략을 구현하고 있으며, 이 시리즈에서는 실제 개발 과정에서 겪은 문제와 해결 과정을 공유합니다.
+[RoboTrader](https://github.com/tgparkk/RoboTrader)는 **한국투자증권 KIS API(Korea Investment & Securities API)**를 활용한 Python 기반 주식 자동매매 시스템입니다. KIS Open API를 통해 실시간 주가 조회, 주문 실행 등을 자동화하며, 눌림목 캔들패턴을 기반으로 한 단타 전략을 구현하고 있습니다. 이 시리즈에서는 실제 개발 과정에서 겪은 문제와 해결 과정을 공유합니다.
 
 ---
 
@@ -80,9 +80,10 @@ for i in range(0, len(stock_codes), batch_size):
 = 초당 175개
 ```
 
-**한국투자증권 API 제한**: 초당 최대 20개
+**한국투자증권 KIS API 제한**: 초당 최대 20개 (KIS Developers 정책)
 **내가 호출한 것**: 초당 175개
 **초과율**: **875%** 💥
+**결과**: KIS API 서버로부터 Rate Limit 에러 발생
 
 (이 수치를 보고 멘붕이 왔습니다...)
 
@@ -176,11 +177,14 @@ batch_size, delay = calculate_optimal(total_stocks)
 ```python
 # core/dynamic_batch_calculator.py
 class DynamicBatchCalculator:
-    """종목 수에 따른 최적 배치 계산"""
+    """한국투자증권 KIS API 제약 조건 하에서 종목 수에 따른 최적 배치 계산
+    
+    KIS API Rate Limit: 초당 20개 호출 제한
+    """
 
-    API_LIMIT_PER_SECOND = 20  # 초당 20개
+    API_LIMIT_PER_SECOND = 20  # 한국투자증권 KIS API: 초당 20개 제한
     TARGET_UPDATE_TIME = 10    # 목표 10초
-    APIS_PER_STOCK = 2         # 종목당 2개 API
+    APIS_PER_STOCK = 2         # 종목당 2개 API (분봉 + 현재가)
 
     def calculate_optimal_batch(self, total_stocks: int):
         """최적 배치 크기와 지연 시간 계산"""
@@ -412,11 +416,11 @@ batch_size = calculate_optimal(current_stocks)
 ## 마치며
 
 조건검색에서 70개 종목이 나왔을 때, 시스템은 멈췄습니다.
-하지만 이 문제를 해결하면서 더 견고한 시스템을 만들 수 있었습니다.
+하지만 **한국투자증권 KIS API의 Rate Limit 제약**을 이해하고 이 문제를 해결하면서 더 견고한 시스템을 만들 수 있었습니다.
 
 **"시스템은 환경에 적응해야 한다"**
 
-이 교훈은 앞으로도 계속 적용될 것 같습니다.
+이 교훈은 KIS API를 활용하는 다른 자동매매 시스템 개발에도 적용될 것 같습니다.
 
 다음 편에서는 **눌림목 전략의 실제 구현**과 **신호 생성 로직**을 다뤄보겠습니다.
 
@@ -429,6 +433,8 @@ batch_size = calculate_optimal(current_stocks)
 ## 참고 자료
 
 - **GitHub**: [RoboTrader](https://github.com/tgparkk/RoboTrader)
+- **한국투자증권 KIS Developers**: [KIS Open API 문서](https://apiportal.koreainvestment.com)
+- **KIS API 가이드**: [한국투자증권 OpenAPI 개발자센터](https://apiportal.koreainvestment.com/howto)
 - **관련 코드**:
   - `core/dynamic_batch_calculator.py` - 동적 배치 계산기
   - `core/intraday_stock_manager.py` - 실시간 데이터 관리
