@@ -12,7 +12,7 @@ comments: true
 
 ## 🤖 RoboTrader 소개
 
-[RoboTrader](https://github.com/tgparkk/RoboTrader)는 **KIS API**를 활용한 Python 기반 주식 자동매매 시스템입니다. KIS Open API를 통해 실시간 주가 조회, 주문 실행 등을 자동화하며, 눌림목 캔들패턴을 기반으로 한 단타 전략을 구현하고 있습니다. 이 시리즈에서는 실제 개발 과정에서 겪은 문제와 해결 과정을 공유합니다.
+[RoboTrader](https://github.com/tgparkk/RoboTrader)는 **한국투자증권 API(KIS API)**를 활용한 Python 기반 주식 자동매매 시스템입니다. KIS Open API를 통해 실시간 주가 조회, 주문 실행 등을 자동화하며, 눌림목 캔들패턴을 기반으로 한 단타 전략을 구현하고 있습니다. 이 시리즈에서는 실제 개발 과정에서 겪은 문제와 해결 과정을 공유합니다.
 
 ---
 
@@ -80,7 +80,7 @@ for i in range(0, len(stock_codes), batch_size):
 = 초당 175개
 ```
 
-**KIS API 제한**: 초당 최대 20개 (KIS Developers 정책)
+**한국투자증권 API 제한**: 초당 최대 20개 (KIS Developers 정책)
 **내가 호출한 것**: 초당 175개
 **초과율**: **875%** 💥
 **결과**: KIS API 서버로부터 Rate Limit 에러 발생
@@ -177,12 +177,12 @@ batch_size, delay = calculate_optimal(total_stocks)
 ```python
 # core/dynamic_batch_calculator.py
 class DynamicBatchCalculator:
-    """KIS API 제약 조건 하에서 종목 수에 따른 최적 배치 계산
+    """한국투자증권 API(KIS API) 제약 조건 하에서 종목 수에 따른 최적 배치 계산
     
     KIS API Rate Limit: 초당 20개 호출 제한
     """
 
-    API_LIMIT_PER_SECOND = 20  # KIS API: 초당 20개 제한
+    API_LIMIT_PER_SECOND = 20  # 한국투자증권 KIS API: 초당 20개 제한
     TARGET_UPDATE_TIME = 10    # 목표 10초
     APIS_PER_STOCK = 2         # 종목당 2개 API (분봉 + 현재가)
 
@@ -416,11 +416,11 @@ batch_size = calculate_optimal(current_stocks)
 ## 마치며
 
 조건검색에서 70개 종목이 나왔을 때, 시스템은 멈췄습니다.
-하지만 **KIS API의 Rate Limit 제약**을 이해하고 이 문제를 해결하면서 더 견고한 시스템을 만들 수 있었습니다.
+하지만 **한국투자증권 API(KIS API)의 Rate Limit 제약**을 이해하고 이 문제를 해결하면서 더 견고한 시스템을 만들 수 있었습니다.
 
 **"시스템은 환경에 적응해야 한다"**
 
-이 교훈은 KIS API를 활용하는 다른 자동매매 시스템 개발에도 적용될 것 같습니다.
+이 교훈은 한국투자증권 KIS API를 활용하는 다른 자동매매 시스템 개발에도 적용될 것 같습니다.
 
 다음 편에서는 **눌림목 전략의 실제 구현**과 **신호 생성 로직**을 다뤄보겠습니다.
 
@@ -433,8 +433,8 @@ batch_size = calculate_optimal(current_stocks)
 ## 참고 자료
 
 - **GitHub**: [RoboTrader](https://github.com/tgparkk/RoboTrader)
-- **KIS Developers**: [KIS Open API 문서](https://apiportal.koreainvestment.com)
-- **KIS API 가이드**: [KIS OpenAPI 개발자센터](https://apiportal.koreainvestment.com/howto)
+- **한국투자증권 KIS Developers**: [KIS Open API 문서](https://apiportal.koreainvestment.com)
+- **한국투자증권 API 가이드**: [KIS OpenAPI 개발자센터](https://apiportal.koreainvestment.com/howto)
 - **관련 코드**:
   - `core/dynamic_batch_calculator.py` - 동적 배치 계산기
   - `core/intraday_stock_manager.py` - 실시간 데이터 관리
