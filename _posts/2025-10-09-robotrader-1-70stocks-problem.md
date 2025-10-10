@@ -12,7 +12,7 @@ comments: true
 
 ## 🤖 RoboTrader 소개
 
-[RoboTrader](https://github.com/tgparkk/RoboTrader)는 **KIS API(Korea Investment & Securities API)**를 활용한 Python 기반 주식 자동매매 시스템입니다. KIS Open API를 통해 실시간 주가 조회, 주문 실행 등을 자동화하며, 눌림목 캔들패턴을 기반으로 한 단타 전략을 구현하고 있습니다. 이 시리즈에서는 실제 개발 과정에서 겪은 문제와 해결 과정을 공유합니다.
+[RoboTrader](https://github.com/tgparkk/RoboTrader)는 **KIS API**를 활용한 Python 기반 주식 자동매매 시스템입니다. KIS Open API를 통해 실시간 주가 조회, 주문 실행 등을 자동화하며, 눌림목 캔들패턴을 기반으로 한 단타 전략을 구현하고 있습니다. 이 시리즈에서는 실제 개발 과정에서 겪은 문제와 해결 과정을 공유합니다.
 
 ---
 
