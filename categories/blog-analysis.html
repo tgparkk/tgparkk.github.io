@@ -1,0 +1,33 @@
+---
+layout: default
+title: Blog Analysis Articles
+---
+
+<div class="category-page">
+  <h1>Blog Analysis Articles</h1>
+
+  <div class="category-description">
+    <p>
+        블로그 운영 분석 및 수익화 전략 관련 글
+    </p>
+  </div>
+
+  <div class="post-grid">
+    {% for post in site.categories.blog-analysis %}
+      <div class="post-card">
+        <div class="post-meta">
+          <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
+        </div>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <p>{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
+        <div class="post-tags">
+          {% for tag in post.tags limit:3 %}
+          <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <p>No blog analysis articles yet. Check back soon!</p>
+    {% endfor %}
+  </div>
+</div>
