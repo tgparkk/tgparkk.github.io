@@ -393,7 +393,16 @@
     
     categoryToggle.addEventListener('click', function(e) {
       e.stopPropagation(); // 이벤트 버블링 방지
+      e.preventDefault(); // 기본 동작 방지
       categoryDropdown.classList.toggle('open');
     });
+    
+    // 드롭다운 메뉴 내부 클릭 시 드롭다운이 닫히지 않도록
+    var dropdownMenu = categoryDropdown.querySelector('.dropdown-menu');
+    if (dropdownMenu) {
+      dropdownMenu.addEventListener('click', function(e) {
+        e.stopPropagation(); // 이벤트 버블링 방지하여 드롭다운이 닫히지 않도록
+      });
+    }
   });
 </script>
