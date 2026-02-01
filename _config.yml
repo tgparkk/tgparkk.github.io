@@ -11,6 +11,7 @@ url: "https://tgparkk.github.io"
 # 빌드 설정
 markdown: kramdown
 highlighter: rouge
+future: true  # UTC 기준 미래 날짜 포스트도 빌드
 
 # 플러그인
 plugins:
