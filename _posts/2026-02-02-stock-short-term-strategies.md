@@ -65,15 +65,6 @@ comments: true
 > - **확인**: 거래량이 평균 대비 20% 이상 증가할 때만 "진짜" 돌파로 간주
 > - 참고: [Investopedia](https://www.investopedia.com/articles/trading/08/trading-breakouts.asp), [Axi](https://www.axi.com/int/blog/education/breakout-trading-strategy)
 
-```mermaid
-flowchart LR
-  subgraph range [횡보 구간]
-    S[지지선] --- R[저항선]
-  end
-  R -->|"돌파 + 거래량 증가"| Up[상승 구간]
-  Up --> Entry[매수 진입 구간]
-```
-
 ### 2. 갭 전략 (Gap)
 
 **전일 종가와 당일 시가** 사이에 벌어진 갭을 이용합니다. 갭 메우기(시가~전일 종가 구간에서 반등) 또는 갭 돌파(갭 방향으로 추가 상승·하락) 시 진입합니다. 갭의 원인(호재·악재)을 확인하는 것이 중요합니다.
@@ -97,15 +88,6 @@ flowchart LR
 > - **익절**: R:R 1:2~1:3 목표, 또는 모멘텀 지표(RSI 등) 약해질 때
 > - **진입 타이밍**: 장 시작 후 1시간 대기 → 범위 형성 후 돌파 시 진입
 > - 참고: [StockCharts](https://chartschool.stockcharts.com/table-of-contents/trading-strategies-and-models/trading-strategies/gap-trading-strategies), [Capital.com](https://capital.com/en-int/learn/trading-strategies/gap-trading)
-
-```mermaid
-flowchart LR
-  C[전일 종가] -->|"시간 경과"| Open[당일 시가]
-  Open -.->|"갭 상승"| GapUp[갭 상단]
-  Open -.->|"갭 하락"| GapDown[갭 하단]
-  GapUp --> EntryUp["갭 돌파 시 매수"]
-  GapDown --> EntryDown["갭 메우기 시 반등 매수"]
-```
 
 ### 3. 모멘텀 전략 (Momentum)
 
@@ -131,14 +113,6 @@ flowchart LR
 > - **R:R**: 최소 2:1 목표, 모멘텀 캔들 극단점에 손절 설정
 > - 참고: [ForexTester](https://forextester.com/blog/momentum-trading-strategies/), [WarriorTrading](https://www.warriortrading.com/momentum-day-trading-strategy/)
 
-```mermaid
-flowchart LR
-  subgraph trend [상승 추세]
-    P1[저점] --> P2[고점] --> P3[저점] --> P4[고점]
-  end
-  P4 -->|"추세 지속 기대"| Entry[모멘텀 매수]
-```
-
 ### 4. 거래량 급증 전략 (Volume Spike)
 
 **평소 대비 거래량이 급증**한 구간을 신호로 씁니다. 볼륨 스파이크 후 가격이 돌파하거나 반전 패턴을 보일 때, 다른 지표(OBV, VWAP 등)와 함께 확인하며 진입합니다. 일시적 대량 거래에 속지 않도록 패턴을 꼭 확인하는 것이 좋습니다.
@@ -162,14 +136,6 @@ flowchart LR
 > - **익절**: 다음 저항선 도달, R:R 1:2 목표
 > - **확인**: 거래량이 20일 평균 대비 50% 이상 증가 + 가격 방향 일치 시 신뢰도 ↑
 > - 참고: [Luxalgo](https://www.luxalgo.com/blog/volume-spikes-timing-trades-with-precision/), [DotNetTutorials](https://dotnettutorials.net/lesson/volume-spike-trading-strategy/)
-
-```mermaid
-flowchart LR
-  V1[평소 거래량] --> Spike[거래량 급증]
-  Spike --> Check[가격 방향 확인]
-  Check --> Entry1[돌파 시 진입]
-  Check --> Entry2[반전 시 진입]
-```
 
 ### 5. VWAP 전략 (VWAP)
 
@@ -195,16 +161,6 @@ flowchart LR
 > - **진입**: VWAP 상향 돌파 후 되돌림 → 지지 확인 시, 거래량 동반 필수
 > - 참고: [Luxalgo](https://www.luxalgo.com/blog/vwap-entry-strategies-for-day-traders/), [Schwab](https://www.schwab.com/learn/story/how-to-use-volume-weighted-indicators-trading)
 
-```mermaid
-flowchart LR
-  subgraph vwap [가격 vs VWAP]
-    Price[가격 선]
-    Line[VWAP 선]
-  end
-  Price -->|"VWAP 상향 돌파"| Above[가격이 VWAP 위]
-  Above -->|"되돌림 후 지지"| Entry[VWAP 매수 진입]
-```
-
 ### 6. 평균 회귀 (Mean Reversion)
 
 가격이 **이동평균이나 일정 구간 평균에서 너무 멀어지면 다시 평균 쪽으로 돌아온다**는 가정으로 매매합니다. 과매수·과매도 구간(예: RSI 70 이상, 30 이하)에서 반대 방향으로 진입하거나, Bollinger Bands 상·하단 터치 후 평균선 복귀를 노립니다. 추세가 강할 때는 평균으로 돌아오기 전에 더 멀어질 수 있으므로, 횡보 구간에서 쓰는 것이 유리합니다.
@@ -228,13 +184,6 @@ flowchart LR
 > - **익절**: 이동평균선 도달 시 절반 익절, 나머지는 평균선 돌파 시 청산
 > - **주의**: 평균 회귀는 "손실을 버티고, 이익을 빨리 확정"하는 구조 – 추세장에서는 위험
 > - 참고: [TradingWithRayner](https://www.tradingwithrayner.com/mean-reversion-trading-strategy/), [QuantifiedStrategies](https://www.quantifiedstrategies.com/mean-reversion-trading-strategy/)
-
-```mermaid
-flowchart LR
-  MA[이동평균선] --> Dev[가격이 평균에서 멀어짐]
-  Dev --> Return[평균 쪽으로 복귀]
-  Return --> Entry[평균 회귀 진입]
-```
 
 ### 7. 시초가 범위 돌파 (ORB, Opening Range Breakout)
 
@@ -260,16 +209,6 @@ flowchart LR
 > - **범위 설정**: 장 시작 후 5분/15분/30분 중 선택 (한국 시장은 9:00~9:15 또는 9:00~9:30 권장)
 > - **승률**: S&P100 5만 건 분석 결과 약 52~53% – 필터링이 중요
 > - 참고: [FluxCharts](https://www.fluxcharts.com/articles/trading-strategies/common-strategies/opening-range-breakout), [TradeThatSwing](https://tradethatswing.com/opening-range-breakout-strategy-up-400-this-year/)
-
-```mermaid
-flowchart LR
-  subgraph orb [시초가 N분 범위]
-    High[고가]
-    Low[저가]
-  end
-  High -->|"상단 돌파"| Long[상승 진입]
-  Low -->|"하단 돌파"| Short[하락 진입]
-```
 
 ---
 
