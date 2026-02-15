@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "주식 단타 전략 소개 – 한국인 독자를 위한 짧은 매매"
+title: "[2] 주식 단타 전략 소개 – 한국인 독자를 위한 짧은 매매"
 date: 2026-02-02
 categories: [stock]
 tags: [stock, 주식, 단타, 전략, 스캘핑, 돌파, 갭, 모멘텀, 볼륨, VWAP, 평균회귀, ORB]

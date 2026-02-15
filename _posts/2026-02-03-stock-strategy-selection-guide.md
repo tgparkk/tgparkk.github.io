@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "단타 전략 선택 가이드 – 나에게 맞는 전략 고르기"
+title: "[3] 단타 전략 선택 가이드 – 나에게 맞는 전략 고르기"
 date: 2026-02-03
 categories: [stock]
 tags: [stock, 주식, 단타, 전략선택, 백테스트, 추세장, 횡보장]

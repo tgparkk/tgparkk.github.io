@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "주식 자동매매 시리즈 소개 – 한국투자증권 API"
+title: "[1] 주식 자동매매 시리즈 소개 – 한국투자증권 API"
 date: 2026-02-01
 categories: [stock]
 tags: [stock, 주식, 자동매매, 시리즈]
