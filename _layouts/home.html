@@ -41,7 +41,7 @@ layout: default
       <span>Windows</span>
     </a>
     <a href="{{ '/categories/hobby/' | relative_url }}" class="category-item">
-      <div class="category-icon"><i class="fas fa-utensils"></i></div>
+      <div class="category-icon"><i class="fas fa-puzzle-piece"></i></div>
       <span>취미</span>
     </a>
     <a href="{{ '/categories/cooking/' | relative_url }}" class="category-item">
@@ -53,11 +53,11 @@ layout: default
       <span>주식</span>
     </a>
     <a href="{{ '/categories/book/' | relative_url }}" class="category-item">
-      <div class="category-icon"><i class="fas fa-chart-line"></i></div>
+      <div class="category-icon"><i class="fas fa-book"></i></div>
       <span>책 정리</span>
     </a>
     <a href="{{ '/categories/english/' | relative_url }}" class="category-item">
-      <div class="category-icon"><i class="fas fa-chart-line"></i></div>
+      <div class="category-icon"><i class="fas fa-language"></i></div>
       <span>영어 공부</span>
     </a>
   </div>
@@ -110,299 +110,12 @@ layout: default
   </div>
 </section>
 
-<!-- 뉴스레터 구독 섹션 -->
-<section class="newsletter-section">
-  <div class="newsletter-container" data-aos="fade-up" data-aos-duration="1000">
-    <div class="newsletter-content">
-      <h2>Stay Updated</h2>
-      <p>Subscribe to my newsletter for latest articles and updates.</p>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Your email address" required>
-        <button type="submit" class="btn btn-primary">Subscribe</button>
-      </form>
-      <p class="newsletter-notice">No spam, unsubscribe at any time.</p>
-    </div>
-  </div>
-</section>
-
-<style>
-  /* 히어로 섹션 스타일 */
-  .hero-section {
-    padding: 100px 0 80px;
-    text-align: center;
-    background-color: var(--bg-color);
-    border-radius: 0 0 50% 50% / 60px;
-  }
-  
-  .hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .hero-section h1 {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
-    letter-spacing: -0.5px;
-  }
-  
-  .highlight {
-    color: var(--accent-color);
-    position: relative;
-    display: inline-block;
-  }
-  
-  .highlight::after {
-    content: '';
-    position: absolute;
-    bottom: 8px;
-    left: 0;
-    width: 100%;
-    height: 8px;
-    background-color: rgba(119, 128, 235, 0.2);
-    z-index: -1;
-  }
-  
-  .hero-subtitle {
-    font-size: 1.3rem;
-    margin-bottom: 40px;
-    color: var(--text-light);
-  }
-  
-  .hero-buttons {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin-top: 30px;
-  }
-  
-  /* 카테고리 내비게이션 스타일 */
-  .category-nav-section {
-    padding: 80px 0;
-  }
-  
-  .section-title-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-  }
-  
-  .section-title {
-    position: relative;
-    display: inline-block;
-    margin: 0;
-  }
-  
-  .section-title::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    width: 60px;
-    height: 3px;
-    background-color: var(--accent-color);
-  }
-  
-  .view-all {
-    font-weight: 600;
-    color: var(--accent-color);
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .view-all:hover {
-    color: var(--primary-color);
-  }
-  
-  .view-all i {
-    font-size: 0.8rem;
-    transition: transform 0.3s;
-  }
-  
-  .view-all:hover i {
-    transform: translateX(3px);
-  }
-  
-  .category-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-  }
-  
-  .category-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 20px;
-    border-radius: 12px;
-    background-color: var(--card-bg);
-    box-shadow: var(--card-shadow);
-    transition: all 0.3s;
-    width: 120px;
-    text-align: center;
-  }
-  
-  .category-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    color: var(--accent-color);
-  }
-  
-  .category-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgba(119, 128, 235, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--accent-color);
-    font-size: 20px;
-    transition: all 0.3s;
-  }
-  
-  .category-item:hover .category-icon {
-    background-color: var(--accent-color);
-    color: white;
-    transform: scale(1.1);
-  }
-  
-  .category-item span {
-    font-weight: 500;
-  }
-  
-  /* 최근 게시물 섹션 스타일 */
-  .recent-posts-section {
-    padding: 80px 0;
-  }
-  
-  /* 포스트 카드 디폴트 이미지 */
-  .post-card-image-container.default-image {
-    height: 200px;
-    background-color: rgba(119, 128, 235, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .default-icon {
-    font-size: 40px;
-    color: var(--accent-color);
-    opacity: 0.4;
-  }
-  
-  /* 뉴스레터 섹션 스타일 */
-  .newsletter-section {
-    padding: 80px 0;
-    background-color: var(--bg-color);
-  }
-  
-  .newsletter-container {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 50px;
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: 16px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(37, 38, 94, 0.2);
-  }
-  
-  .newsletter-content h2 {
-    margin-bottom: 15px;
-    color: white;
-  }
-  
-  .newsletter-content p {
-    margin-bottom: 30px;
-    color: rgba(255, 255, 255, 0.8);
-  }
-  
-  .newsletter-form {
-    display: flex;
-    gap: 10px;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  
-  .newsletter-form input {
-    flex-grow: 1;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-  }
-  
-  .newsletter-form .btn {
-    padding: 15px 25px;
-    background-color: var(--accent-color);
-    border: none;
-  }
-  
-  .newsletter-form .btn:hover {
-    background-color: var(--secondary-accent);
-  }
-  
-  .newsletter-notice {
-    margin-top: 15px;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
-  }
-  
-  /* 반응형 스타일 */
-  @media (max-width: 768px) {
-    .hero-section h1 {
-      font-size: 2.5rem;
-    }
-    
-    .hero-subtitle {
-      font-size: 1.1rem;
-    }
-    
-    .hero-buttons {
-      flex-direction: column;
-      gap: 10px;
-      max-width: 250px;
-      margin: 30px auto 0;
-    }
-    
-    .category-nav {
-      gap: 10px;
-    }
-    
-    .category-item {
-      width: calc(50% - 10px);
-      padding: 15px;
-    }
-    
-    .newsletter-form {
-      flex-direction: column;
-    }
-    
-    .newsletter-container {
-      padding: 30px 20px;
-    }
-  }
-</style>
-
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     // AOS 라이브러리 초기화
-    AOS.init({
-      once: true
-    });
-    
-    // 뉴스레터 폼 제출 처리 (데모용)
-    const newsletterForm = document.querySelector('.newsletter-form');
-    if (newsletterForm) {
-      newsletterForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = this.querySelector('input[type="email"]').value;
-        alert('뉴스레터 구독 기능은 현재 준비 중입니다.\n입력하신 이메일: ' + email);
+    if (typeof AOS !== 'undefined') {
+      AOS.init({
+        once: true
       });
     }
   });

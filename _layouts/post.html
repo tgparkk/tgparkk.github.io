@@ -106,9 +106,11 @@ layout: default
   
   <!-- 저자 정보 -->
   <div class="author-box" data-aos="fade-up">
+    {% if site.avatar %}
     <div class="author-avatar">
-      <img src="{{ '/assets/images/avatar.jpg' | relative_url }}" alt="Author Avatar">
+      <img src="{{ site.avatar | relative_url }}" alt="Author Avatar">
     </div>
+    {% endif %}
     <div class="author-info">
       <h3>{{ site.author | default: 'tgparkk' }}</h3>
       <p>Developer passionate about C++, multi-threading, rendering, and game programming. Sharing insights and experiences through this blog.</p>
@@ -171,446 +173,7 @@ layout: default
     </div>
   </div>
 
-  <!-- 댓글 섹션 (선택적) -->
-  {% if site.comments_enabled %}
-  <div class="comments-section" data-aos="fade-up">
-    <h2 class="section-title">Comments</h2>
-    <div id="comments">
-      <!-- 여기에 댓글 시스템 코드 추가 -->
-    </div>
-  </div>
-  {% endif %}
 </article>
-
-<style>
-  /* 포스트 페이지 스타일 */
-  .post {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 0 80px;
-  }
-  
-  .post-header {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  
-  .post-category-badge {
-    margin-bottom: 20px;
-  }
-  
-  .post-category-badge a {
-    display: inline-block;
-    padding: 6px 12px;
-    background-color: var(--accent-color);
-    color: white;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.3s;
-  }
-  
-  .post-category-badge a:hover {
-    background-color: var(--primary-color);
-    transform: translateY(-2px);
-  }
-  
-  .post-title {
-    font-size: 2.8rem;
-    margin-bottom: 20px;
-    line-height: 1.2;
-  }
-  
-  .post-meta {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    color: var(--text-light);
-    margin-bottom: 30px;
-  }
-  
-  .post-meta span {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .post-meta i {
-    color: var(--accent-color);
-  }
-  
-  .post-featured-image {
-    margin: 0 -20px 40px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--card-shadow);
-  }
-  
-  .post-featured-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  /* 목차 스타일 */
-  .table-of-contents {
-    background-color: rgba(119, 128, 235, 0.05);
-    border-left: 4px solid var(--accent-color);
-    padding: 20px 25px;
-    margin: 40px 0;
-    border-radius: 0 8px 8px 0;
-  }
-  
-  .toc-title {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.3rem;
-    color: var(--primary-color);
-  }
-  
-  #toc ul {
-    margin-bottom: 0;
-    padding-left: 20px;
-  }
-  
-  #toc li {
-    margin-bottom: 8px;
-  }
-  
-  #toc a {
-    color: var(--text-color);
-    transition: all 0.2s;
-  }
-  
-  #toc a:hover {
-    color: var(--accent-color);
-  }
-  
-  /* 포스트 콘텐츠 스타일 */
-  .post-content {
-    font-size: 1.125rem;
-    line-height: 1.8;
-    margin-bottom: 60px;
-  }
-  
-  .post-content h2 {
-    font-size: 2rem;
-    margin-top: 50px;
-    margin-bottom: 20px;
-    position: relative;
-    padding-bottom: 10px;
-  }
-  
-  .post-content h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50px;
-    height: 3px;
-    background-color: var(--accent-color);
-  }
-  
-  .post-content h3 {
-    font-size: 1.5rem;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    color: var(--primary-color);
-  }
-  
-  .post-content p {
-    margin-bottom: 24px;
-  }
-  
-  .post-content img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin: 30px 0;
-    box-shadow: var(--card-shadow);
-  }
-  
-  .post-content blockquote {
-    border-left: 4px solid var(--accent-color);
-    padding: 20px 30px;
-    margin: 30px 0;
-    background-color: rgba(119, 128, 235, 0.05);
-    border-radius: 0 8px 8px 0;
-    font-style: italic;
-  }
-  
-  .post-content blockquote p:last-child {
-    margin-bottom: 0;
-  }
-  
-  .post-content ul,
-  .post-content ol {
-    margin-left: 20px;
-    margin-bottom: 30px;
-  }
-  
-  .post-content li {
-    margin-bottom: 10px;
-  }
-  
-  .post-content a {
-    color: var(--accent-color);
-    border-bottom: 1px dashed var(--accent-color);
-    padding-bottom: 2px;
-    transition: all 0.2s;
-  }
-  
-  .post-content a:hover {
-    color: var(--primary-color);
-    border-bottom: 1px solid var(--primary-color);
-  }
-  
-  /* 코드 블록 스타일 */
-  .post-content pre {
-    margin: 30px 0;
-    border-radius: 8px;
-    position: relative;
-  }
-  
-  /* 태그 및 공유 스타일 */
-  .post-footer {
-    display: flex;
-    justify-content: space-between;
-    margin: 60px 0;
-    padding: 30px 0;
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
-  }
-  
-  .post-tags, .share {
-    flex: 1;
-  }
-  
-  .post-footer h3 {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-  }
-  
-  .post-footer h3 i {
-    color: var(--accent-color);
-  }
-  
-  .tags-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .tag {
-    display: inline-block;
-    padding: 5px 12px;
-    background-color: rgba(119, 128, 235, 0.1);
-    color: var(--primary-color);
-    border-radius: 20px;
-    font-size: 0.85rem;
-    transition: all 0.2s;
-  }
-  
-  .tag:hover {
-    background-color: var(--accent-color);
-    color: white;
-    transform: translateY(-2px);
-  }
-  
-  .share {
-    text-align: right;
-  }
-  
-  .share-buttons {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 15px;
-    justify-content: flex-end;
-  }
-  
-  .share-buttons li a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: rgba(119, 128, 235, 0.1);
-    color: var(--primary-color);
-    transition: all 0.3s;
-  }
-  
-  .share-buttons li a:hover {
-    background-color: var(--accent-color);
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(119, 128, 235, 0.3);
-  }
-  
-  /* 저자 정보 스타일 */
-  .author-box {
-    display: flex;
-    gap: 20px;
-    background-color: var(--card-bg);
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: var(--card-shadow);
-    margin-bottom: 60px;
-  }
-  
-  .author-avatar {
-    flex-shrink: 0;
-  }
-  
-  .author-avatar img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .author-info h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.3rem;
-  }
-  
-  .author-info p {
-    margin-bottom: 15px;
-    font-size: 0.95rem;
-    color: var(--text-light);
-  }
-  
-  .author-social a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: rgba(119, 128, 235, 0.1);
-    color: var(--accent-color);
-    margin-right: 10px;
-    transition: all 0.3s;
-  }
-  
-  .author-social a:hover {
-    background-color: var(--accent-color);
-    color: white;
-    transform: translateY(-3px);
-  }
-  
-  /* 관련 게시물 스타일 */
-  .related-posts {
-    margin-top: 60px;
-  }
-  
-  .related-posts .section-title {
-    margin-bottom: 30px;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 10px;
-  }
-  
-  .related-posts .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background-color: var(--accent-color);
-  }
-  
-  .related-posts .post-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 30px;
-  }
-  
-  /* 댓글 섹션 스타일 */
-  .comments-section {
-    margin-top: 80px;
-  }
-  
-  /* 반응형 스타일 */
-  @media (max-width: 768px) {
-    .post-title {
-      font-size: 2rem;
-    }
-    
-    .post-meta {
-      flex-direction: column;
-      gap: 10px;
-      align-items: center;
-    }
-    
-    .post-footer {
-      flex-direction: column;
-      gap: 30px;
-    }
-    
-    .share {
-      text-align: left;
-    }
-    
-    .share-buttons {
-      justify-content: flex-start;
-    }
-    
-    .author-box {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    
-    .author-social {
-      justify-content: center;
-      display: flex;
-    }
-    
-    .related-posts .post-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  details {
-  margin: 1rem 0;
-  padding: 0.5rem;
-  background-color: #f8f9fa;
-  border-radius: 5px;
-  border: 1px solid #e1e4e8;
-}
-
-details summary {
-  cursor: pointer;
-  font-weight: bold;
-  padding: 0.5rem;
-}
-
-details[open] summary {
-  margin-bottom: 0.5rem;
-  border-bottom: 1px solid #e1e4e8;
-}
-
-[data-theme="dark"] details {
-  background-color: #2a2a2a;
-  border-color: #3f3f3f;
-}
-
-[data-theme="dark"] details[open] summary {
-  border-color: #3f3f3f;
-}
-</style>
 
 <!-- JavaScript for Table of Contents -->
 <script>
@@ -683,6 +246,54 @@ details[open] summary {
       
       block.appendChild(button);
     });
+  });
+</script>
+
+<!-- Mermaid.js: ```mermaid 코드 블록을 다이어그램으로 렌더링 (조건부 로딩) -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var mermaidCodes = document.querySelectorAll('.post-content pre code.language-mermaid');
+    if (mermaidCodes.length === 0) return;
+
+    // mermaid 코드 블록이 있을 때만 CDN 로드
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js';
+    script.onload = function() {
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: isDark ? 'dark' : 'default',
+        securityLevel: 'loose',
+        suppressErrors: true
+      });
+
+      function escapeHtml(s) {
+        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+      mermaidCodes.forEach(function(codeEl) {
+        var pre = codeEl.parentElement;
+        if (!pre || pre.tagName !== 'PRE') return;
+        var code = codeEl.textContent.trim();
+        pre.outerHTML = '<pre class="mermaid">' + escapeHtml(code) + '</pre>';
+      });
+
+      var mermaidPre = document.querySelectorAll('.post-content pre.mermaid');
+      if (mermaidPre.length > 0) {
+        try {
+          if (typeof mermaid.run === 'function') {
+            var p = mermaid.run({ querySelector: '.post-content pre.mermaid', suppressErrors: true });
+            if (p && typeof p.catch === 'function') {
+              p.catch(function(err) { console.warn('Mermaid:', err); });
+            }
+          } else if (typeof mermaid.init === 'function') {
+            mermaid.init(undefined, '.post-content pre.mermaid');
+          }
+        } catch (e) {
+          console.warn('Mermaid:', e);
+        }
+      }
+    };
+    document.head.appendChild(script);
   });
 </script>
 
