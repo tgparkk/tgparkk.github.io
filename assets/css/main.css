@@ -13,7 +13,7 @@
   --bg-color: #FFFFFF;
   --card-bg: #FFFFFF;
   --text-color: #333333;
-  --text-light: #7A7A7A;
+  --text-light: #666666;
   --border-color: #EFEFEF;
   --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   --transition: all 0.3s ease;
@@ -45,7 +45,7 @@
 
 body {
   font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 1.8;
   color: var(--text-color);
   background-color: var(--bg-color);
@@ -80,6 +80,18 @@ body {
 :focus-visible {
   outline: 2px solid var(--accent-color);
   outline-offset: 2px;
+}
+
+/* Reading Progress Bar */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: var(--accent-color);
+  z-index: 1001;
+  transition: width 0.1s linear;
 }
 
 /* ===== 2. Typography ===== */
@@ -1244,6 +1256,9 @@ details[open] summary { margin-bottom: 0.5rem; border-bottom: 1px solid #e1e4e8;
   h2 { font-size: 2rem; }
   h3 { font-size: 1.5rem; }
 
+  /* 모바일: 코드 복사 버튼 항상 표시 (hover 불가) */
+  .copy-code-button { opacity: 0.7; }
+
   /* 모바일: 헤더 nav 숨김 */
   header nav { display: none; }
   header .container { justify-content: center; padding-left: 60px; }
@@ -1278,4 +1293,21 @@ details[open] summary { margin-bottom: 0.5rem; border-bottom: 1px solid #e1e4e8;
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .post-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ===== 11. Reduced Motion (접근성) ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .reading-progress {
+    transition: none !important;
+  }
 }

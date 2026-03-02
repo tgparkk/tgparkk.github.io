@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+<div class="reading-progress" id="reading-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 <article class="post">
   <div class="post-header">
     <div class="post-category-badge">
@@ -294,6 +295,24 @@ layout: default
       }
     };
     document.head.appendChild(script);
+  });
+</script>
+
+<!-- Reading Progress Bar -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var progressBar = document.getElementById('reading-progress');
+    var postContent = document.querySelector('.post-content');
+    if (!progressBar || !postContent) return;
+
+    window.addEventListener('scroll', function() {
+      var contentTop = postContent.offsetTop;
+      var contentHeight = postContent.offsetHeight;
+      var scrolled = window.scrollY - contentTop;
+      var progress = Math.min(Math.max(scrolled / (contentHeight - window.innerHeight) * 100, 0), 100);
+      progressBar.style.width = progress + '%';
+      progressBar.setAttribute('aria-valuenow', Math.round(progress));
+    });
   });
 </script>
 
