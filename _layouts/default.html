@@ -38,10 +38,31 @@
                     <li><a href="{{ '/about/' | relative_url }}">About</a></li>
                     <li><a href="{{ '/categories/all/' | relative_url }}">All Posts</a></li>
                     <li><a href="{{ '/image-converter/' | relative_url }}">Image Converter</a></li>
+                    <li>
+                        <button id="header-search-toggle" class="header-search-toggle" aria-label="검색 열기" title="검색 (Ctrl+K)">
+                            <i class="fas fa-search"></i>
+                            <kbd class="header-search-kbd">Ctrl K</kbd>
+                        </button>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
+
+    <!-- 검색 모달 -->
+    <div id="search-modal" class="search-modal" role="dialog" aria-label="검색" aria-hidden="true">
+        <div class="search-modal-overlay" id="search-modal-overlay"></div>
+        <div class="search-modal-content">
+            <div class="search-modal-header">
+                <div class="search-modal-input-wrap">
+                    <i class="fas fa-search search-modal-icon"></i>
+                    <input type="text" id="header-search-input" class="search-modal-input" placeholder="글 제목, 태그, 카테고리 검색..." autocomplete="off">
+                    <kbd class="search-modal-kbd">ESC</kbd>
+                </div>
+            </div>
+            <div id="header-search-results" class="search-modal-results"></div>
+        </div>
+    </div>
 
     <!-- 메인 콘텐츠 -->
     <main id="main-content">

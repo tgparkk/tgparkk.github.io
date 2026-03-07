@@ -1,0 +1,16 @@
+<!-- 수동 광고 슬롯 : position 파라미터로 위치 구분 -->
+<!-- 사용법: {% include ad-unit.html position="post-top" %} -->
+{% if include.position == "post-top" %}
+  {% assign ad_slot = "8645097843" %}
+{% elsif include.position == "post-bottom" %}
+  {% assign ad_slot = "3445217418" %}
+{% endif %}
+<div class="ad-container ad-{{ include.position }}" aria-label="광고">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-7230084799824817"
+       data-ad-slot="{{ ad_slot }}"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>

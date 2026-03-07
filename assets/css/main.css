@@ -501,6 +501,179 @@ nav ul li a:hover::after { width: 100%; }
 .search-item p { margin: 5px 0; font-size: 0.9rem; color: var(--text-color); }
 .search-item small { font-size: 0.8rem; color: var(--text-light); }
 
+/* Header Search Toggle */
+.header-search-toggle {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+}
+
+.header-search-toggle:hover {
+  color: var(--accent-color);
+}
+
+.header-search-kbd {
+  background: var(--border-color);
+  color: var(--text-light);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-family: inherit;
+  margin-left: 6px;
+  line-height: 1;
+}
+
+/* Search Modal */
+.search-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  padding-top: 15vh;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.search-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.search-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.search-modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 620px;
+  max-height: 70vh;
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(-10px);
+  transition: transform 0.2s ease;
+}
+
+.search-modal.active .search-modal-content {
+  transform: translateY(0);
+}
+
+.search-modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.search-modal-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-modal-icon {
+  color: var(--accent-color);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.search-modal-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  outline: none;
+  font-family: inherit;
+}
+
+.search-modal-input::placeholder {
+  color: var(--text-light);
+}
+
+.search-modal-kbd {
+  background: var(--border-color);
+  color: var(--text-light);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+
+.search-modal-results {
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.search-modal-results .search-item {
+  padding: 14px 16px;
+  border-radius: 8px;
+  border-bottom: none;
+  transition: background-color 0.15s ease;
+}
+
+.search-modal-results .search-item:hover {
+  background-color: rgba(119, 128, 235, 0.08);
+}
+
+.search-modal-results .search-item h4 {
+  margin: 0 0 4px 0;
+  font-size: 1rem;
+  color: var(--heading-color);
+}
+
+.search-modal-results .search-item h4 a {
+  color: inherit;
+}
+
+.search-modal-results .search-item h4 a:hover {
+  color: var(--accent-color);
+}
+
+.search-modal-results .search-item p {
+  margin: 0 0 4px 0;
+  font-size: 0.875rem;
+  color: var(--text-light);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.search-modal-results .search-item small {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  opacity: 0.7;
+}
+
+.search-modal-results .search-no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
 /* ===== 5. Components ===== */
 
 /* Buttons */
@@ -968,6 +1141,43 @@ details[open] summary { margin-bottom: 0.5rem; border-bottom: 1px solid #e1e4e8;
 
 .newsletter-notice { margin-top: 15px; font-size: 0.85rem; color: rgba(255, 255, 255, 0.6); }
 
+/* ===== Ad Units ===== */
+
+.ad-container {
+  margin: 30px 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+  min-height: 100px;
+  position: relative;
+}
+
+.ad-container::before {
+  content: 'AD';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-color);
+  color: var(--text-light);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 0 8px;
+  opacity: 0.5;
+}
+
+.ad-post-top {
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+.ad-post-bottom {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
 /* ===== 8. Post Page ===== */
 
 .post { max-width: 800px; margin: 0 auto; padding: 40px 0 80px; }
@@ -1259,8 +1469,10 @@ details[open] summary { margin-bottom: 0.5rem; border-bottom: 1px solid #e1e4e8;
   /* 모바일: 코드 복사 버튼 항상 표시 (hover 불가) */
   .copy-code-button { opacity: 0.7; }
 
-  /* 모바일: 헤더 nav 숨김 */
-  header nav { display: none; }
+  /* 모바일: 헤더 nav 숨김, 검색은 유지 */
+  header nav ul li:not(:last-child) { display: none; }
+  header nav { display: block; }
+  .header-search-kbd { display: none; }
   header .container { justify-content: center; padding-left: 60px; }
   .logo { margin-bottom: 0; }
 

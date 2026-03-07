@@ -44,9 +44,15 @@ layout: default
   </div>
   {% endif %}
 
+  <!-- 광고: 본문 상단 -->
+  {% include ad-unit.html position="post-top" %}
+
   <div class="post-content" data-aos="fade-up" data-aos-delay="300">
     {{ content }}
   </div>
+
+  <!-- 광고: 본문 하단 -->
+  {% include ad-unit.html position="post-bottom" %}
 
   {% if site.disqus.shortname %}
 <div class="comments">
