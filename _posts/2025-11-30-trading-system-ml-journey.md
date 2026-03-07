@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "트레이딩 시스템에 머신러닝을 적용한 기술 여정"
+title: "Python LightGBM으로 주식 매매 신호 정확도 70% 달성하기"
 date: 2025-11-30
 categories: machine-learning
 tags: [machine-learning, trading, python, lightgbm, 머신러닝, 트레이딩, kis, 한국투자증권]

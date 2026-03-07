@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "초보자를 위한 Windows 그래픽 함수 이해하기: FillRect, SelectObject, DeleteObject, BitBlt"
+title: "Win32 GDI 핵심 함수 – FillRect, BitBlt, SelectObject 정리"
 date: 2025-04-04
 categories: windows
 tags: [windows, win32, rendering, FillRect, SelectObject, DeleteObject, BitBlt, 윈도우, 렌더링]
-excerpt: "윈도우즈 프로그램의 렌더링링 원리"
+excerpt: "윈도우즈 프로그램의 렌더링 원리"
 comments: true
 ---
 

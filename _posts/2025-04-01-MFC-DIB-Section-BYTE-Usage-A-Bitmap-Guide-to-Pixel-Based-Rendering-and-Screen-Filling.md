@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "MFC DIB 섹션 & BYTE 사용법: 300×400 비트맵으로 알아보는 픽셀 단위 그래픽 렌더링 및 화면 채우기 원리"
+title: "MFC 비트맵 렌더링 – DIB Section으로 픽셀 단위 그리기"
 date: 2025-04-01
 categories: windows
 tags: [windows, win32, rendering, bitmap, 윈도우, 렌더링, 비트맵]

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "고성능 게임에서 사용하는 그래픽 기법 - 더블 버퍼링"
+title: "Win32 더블 버퍼링 구현 – 게임 화면 깜빡임 해결"
 date: 2025-03-29
 categories: gamedev
 tags: [cpp, game, win32, 게임, 더블 버퍼링]

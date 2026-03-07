@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "RoboTrader 개발일지 – 1: 70개 종목, 시스템이 멈춘 날"
+title: "KIS API 초당 20건 제한 해결 – 동적 배치로 70종목 처리하기"
 date: 2025-10-09
 categories: [robotrader]
 tags: [stock, python, 자동매매, API, 최적화, RoboTrader, 한국투자증권, KIS, KIS API, 한국투자증권API]
