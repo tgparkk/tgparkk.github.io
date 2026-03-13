@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "블로그 수익화 분석 - 구글 SEO와 광고로 돈 버는 방법"
+title: "블로그 수익화 전략 - SEO 최적화와 구글 AdSense로 트래픽 늘리는 방법"
 date: 2025-12-13
 categories: [blog-analysis]
-tags: [블로그, 수익화, Google-Analytics, 콘텐츠전략, 트래픽분석, AdSense, SEO, 구글검색, 구글광고]
-excerpt: "구글 Google Analytics와 구글 AdSense 광고 데이터 분석 결과. 구글 SEO 최적화로 어떤 글이 수익을 만드는지 정리했어요."
+tags: [블로그, 수익화, Google-Analytics, 콘텐츠전략, 트래픽분석, AdSense, SEO, 구글검색, 구글광고, 블로그 수익화 전략, 블로그 수익화 방법, 블로그 트래픽 증가]
+excerpt: "블로그 수익화 방법을 실제 데이터로 분석했습니다. Google Analytics 트래픽 분석, SEO 최적화 팁, AdSense 광고 수익 전략까지 — 블로그 트래픽 증가와 수익화를 위한 실전 가이드."
 comments: true
 ---
 

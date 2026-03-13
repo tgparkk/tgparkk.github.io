@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "[4] 자동매매 프레임워크 설계 – 전략을 갈아끼우는 구조"
+title: "[4] 주식 자동매매 프레임워크 설계 – 한국투자증권 Open API 파이썬 구현"
 date: 2026-02-15
 categories: [stock]
-tags: [stock, auto-trading, kis-api, python, framework, template]
-excerpt: "주식에는 다양한 전략이 있으니, 공통 부분은 한 번만 짜고 전략만 갈아끼우는 프레임워크를 설계했습니다. BaseStrategy 하나만 상속하면 새로운 자동매매 봇이 탄생합니다."
+tags: [stock, auto-trading, kis-api, python, framework, template, 한국투자증권, Open API, 자동매매 시스템 개발, 자동매매 프로그램]
+excerpt: "주식 자동매매 시스템 개발의 핵심 — 전략만 갈아끼우는 파이썬 프레임워크 설계. 한국투자증권 Open API 기반, BaseStrategy 하나만 상속하면 새로운 자동매매 프로그램이 탄생합니다."
 comments: true
 ---
 

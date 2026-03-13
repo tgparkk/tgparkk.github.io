@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "KIS API 초당 20건 제한 해결 – 동적 배치로 70종목 처리하기"
+title: "한국투자증권 Open API 자동매매 – 초당 20건 제한 해결법 (GitHub 소스 포함)"
 date: 2025-10-09
 categories: [robotrader]
-tags: [stock, python, 자동매매, API, 최적화, RoboTrader, 한국투자증권, KIS, KIS API, 한국투자증권API]
-excerpt: "조건검색에서 70개 종목이 선정되자 시스템이 에러를 토해냈다. KIS API 제한 초당 20개를 875% 초과한 순간, 나는 동적 배치 시스템을 만들기로 했다."
+tags: [stock, python, 자동매매, API, 최적화, RoboTrader, 한국투자증권, KIS, KIS API, 한국투자증권API, GitHub, Open API, 파이썬 자동매매]
+excerpt: "한국투자증권 Open API 자동매매 개발 중 초당 20건 호출 제한에 부딪혔습니다. 70종목을 처리하기 위해 파이썬으로 동적 배치 시스템을 구현한 과정과 GitHub 소스코드를 공유합니다."
 comments: true
 ---
 

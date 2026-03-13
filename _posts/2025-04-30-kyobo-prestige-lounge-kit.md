@@ -1,9 +1,10 @@
 ---
 layout: post
-title: "2025 교보문고 Prestige Lounge Kit 언박싱"
+title: "2025 교보문고 프레스티지 키트 언박싱 – Prestige Lounge Kit 구성품 후기"
 date: 2025-04-30 18:00:00 +0900
 categories: book
-tags: [교보문고, 프레스티지, 언박싱, 독서]
+tags: [교보문고, 프레스티지, 언박싱, 독서, 교보문고 프레스티지 키트, 교보 프레스티지, Prestige Lounge]
+excerpt: "2025 교보문고 프레스티지 키트(Prestige Lounge Kit) 언박싱 후기. 교보문고 최고 등급 회원에게만 제공되는 특별 선물 세트의 구성품을 사진과 함께 소개합니다."
 ---
 
 교보문고는 매년 최고 등급 회원들에게 특별한 감사의 마음을 담아 'Prestige Lounge Kit'를 선물합니다. 1년에 한 번, 교보문고의 최고 등급 회원들만 받을 수 있는 특별한 선물 세트를 지금부터 함께 살펴보겠습니다.

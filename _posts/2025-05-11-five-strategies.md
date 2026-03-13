@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "초단기 매매 5종 전략 총정리"
+title: "주식 단타 매매 전략 5가지 총정리 – 돌파·갭·모멘텀·볼륨·VWAP 매매법"
 date: 2025-05-11
 categories: stock
-tags: [stock, 주식, 투자전략, 초단기투자, 스캘핑, 돌파, 갭, 모멘텀, 볼륨, VWAP]
-excerpt: "돌파·갭·모멘텀·볼륨 스파이크·VWAP 전략"
+tags: [stock, 주식, 투자전략, 초단기투자, 스캘핑, 돌파, 갭, 모멘텀, 볼륨, VWAP, 단타 매매 전략, VWAP 매매법, 주식 자동매매 전략]
+excerpt: "주식 단타 매매 전략 5가지를 총정리합니다. 돌파(Breakout), 갭, 모멘텀, 볼륨 스파이크, VWAP 매매법의 진입 시그널과 손절 기준을 실전 예시와 함께 설명합니다."
 comments: true
 ---
 
