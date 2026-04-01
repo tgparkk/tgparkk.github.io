@@ -1,0 +1,99 @@
+<div class="next-read" data-aos="fade-up">
+  <h2 class="section-title">Next Read</h2>
+  <div class="next-read-grid">
+
+    {% comment %} Left card: series prev/next or same-category prev/next {% endcomment %}
+    {% if page.series %}
+      {% assign series_posts = site.posts | where: "series", page.series | sort: "series_order" %}
+      {% assign current_order = page.series_order %}
+      {% assign prev_post = nil %}
+      {% assign next_post = nil %}
+      {% for sp in series_posts %}
+        {% if sp.series_order < current_order %}
+          {% assign prev_post = sp %}
+        {% endif %}
+        {% if sp.series_order > current_order and next_post == nil %}
+          {% assign next_post = sp %}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {% assign cat = page.categories | first %}
+      {% assign cat_posts = site.posts | where_exp: "p", "p.categories contains cat" | sort: "date" %}
+      {% assign prev_post = nil %}
+      {% assign next_post = nil %}
+      {% assign found_current = false %}
+      {% for cp in cat_posts %}
+        {% if cp.url == page.url %}
+          {% assign found_current = true %}
+        {% elsif found_current == false %}
+          {% assign prev_post = cp %}
+        {% elsif next_post == nil %}
+          {% assign next_post = cp %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <div class="next-read-card">
+      {% if prev_post %}
+        <div class="next-read-label"><i class="fas fa-arrow-left"></i>
+          {% if page.series %}이전 편{% else %}이전 글{% endif %}
+        </div>
+        <h4><a href="{{ prev_post.url | relative_url }}">{{ prev_post.title }}</a></h4>
+        <div class="next-read-meta">
+          {% if page.series %}{{ prev_post.series_order }}편 &middot; {% endif %}
+          {{ prev_post.date | date: "%Y-%m-%d" }}
+        </div>
+      {% else %}
+        <div class="next-read-label"><i class="fas fa-arrow-left"></i>
+          {% if page.series %}첫 번째 편입니다{% else %}이전 글 없음{% endif %}
+        </div>
+        <div class="next-read-empty">시리즈의 시작이에요!</div>
+      {% endif %}
+    </div>
+
+    {% comment %} Right card: cross-category recommendation by tags {% endcomment %}
+    <div class="next-read-card">
+      {% assign recommended = nil %}
+      {% for post in site.posts %}
+        {% if post.url != page.url and recommended == nil %}
+          {% assign same_category = false %}
+          {% for cat in post.categories %}
+            {% if page.categories contains cat %}
+              {% assign same_category = true %}
+            {% endif %}
+          {% endfor %}
+          {% if same_category == false %}
+            {% for tag in post.tags %}
+              {% if page.tags contains tag and recommended == nil %}
+                {% assign recommended = post %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+      {% if recommended %}
+        <div class="next-read-label">
+          다른 주제 추천 <i class="fas fa-random"></i>
+        </div>
+        <h4><a href="{{ recommended.url | relative_url }}">{{ recommended.title }}</a></h4>
+        <div class="next-read-meta">
+          {{ recommended.categories | first }} &middot; {{ recommended.date | date: "%Y-%m-%d" }}
+        </div>
+      {% elsif next_post %}
+        <div class="next-read-label">
+          {% if page.series %}다음 편{% else %}다음 글{% endif %} <i class="fas fa-arrow-right"></i>
+        </div>
+        <h4><a href="{{ next_post.url | relative_url }}">{{ next_post.title }}</a></h4>
+        <div class="next-read-meta">
+          {% if page.series %}{{ next_post.series_order }}편 &middot; {% endif %}
+          {{ next_post.date | date: "%Y-%m-%d" }}
+        </div>
+      {% else %}
+        <div class="next-read-label">추천 글 <i class="fas fa-star"></i></div>
+        <div class="next-read-empty">더 많은 글이 곧 올라옵니다!</div>
+      {% endif %}
+    </div>
+
+  </div>
+</div>

@@ -1685,3 +1685,71 @@ details[open] summary { margin-bottom: 0.5rem; border-bottom: 1px solid #e1e4e8;
 .toc-mobile .toc-nav {
   padding: 8px 16px 12px;
 }
+
+/* ===== Next Read Cards ===== */
+
+.next-read {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border-color);
+}
+
+.next-read-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .next-read-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.next-read-card {
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  transition: var(--transition);
+}
+
+.next-read-card:hover {
+  box-shadow: var(--card-shadow);
+  transform: translateY(-2px);
+}
+
+.next-read-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.next-read-card h4 {
+  font-size: 0.92rem;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.next-read-card h4 a {
+  color: var(--heading-color);
+}
+
+.next-read-card h4 a:hover {
+  color: var(--accent-color);
+}
+
+.next-read-meta {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+.next-read-empty {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  padding: 10px 0;
+}
