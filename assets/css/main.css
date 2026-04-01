@@ -1581,6 +1581,11 @@ details[open] summary { margin-bottom: 0.5rem; border-bottom: 1px solid #e1e4e8;
 
 /* ===== TOC Sidebar ===== */
 
+.post-content h2,
+.post-content h3 {
+  scroll-margin-top: 80px;
+}
+
 .post-body-layout {
   display: grid;
   grid-template-columns: 1fr;
@@ -1596,6 +1601,10 @@ details[open] summary { margin-bottom: 0.5rem; border-bottom: 1px solid #e1e4e8;
 
 .toc-sidebar {
   display: none;
+}
+
+.toc-sidebar.toc-visible {
+  display: block;
 }
 
 @media (max-width: 767px) {
@@ -1637,6 +1646,7 @@ details[open] summary { margin-bottom: 0.5rem; border-bottom: 1px solid #e1e4e8;
   border-left: 2px solid var(--border-color);
   transition: var(--transition);
   line-height: 1.4;
+  text-decoration: none;
 }
 
 .toc-nav .toc-item a:hover {
@@ -1662,6 +1672,10 @@ details[open] summary { margin-bottom: 0.5rem; border-bottom: 1px solid #e1e4e8;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   overflow: hidden;
+}
+
+.toc-mobile.toc-visible {
+  display: block;
 }
 
 @media (min-width: 768px) {

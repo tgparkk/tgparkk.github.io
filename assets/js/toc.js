@@ -7,14 +7,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var sidebar = document.querySelector('.toc-sidebar');
   var mobile = document.querySelector('.toc-mobile');
-  if (sidebar) sidebar.style.display = 'block';
-  if (mobile) mobile.style.display = 'block';
+  if (sidebar) sidebar.classList.add('toc-visible');
+  if (mobile) mobile.classList.add('toc-visible');
 
   function buildTocList() {
     var ul = document.createElement('ul');
     headings.forEach(function (h, i) {
-      var id = 'toc-heading-' + i;
-      h.id = id;
+      if (!h.id) {
+        h.id = 'toc-heading-' + i;
+      }
+      var id = h.id;
       var li = document.createElement('li');
       li.className = 'toc-item' + (h.tagName === 'H3' ? ' toc-sub' : '');
       var a = document.createElement('a');
@@ -24,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
       a.addEventListener('click', function (e) {
         e.preventDefault();
         h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + id);
       });
       li.appendChild(a);
       ul.appendChild(li);
