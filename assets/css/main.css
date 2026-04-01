@@ -1753,3 +1753,240 @@ details[open] summary { margin-bottom: 0.5rem; border-bottom: 1px solid #e1e4e8;
   color: var(--text-light);
   padding: 10px 0;
 }
+
+/* ===== Homepage Content Layout ===== */
+
+.home-content-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.home-curation-col {
+  display: none;
+}
+
+.home-curation-mobile {
+  display: block;
+  margin-top: 40px;
+}
+
+@media (min-width: 1100px) {
+  .home-content-layout {
+    grid-template-columns: 1fr 300px;
+    gap: 32px;
+  }
+  .home-curation-col {
+    display: block;
+  }
+  .home-curation-mobile {
+    display: none;
+  }
+}
+
+/* ===== Curation Panel ===== */
+
+.curation-panel {
+  position: sticky;
+  top: 80px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.curation-tabs {
+  display: flex;
+  background: var(--primary-color);
+}
+
+.curation-tab-btn {
+  flex: 1;
+  padding: 11px 8px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+}
+
+.curation-tab-btn:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.curation-tab-btn.active {
+  color: #fff;
+  border-bottom-color: var(--accent-color);
+}
+
+.curation-tab-panel {
+  padding: 14px;
+}
+
+.curation-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.curation-item:last-child {
+  border-bottom: none;
+}
+
+.curation-rank {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--accent-color);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.curation-rank.silver {
+  background: var(--text-light);
+}
+
+.curation-info {
+  min-width: 0;
+}
+
+.curation-title {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin-bottom: 3px;
+  line-height: 1.35;
+}
+
+.curation-title:hover {
+  color: var(--accent-color);
+}
+
+.curation-stats {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  display: flex;
+  gap: 10px;
+}
+
+.curation-stats i {
+  color: var(--accent-color);
+}
+
+.curation-skeleton {
+  padding: 4px 0;
+}
+
+.skeleton-line {
+  height: 12px;
+  background: var(--border-color);
+  border-radius: 4px;
+  margin-bottom: 14px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-line.short {
+  width: 60%;
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.curation-series-item {
+  padding: 12px;
+  background: rgba(119, 128, 235, 0.04);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 10px;
+}
+
+.curation-series-item h5 {
+  font-size: 0.82rem;
+  color: var(--heading-color);
+  margin-bottom: 4px;
+}
+
+.curation-series-meta {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  display: flex;
+  gap: 10px;
+}
+
+.curation-series-meta i {
+  color: var(--accent-color);
+}
+
+.curation-series-start {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.curation-series-start:hover {
+  color: var(--link-hover-color);
+}
+
+.curation-topic-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--heading-color);
+  transition: var(--transition);
+}
+
+.curation-topic-item:last-child {
+  border-bottom: none;
+}
+
+.curation-topic-item:hover {
+  color: var(--accent-color);
+}
+
+.curation-topic-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.72rem;
+  flex-shrink: 0;
+}
+
+.curation-topic-name {
+  flex: 1;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.curation-topic-count {
+  font-size: 0.72rem;
+  color: var(--text-light);
+}
+
+.curation-empty {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.82rem;
+  color: var(--text-light);
+}

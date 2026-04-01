@@ -1,0 +1,86 @@
+<!-- Hidden post data for JS popularity ranking -->
+{% for post in site.posts %}
+<span class="curation-post-data" hidden
+  data-id="{{ post.url | slugify }}"
+  data-title="{{ post.title | escape }}"
+  data-url="{{ post.url | relative_url }}"
+  data-category="{{ post.categories | first }}"></span>
+{% endfor %}
+
+<div class="curation-panel">
+  <div class="curation-tabs">
+    <button class="curation-tab-btn active" data-tab="popular">
+      <i class="fas fa-fire"></i> 인기글
+    </button>
+    <button class="curation-tab-btn" data-tab="series">
+      <i class="fas fa-layer-group"></i> 시리즈
+    </button>
+    <button class="curation-tab-btn" data-tab="topics">
+      <i class="fas fa-folder"></i> 주제별
+    </button>
+  </div>
+
+  <!-- Popular Tab -->
+  <div id="curation-popular" class="curation-tab-panel" style="display: block;">
+    <div id="curation-popular-list">
+      <div class="curation-skeleton">
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line short"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line short"></div>
+        <div class="skeleton-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Series Tab -->
+  <div id="curation-series" class="curation-tab-panel" style="display: none;">
+    {% assign all_series = "" %}
+    {% for post in site.posts %}
+      {% if post.series %}
+        {% unless all_series contains post.series %}
+          {% if all_series != "" %}{% assign all_series = all_series | append: "|||" %}{% endunless %}
+          {% assign all_series = all_series | append: post.series %}
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+
+    {% assign series_list = all_series | split: "|||" %}
+    {% for series_name in series_list %}
+      {% assign s_posts = site.posts | where: "series", series_name | sort: "series_order" %}
+      {% assign s_count = s_posts | size %}
+      {% if s_count > 1 %}
+      <div class="curation-series-item">
+        <h5>{{ series_name }}</h5>
+        <div class="curation-series-meta">
+          <span><i class="fas fa-layer-group"></i> {{ s_count }}편</span>
+        </div>
+        <a href="{{ s_posts.first.url | relative_url }}" class="curation-series-start">
+          1편부터 시작하기 <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+      {% endif %}
+    {% endfor %}
+
+    {% if series_list.size == 0 %}
+      <div class="curation-empty">아직 시리즈가 없습니다.</div>
+    {% endif %}
+  </div>
+
+  <!-- Topics Tab -->
+  <div id="curation-topics" class="curation-tab-panel" style="display: none;">
+    {% assign categories_sorted = "cpp,async_servers,gamedev,rendering,windows,security,stock,robotrader,trading-journal,machine-learning,hobby,cooking,book,english,review,blog-analysis" | split: "," %}
+    {% assign cat_icons = "fa-code,fa-server,fa-gamepad,fa-paint-brush,fab fa-windows,fa-shield-alt,fa-chart-line,fa-robot,fa-journal-whills,fa-brain,fa-puzzle-piece,fa-utensils,fa-book,fa-language,fa-star,fa-chart-bar" | split: "," %}
+    {% for cat in categories_sorted %}
+      {% assign cat_posts = site.posts | where_exp: "p", "p.categories contains cat" %}
+      {% assign cat_count = cat_posts | size %}
+      {% if cat_count > 0 %}
+      <a href="{{ '/categories/' | append: cat | relative_url }}/" class="curation-topic-item">
+        <span class="curation-topic-icon"><i class="fas {{ cat_icons[forloop.index0] }}"></i></span>
+        <span class="curation-topic-name">{{ cat }}</span>
+        <span class="curation-topic-count">{{ cat_count }}편</span>
+      </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

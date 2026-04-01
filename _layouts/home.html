@@ -63,50 +63,63 @@ layout: default
   </div>
 </section>
 
-<!-- 최근 게시물 -->
+<!-- 최근 게시물 + 큐레이션 패널 -->
 <section class="recent-posts-section">
-  <div class="section-title-container" data-aos="fade-up" data-aos-duration="800">
-    <h2 class="section-title">Recent Posts</h2>
-    <a href="{{ '/categories/all/' | relative_url }}" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+  <div class="home-content-layout">
+    <div class="home-main-col">
+      <div class="section-title-container" data-aos="fade-up" data-aos-duration="800">
+        <h2 class="section-title">Recent Posts</h2>
+        <a href="{{ '/categories/all/' | relative_url }}" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="post-grid">
+        {% for post in site.posts limit:6 %}
+          <div class="post-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{{ forloop.index | times: 100 }}">
+            {% if post.image %}
+              <div class="post-card-image-container">
+                <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="post-card-image">
+              </div>
+            {% else %}
+              <div class="post-card-image-container default-image">
+                <i class="fas fa-file-alt default-icon"></i>
+              </div>
+            {% endif %}
+
+            <div class="post-card-content">
+              <div class="post-card-meta">
+                <span class="post-date"><i class="far fa-calendar-alt"></i> {{ post.date | date: "%Y-%m-%d" }}</span>
+                {% if post.categories.size > 0 %}
+                <span class="post-category">
+                  {% for category in post.categories limit:1 %}
+                    <a href="{{ '/categories/' | append: category | relative_url }}/">{{ category }}</a>
+                  {% endfor %}
+                </span>
+                {% endif %}
+              </div>
+
+              <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+
+              {% if post.excerpt %}
+                <div class="post-excerpt">
+                  {{ post.excerpt | strip_html | truncatewords: 20 }}
+                </div>
+              {% endif %}
+
+              <a href="{{ post.url | relative_url }}" class="read-more">Read More</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="home-curation-col">
+      {% include curation-panel.html %}
+    </div>
   </div>
 
-  <div class="post-grid">
-    {% for post in site.posts limit:6 %}
-      <div class="post-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="{{ forloop.index | times: 100 }}">
-        {% if post.image %}
-          <div class="post-card-image-container">
-            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="post-card-image">
-          </div>
-        {% else %}
-          <div class="post-card-image-container default-image">
-            <i class="fas fa-file-alt default-icon"></i>
-          </div>
-        {% endif %}
-        
-        <div class="post-card-content">
-          <div class="post-card-meta">
-            <span class="post-date"><i class="far fa-calendar-alt"></i> {{ post.date | date: "%Y-%m-%d" }}</span>
-            {% if post.categories.size > 0 %}
-            <span class="post-category">
-              {% for category in post.categories limit:1 %}
-                <a href="{{ '/categories/' | append: category | relative_url }}/">{{ category }}</a>
-              {% endfor %}
-            </span>
-            {% endif %}
-          </div>
-          
-          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-          
-          {% if post.excerpt %}
-            <div class="post-excerpt">
-              {{ post.excerpt | strip_html | truncatewords: 20 }}
-            </div>
-          {% endif %}
-          
-          <a href="{{ post.url | relative_url }}" class="read-more">Read More</a>
-        </div>
-      </div>
-    {% endfor %}
+  <!-- Mobile: curation below grid -->
+  <div class="home-curation-mobile">
+    {% include curation-panel.html %}
   </div>
 </section>
 
@@ -120,3 +133,4 @@ layout: default
     }
   });
 </script>
+<script src="{{ '/assets/js/curation.js' | relative_url }}"></script>
