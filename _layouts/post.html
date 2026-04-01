@@ -3,6 +3,7 @@ layout: default
 ---
 <div class="reading-progress" id="reading-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 <article class="post">
+  {% include series-banner.html %}
   <div class="post-header">
     <div class="post-category-badge">
       {% for category in page.categories limit:1 %}

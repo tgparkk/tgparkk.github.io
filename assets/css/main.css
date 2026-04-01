@@ -1531,3 +1531,50 @@ details[open] summary { margin-bottom: 0.5rem; border-bottom: 1px solid #e1e4e8;
     transition: none !important;
   }
 }
+
+/* ===== Series Banner ===== */
+
+.series-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, rgba(119, 128, 235, 0.08), rgba(88, 194, 232, 0.08));
+  border: 1px solid rgba(119, 128, 235, 0.2);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  color: var(--text-color);
+  flex-wrap: wrap;
+}
+
+.series-banner > i {
+  color: var(--accent-color);
+  font-size: 1.1rem;
+}
+
+.series-banner .series-label strong {
+  color: var(--accent-color);
+}
+
+.series-banner .series-nav-links {
+  margin-left: auto;
+  display: flex;
+  gap: 12px;
+}
+
+.series-banner .series-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  transition: var(--transition);
+}
+
+.series-banner .series-link:hover {
+  color: var(--link-hover-color);
+}
+
+[data-theme="dark"] .series-banner {
+  background: linear-gradient(135deg, rgba(119, 128, 235, 0.12), rgba(88, 194, 232, 0.08));
+  border-color: rgba(119, 128, 235, 0.3);
+}

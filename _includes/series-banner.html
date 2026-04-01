@@ -1,0 +1,30 @@
+{% if page.series %}
+{% assign series_posts = site.posts | where: "series", page.series | sort: "series_order" %}
+{% assign series_total = series_posts | size %}
+{% if series_total > 1 %}
+<div class="series-banner">
+  <i class="fas fa-layer-group"></i>
+  <span class="series-label">
+    {{ page.series }} &mdash; <strong>{{ page.series_order }}편</strong> / 총 {{ series_total }}편
+  </span>
+  <div class="series-nav-links">
+    {% for sp in series_posts %}
+      {% if sp.url == page.url %}
+        {% if forloop.index > 1 %}
+          {% assign prev_index = forloop.index0 | minus: 1 %}
+          <a href="{{ series_posts[prev_index].url | relative_url }}" class="series-link" title="이전: {{ series_posts[prev_index].title }}">
+            <i class="fas fa-chevron-left"></i> 이전편
+          </a>
+        {% endif %}
+        {% unless forloop.last %}
+          {% assign next_index = forloop.index0 | plus: 1 %}
+          <a href="{{ series_posts[next_index].url | relative_url }}" class="series-link" title="다음: {{ series_posts[next_index].title }}">
+            다음편 <i class="fas fa-chevron-right"></i>
+          </a>
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% endif %}
