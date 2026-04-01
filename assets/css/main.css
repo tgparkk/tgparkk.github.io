@@ -1578,3 +1578,110 @@ details[open] summary { margin-bottom: 0.5rem; border-bottom: 1px solid #e1e4e8;
   background: linear-gradient(135deg, rgba(119, 128, 235, 0.12), rgba(88, 194, 232, 0.08));
   border-color: rgba(119, 128, 235, 0.3);
 }
+
+/* ===== TOC Sidebar ===== */
+
+.post-body-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+@media (min-width: 768px) {
+  .post-body-layout {
+    grid-template-columns: 1fr 240px;
+    gap: 32px;
+  }
+}
+
+.toc-sidebar {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .toc-sidebar {
+    display: none !important;
+  }
+}
+
+.toc-sidebar-inner {
+  position: sticky;
+  top: 80px;
+}
+
+.toc-sidebar-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.toc-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc-nav .toc-item {
+  margin-bottom: 2px;
+}
+
+.toc-nav .toc-item a {
+  display: block;
+  padding: 5px 10px;
+  font-size: 0.78rem;
+  color: var(--text-light);
+  border-left: 2px solid var(--border-color);
+  transition: var(--transition);
+  line-height: 1.4;
+}
+
+.toc-nav .toc-item a:hover {
+  color: var(--accent-color);
+  border-left-color: var(--accent-color);
+}
+
+.toc-nav .toc-item a.toc-active {
+  color: var(--accent-color);
+  border-left-color: var(--accent-color);
+  font-weight: 600;
+  background: rgba(119, 128, 235, 0.05);
+}
+
+.toc-nav .toc-sub a {
+  padding-left: 22px;
+  font-size: 0.75rem;
+}
+
+.toc-mobile {
+  display: none;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .toc-mobile {
+    display: none !important;
+  }
+}
+
+.toc-mobile summary {
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  cursor: pointer;
+  background: rgba(119, 128, 235, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.toc-mobile .toc-nav {
+  padding: 8px 16px 12px;
+}

@@ -38,18 +38,14 @@ layout: default
   </div>
   {% endif %}
 
-  {% if page.toc %}
-  <div class="table-of-contents" data-aos="fade-up" data-aos-delay="300">
-    <h2 class="toc-title">Table of Contents</h2>
-    <div id="toc"></div>
-  </div>
-  {% endif %}
-
   <!-- 광고: 본문 상단 -->
   {% include ad-unit.html position="post-top" %}
 
-  <div class="post-content" data-aos="fade-up" data-aos-delay="300">
-    {{ content }}
+  <div class="post-body-layout">
+    <div class="post-content" data-aos="fade-up" data-aos-delay="300">
+      {{ content }}
+    </div>
+    {% include toc-sidebar.html %}
   </div>
 
   <!-- 광고: 본문 하단 -->
@@ -194,44 +190,6 @@ layout: default
       });
     }
     
-    // 목차 생성 함수
-    function generateTableOfContents() {
-      const headings = document.querySelectorAll('.post-content h2, .post-content h3');
-      const toc = document.getElementById('toc');
-      
-      if (toc && headings.length > 0) {
-        const ul = document.createElement('ul');
-        
-        headings.forEach((heading, index) => {
-          // 앵커 ID 생성
-          const id = `heading-${index}`;
-          heading.id = id;
-          
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          
-          a.href = `#${id}`;
-          a.textContent = heading.textContent;
-          
-          // h3는 들여쓰기
-          if (heading.tagName.toLowerCase() === 'h3') {
-            li.style.marginLeft = '15px';
-          }
-          
-          li.appendChild(a);
-          ul.appendChild(li);
-        });
-        
-        toc.appendChild(ul);
-      }
-    }
-    
-    // TOC가 활성화된 경우에만 생성
-    const tocContainer = document.querySelector('.table-of-contents');
-    if (tocContainer) {
-      generateTableOfContents();
-    }
-    
     // 코드 블록에 복사 버튼 추가
     const codeBlocks = document.querySelectorAll('pre');
     codeBlocks.forEach(block => {
@@ -322,6 +280,9 @@ layout: default
     });
   });
 </script>
+
+<!-- Table of Contents -->
+<script src="{{ '/assets/js/toc.js' | relative_url }}"></script>
 
 <!-- JavaScript for like button -->
 <script src="{{ '/assets/js/like-system.js' | relative_url }}"></script>
