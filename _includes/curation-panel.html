@@ -39,7 +39,7 @@
     {% for post in site.posts %}
       {% if post.series %}
         {% unless all_series contains post.series %}
-          {% if all_series != "" %}{% assign all_series = all_series | append: "|||" %}{% endunless %}
+          {% if all_series != "" %}{% assign all_series = all_series | append: "|||" %}{% endif %}
           {% assign all_series = all_series | append: post.series %}
         {% endunless %}
       {% endif %}
