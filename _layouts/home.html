@@ -79,10 +79,6 @@ layout: default
               <div class="post-card-image-container">
                 <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="post-card-image">
               </div>
-            {% else %}
-              <div class="post-card-image-container default-image">
-                <i class="fas fa-file-alt default-icon"></i>
-              </div>
             {% endif %}
 
             <div class="post-card-content">
@@ -114,6 +110,7 @@ layout: default
 
     <div class="home-curation-col">
       {% include curation-panel.html %}
+      {% include ad-unit.html position="home-sidebar" %}
     </div>
   </div>
 
