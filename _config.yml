@@ -39,6 +39,13 @@ defaults:
     values:
       layout: "default"
 
+# 저자 정보
+author:
+  name: tgparkk
+  url: https://github.com/tgparkk
+
+github_username: tgparkk
+
 # Disqus 설정
 disqus:
   shortname: tgparkk-github-io
