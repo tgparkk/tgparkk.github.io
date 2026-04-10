@@ -9,7 +9,7 @@ image: /assets/images/book/the-stranger.jpg
 comments: true
 ---
 
-![이방인 - 알베르 카뮈 (민음사 세계문학전집 266)](/assets/images/book/the-stranger.jpg){: .img-right}
+![이방인 - 알베르 카뮈](/assets/images/book/the-stranger.jpg){: .img-right}
 
 오랜만에 소설 하나 읽었는데 2시간 만에 다 읽어버렸습니다. (분량이 안길어서.. ^^;)
 

@@ -32,12 +32,6 @@ layout: default
     </div>
   </div>
 
-  {% if page.image %}
-  <div class="post-featured-image" data-aos="fade-up" data-aos-delay="200">
-    <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
-  </div>
-  {% endif %}
-
   <!-- 광고: 본문 상단 -->
   {% include ad-unit.html position="post-top" %}
 
