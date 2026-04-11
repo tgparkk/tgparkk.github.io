@@ -6,6 +6,7 @@ categories: [stock]
 tags: [stock, auto-trading, kis-api, python, framework, template]
 excerpt: "프레임워크의 핵심 모듈 세 가지를 구현합니다. 증권사 API를 하나로 감싸는 KISBroker, 자금 중복 사용을 막는 FundManager, 전략을 자동으로 찾아 로드하는 StrategyLoader."
 comments: true
+image: /assets/images/auto-stock-thumbnails/stock-auto-trading.svg
 ---
 
 [지난 글](/stock/2026/02/15/stock-auto-trading-framework-design.html)에서 프레임워크의 전체 구조와 BaseStrategy, Signal을 다뤘습니다. 이번 글에서는 그 뼈대 위에 얹히는 **핵심 모듈 세 가지**를 구현합니다.

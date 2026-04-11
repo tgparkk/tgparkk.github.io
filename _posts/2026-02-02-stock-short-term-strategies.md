@@ -6,6 +6,7 @@ categories: [stock]
 tags: [stock, 주식, 단타, 전략, 스캘핑, 돌파, 갭, 모멘텀, 볼륨, VWAP, 평균회귀, ORB]
 excerpt: "단타에 초점을 두고, 웹에서 전략을 탐색하고 KIS API로 구현 가능한지 확인하는 방식으로 정리했습니다. 돌파·갭·모멘텀·볼륨·VWAP·평균 회귀·시초가 범위 돌파(ORB) 요약과 구현 가능 여부 표를 담았습니다."
 comments: true
+image: /assets/images/auto-stock-thumbnails/stock-auto-trading.svg
 ---
 
 [지난 글](/stock/2026/02/01/stock-auto-trading-series-intro.html)에서 자동매매 시리즈 흐름을 소개했습니다. 이번 글에서는 첫 번째 주제인 **전략 종류**를 다룹니다.

@@ -6,6 +6,7 @@ categories: [stock]
 tags: [stock, 주식, 단타, 전략선택, 백테스트, 추세장, 횡보장]
 excerpt: "7가지 단타 전략 중 어떤 것을 선택할지 고민하는 분들을 위해, 전략별 비교표와 성향별 추천, 백테스트 기초를 정리했습니다."
 comments: true
+image: /assets/images/auto-stock-thumbnails/stock-auto-trading.svg
 ---
 
 지난 글에서 **7가지 단타 전략**(돌파, 갭, 모멘텀, 거래량 급증, VWAP, 평균 회귀, ORB)을 소개했습니다. 이번 글에서는 **어떤 전략을 선택할지** 고민하는 분들을 위해 비교표, 성향별 추천, 그리고 백테스트 기초를 다룹니다.

@@ -1,0 +1,50 @@
+<svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#25265E"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="160" fill="url(#bg1)"/>
+  <line x1="40" y1="30" x2="40" y2="130" stroke="#ffffff10" stroke-width="0.5"/>
+  <line x1="100" y1="30" x2="100" y2="130" stroke="#ffffff10" stroke-width="0.5"/>
+  <line x1="160" y1="30" x2="160" y2="130" stroke="#ffffff10" stroke-width="0.5"/>
+  <line x1="220" y1="30" x2="220" y2="130" stroke="#ffffff10" stroke-width="0.5"/>
+  <line x1="280" y1="30" x2="280" y2="130" stroke="#ffffff10" stroke-width="0.5"/>
+  <line x1="340" y1="30" x2="340" y2="130" stroke="#ffffff10" stroke-width="0.5"/>
+  <line x1="30" y1="50" x2="370" y2="50" stroke="#ffffff08" stroke-width="0.5"/>
+  <line x1="30" y1="80" x2="370" y2="80" stroke="#ffffff08" stroke-width="0.5"/>
+  <line x1="30" y1="110" x2="370" y2="110" stroke="#ffffff08" stroke-width="0.5"/>
+  <line x1="55" y1="55" x2="55" y2="105" stroke="#ff6b6b" stroke-width="1"/>
+  <rect x="49" y="65" width="12" height="25" fill="#ff6b6b" rx="1"/>
+  <line x1="80" y1="60" x2="80" y2="115" stroke="#ff6b6b" stroke-width="1"/>
+  <rect x="74" y="70" width="12" height="30" fill="#ff6b6b" rx="1"/>
+  <line x1="105" y1="75" x2="105" y2="120" stroke="#ff6b6b" stroke-width="1"/>
+  <rect x="99" y="85" width="12" height="20" fill="#ff6b6b" rx="1"/>
+  <line x1="130" y1="80" x2="130" y2="125" stroke="#888" stroke-width="1"/>
+  <rect x="124" y="100" width="12" height="3" fill="#888" rx="1"/>
+  <polygon points="130,138 124,148 136,148" fill="#58C2E8"/>
+  <text x="130" y="155" fill="#58C2E8" font-size="8" text-anchor="middle" font-weight="bold" font-family="monospace">BUY</text>
+  <line x1="155" y1="70" x2="155" y2="110" stroke="#4ecdc4" stroke-width="1"/>
+  <rect x="149" y="78" width="12" height="22" fill="#4ecdc4" rx="1"/>
+  <line x1="180" y1="50" x2="180" y2="100" stroke="#4ecdc4" stroke-width="1"/>
+  <rect x="174" y="55" width="12" height="35" fill="#4ecdc4" rx="1"/>
+  <line x1="205" y1="40" x2="205" y2="85" stroke="#4ecdc4" stroke-width="1"/>
+  <rect x="199" y="45" width="12" height="28" fill="#4ecdc4" rx="1"/>
+  <line x1="230" y1="35" x2="230" y2="70" stroke="#4ecdc4" stroke-width="1"/>
+  <rect x="224" y="40" width="12" height="18" fill="#4ecdc4" rx="1"/>
+  <line x1="255" y1="38" x2="255" y2="75" stroke="#ff6b6b" stroke-width="1"/>
+  <rect x="249" y="42" width="12" height="22" fill="#ff6b6b" rx="1"/>
+  <polygon points="255,30 249,20 261,20" fill="#ff6b6b"/>
+  <text x="255" y="16" fill="#ff6b6b" font-size="8" text-anchor="middle" font-weight="bold" font-family="monospace">SELL</text>
+  <line x1="280" y1="50" x2="280" y2="95" stroke="#ff6b6b" stroke-width="1"/>
+  <rect x="274" y="55" width="12" height="28" fill="#ff6b6b" rx="1"/>
+  <line x1="305" y1="55" x2="305" y2="100" stroke="#4ecdc4" stroke-width="1"/>
+  <rect x="299" y="60" width="12" height="25" fill="#4ecdc4" rx="1"/>
+  <line x1="330" y1="45" x2="330" y2="90" stroke="#4ecdc4" stroke-width="1"/>
+  <rect x="324" y="50" width="12" height="28" fill="#4ecdc4" rx="1"/>
+  <line x1="355" y1="35" x2="355" y2="78" stroke="#4ecdc4" stroke-width="1"/>
+  <rect x="349" y="40" width="12" height="25" fill="#4ecdc4" rx="1"/>
+  <polyline points="55,85 80,92 105,100 130,102 155,95 180,82 205,68 230,55 255,52 280,60 305,65 330,58 355,50"
+            fill="none" stroke="#7780EB" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
+</svg>
