@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Default Open Graph image (1200x630).
+  NOTE: Many social platforms (Facebook, Twitter, KakaoTalk, Slack) do not
+  reliably render SVG previews. For best compatibility, rasterize this file
+  into a PNG at /assets/images/og-default.png and update _config.yml
+  (default_og_image: /assets/images/og-default.png).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#25265E"/>
+      <stop offset="60%" stop-color="#3B3F9C"/>
+      <stop offset="100%" stop-color="#7780EB"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="85%" cy="20%" r="55%">
+      <stop offset="0%" stop-color="#58C2E8" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#58C2E8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- subtle code-like tick marks -->
+  <g fill="#FFFFFF" fill-opacity="0.06">
+    <rect x="80" y="540" width="220" height="6" rx="3"/>
+    <rect x="80" y="560" width="160" height="6" rx="3"/>
+    <rect x="80" y="580" width="260" height="6" rx="3"/>
+  </g>
+
+  <!-- Brand mark -->
+  <g transform="translate(80 100)">
+    <rect x="0" y="0" width="72" height="72" rx="16" fill="#FFFFFF" fill-opacity="0.12"/>
+    <text x="36" y="50" font-family="'Pretendard Variable', 'Segoe UI', system-ui, sans-serif"
+          font-size="38" font-weight="800" fill="#FFFFFF" text-anchor="middle">TG</text>
+  </g>
+
+  <!-- Site title -->
+  <text x="80" y="290" font-family="'Pretendard Variable', 'Segoe UI', system-ui, sans-serif"
+        font-size="72" font-weight="800" fill="#FFFFFF">TG's Programming Blog</text>
+
+  <!-- Tagline -->
+  <text x="80" y="360" font-family="'Pretendard Variable', 'Segoe UI', system-ui, sans-serif"
+        font-size="32" font-weight="500" fill="#E8E8ED" fill-opacity="0.9">
+    C++ · Async · Rendering · Windows · GameDev
+  </text>
+
+  <!-- URL pill -->
+  <g transform="translate(80 430)">
+    <rect x="0" y="0" width="360" height="56" rx="28" fill="#FFFFFF" fill-opacity="0.15"/>
+    <text x="28" y="37" font-family="'Pretendard Variable', 'Segoe UI', system-ui, sans-serif"
+          font-size="24" font-weight="600" fill="#FFFFFF">tgparkk.github.io</text>
+  </g>
+</svg>

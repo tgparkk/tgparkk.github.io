@@ -43,9 +43,20 @@ defaults:
 author:
   name: tgparkk
   url: https://github.com/tgparkk
+  bio: "C++, 멀티스레딩, 렌더링, 게임 프로그래밍에 대한 깊이 있는 글을 씁니다."
 
 github_username: tgparkk
 
 # Disqus 설정
 disqus:
   shortname: tgparkk-github-io
+
+# 소셜 공유/SEO 기본 이미지 (1200x630 권장)
+# 아직 PNG가 없을 경우 SVG 폴백이 사용되지만, 일부 소셜 플랫폼은 SVG를 렌더링하지 않으므로
+# 가능하면 /assets/images/og-default.png 를 생성해 교체하세요.
+default_og_image: /assets/images/og-default.svg
+
+# Google Search Console 검증 토큰
+# Search Console에서 "HTML 태그" 검증 방법을 선택한 뒤 content 값을 여기에 붙여넣으세요.
+# 값이 비어 있으면 메타 태그가 출력되지 않습니다.
+google_site_verification: ""

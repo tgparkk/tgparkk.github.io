@@ -6,11 +6,17 @@
 
 <!-- SEO 메타 태그 -->
 {% assign seo_description = page.description | default: page.excerpt | strip_html | escape | truncate: 160 | default: site.description %}
+{% assign og_image_path = page.image | default: site.default_og_image %}
 <meta name="description" content="{{ seo_description }}">
 <meta name="author" content="{{ site.author.name | default: 'tgparkk' }}">
 
 {% if page.keywords %}
 <meta name="keywords" content="{{ page.keywords }}">
+{% endif %}
+
+<!-- Google Search Console 검증 (값이 비어 있으면 출력하지 않음) -->
+{% if site.google_site_verification and site.google_site_verification != "" %}
+<meta name="google-site-verification" content="{{ site.google_site_verification }}">
 {% endif %}
 
 <!-- Open Graph 메타 태그 -->
@@ -19,14 +25,21 @@
 <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 <meta property="og:locale" content="ko_KR">
-{% if page.image %}
-<meta property="og:image" content="{{ page.image | absolute_url }}">
+{% if og_image_path %}
+<meta property="og:image" content="{{ og_image_path | absolute_url }}">
+<meta property="og:image:alt" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
 {% endif %}
 <meta property="og:description" content="{{ seo_description }}">
 {% if page.layout == 'post' %}
 <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
 {% if page.last_modified_at %}
 <meta property="article:modified_time" content="{{ page.last_modified_at | date_to_xmlschema }}">
+{% endif %}
+{% if site.author.url %}
+<meta property="article:author" content="{{ site.author.url }}">
+{% endif %}
+{% if page.categories %}
+<meta property="article:section" content="{{ page.categories | first }}">
 {% endif %}
 {% for tag in page.tags %}
 <meta property="article:tag" content="{{ tag }}">
@@ -37,8 +50,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
 <meta name="twitter:description" content="{{ seo_description }}">
-{% if page.image %}
-<meta name="twitter:image" content="{{ page.image | absolute_url }}">
+{% if og_image_path %}
+<meta name="twitter:image" content="{{ og_image_path | absolute_url }}">
 {% endif %}
 
 <!-- Google 애널리틱스 -->
@@ -65,13 +78,13 @@
   "url": "{{ page.url | absolute_url }}",
   "datePublished": "{{ page.date | date_to_xmlschema }}",
   "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
-  {% if page.image %}
-  "image": "{{ page.image | absolute_url }}",
+  {% if og_image_path %}
+  "image": "{{ og_image_path | absolute_url }}",
   {% endif %}
   "author": {
     "@type": "Person",
     "name": {{ page.author | default: site.author.name | default: 'tgparkk' | jsonify }},
-    "url": "https://github.com/tgparkk"
+    "url": {{ site.author.url | default: 'https://github.com/tgparkk' | jsonify }}
   },
   "publisher": {
     "@type": "Organization",
@@ -79,6 +92,35 @@
   }
 }
 </script>
+{% assign bc_category = page.categories | first %}
+{% if bc_category %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ '/' | absolute_url }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ bc_category | jsonify }},
+      "item": "{{ '/categories/' | append: bc_category | append: '/' | absolute_url }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ page.title | jsonify }},
+      "item": "{{ page.url | absolute_url }}"
+    }
+  ]
+}
+</script>
+{% endif %}
 {% else %}
 <script type="application/ld+json">
 {
