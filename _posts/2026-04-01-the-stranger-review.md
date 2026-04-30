@@ -2,7 +2,7 @@
 layout: post
 title: "이방인을 읽고 나도 비어있는 걸까 생각했다"
 date: 2026-04-01
-categories: review
+categories: book
 tags: [이방인, 카뮈, 서평, 부조리, 독후감, The Stranger]
 excerpt: "뫼르소에게 공감한 순간, 나도 어딘가 비어있는 건 아닌지 불안해졌다."
 image: /assets/images/book/the-stranger.jpg
