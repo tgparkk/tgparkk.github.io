@@ -1,0 +1,189 @@
+{% comment %}
+  Archive list component used by /categories/all/ and individual category pages.
+
+  Parameters:
+    posts            — list of posts to render
+    page_title       — main heading text
+    active_category  — currently selected category ("all" or category slug)
+    show_filter      — render the category pill filter bar (default true)
+    show_series      — render the "in-progress series" cards (default true)
+
+  Posts are grouped by year. Each row exposes data-category and data-year so
+  client-side JS can filter without re-rendering.
+{% endcomment %}
+
+{% assign posts = include.posts %}
+{% assign page_title = include.page_title | default: "All Posts" %}
+{% assign active_category = include.active_category | default: "all" %}
+{% assign show_filter = include.show_filter %}
+{% if show_filter == nil %}{% assign show_filter = true %}{% endif %}
+{% assign show_series = include.show_series %}
+{% if show_series == nil %}{% assign show_series = true %}{% endif %}
+
+<header class="archive-header">
+  <h1 class="archive-title">{{ page_title }}</h1>
+  <span class="archive-count">{{ posts | size }}편</span>
+</header>
+
+{% if show_filter %}
+{%- comment -%}
+  Category list mirrors curation-panel.html ordering. Counts are computed from
+  site.posts so that pill counts stay stable across pages (each pill always
+  shows the global total for that category).
+{%- endcomment -%}
+{% assign cat_slugs = "cpp,async_servers,gamedev,rendering,windows,security,stock,robotrader,trading-journal,machine-learning,hobby,cooking,book,english,review,blog-analysis" | split: "," %}
+{% assign cat_icons = "fa-code,fa-server,fa-gamepad,fa-paint-brush,fab fa-windows,fa-shield-alt,fa-chart-line,fa-robot,fa-journal-whills,fa-brain,fa-puzzle-piece,fa-utensils,fa-book,fa-language,fa-star,fa-chart-bar" | split: "," %}
+
+<nav class="archive-filter-bar" aria-label="카테고리 필터">
+  <button type="button"
+          class="archive-filter-pill"
+          data-filter="all"
+          data-active="{% if active_category == 'all' %}true{% else %}false{% endif %}">
+    <i class="fas fa-layer-group" aria-hidden="true"></i>
+    <span>전체</span>
+    <span class="archive-filter-count">{{ site.posts | size }}</span>
+  </button>
+  {% for cat in cat_slugs %}
+    {% assign cat_posts = site.categories[cat] %}
+    {% assign cat_count = cat_posts | size %}
+    {% if cat_count > 0 %}
+      <button type="button"
+              class="archive-filter-pill"
+              data-filter="{{ cat }}"
+              data-active="{% if active_category == cat %}true{% else %}false{% endif %}">
+        <i class="fas {{ cat_icons[forloop.index0] }}" aria-hidden="true"></i>
+        <span>{{ cat }}</span>
+        <span class="archive-filter-count">{{ cat_count }}</span>
+      </button>
+    {% endif %}
+  {% endfor %}
+</nav>
+{% endif %}
+
+{% if show_series %}
+{%- comment -%}
+  Build the unique series list by walking site.posts once. Render only series
+  with 2+ posts, since a single-entry "series" adds noise.
+{%- endcomment -%}
+{% assign all_series = "" %}
+{% for post in site.posts %}
+  {% if post.series %}
+    {% unless all_series contains post.series %}
+      {% if all_series != "" %}{% assign all_series = all_series | append: "|||" %}{% endif %}
+      {% assign all_series = all_series | append: post.series %}
+    {% endunless %}
+  {% endif %}
+{% endfor %}
+{% assign series_list = all_series | split: "|||" %}
+
+{% assign visible_series_count = 0 %}
+{% for s in series_list %}
+  {% assign s_posts = site.posts | where: "series", s %}
+  {% if s_posts.size >= 2 %}
+    {% assign visible_series_count = visible_series_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+{% if visible_series_count > 0 %}
+<section class="archive-series-section" aria-label="진행 중인 시리즈">
+  <h2 class="archive-section-heading">
+    <i class="fas fa-layer-group" aria-hidden="true"></i> 진행 중인 시리즈
+  </h2>
+  <div class="archive-series-grid">
+    {% for s in series_list %}
+      {% assign s_posts = site.posts | where: "series", s | sort: "series_order" %}
+      {% assign s_count = s_posts | size %}
+      {% if s_count >= 2 %}
+        {% assign s_first = s_posts | first %}
+        {% assign s_name = s_first.series_name | default: s %}
+        {% assign s_category = s_first.categories | first %}
+        <a class="archive-series-card" href="{{ s_first.url | relative_url }}">
+          <span class="archive-series-card-cat">{{ s_category }}</span>
+          <h3 class="archive-series-card-title">{{ s_name }}</h3>
+          <span class="archive-series-card-meta">
+            <i class="fas fa-layer-group" aria-hidden="true"></i> {{ s_count }}편
+            <span class="archive-series-card-arrow">1편부터 시작 →</span>
+          </span>
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endif %}
+
+{%- comment -%}
+  Group posts by year. site.posts is ordered newest-first by Jekyll, so the
+  first occurrence of each year already arrives in descending order.
+{%- endcomment -%}
+{% assign years_seen = "" %}
+{% for post in posts %}
+  {% assign y = post.date | date: "%Y" %}
+  {% unless years_seen contains y %}
+    {% if years_seen != "" %}{% assign years_seen = years_seen | append: "," %}{% endif %}
+    {% assign years_seen = years_seen | append: y %}
+  {% endunless %}
+{% endfor %}
+{% assign years = years_seen | split: "," %}
+
+<div class="archive-body">
+  <main class="archive-main">
+    {% if posts.size == 0 %}
+      <p class="archive-empty">아직 작성된 게시물이 없습니다.</p>
+    {% else %}
+      {% for year in years %}
+        <section class="archive-year-group" data-year="{{ year }}" id="year-{{ year }}">
+          <h2 class="archive-year-header">{{ year }}</h2>
+          <div class="archive-year-list">
+            {% for post in posts %}
+              {% assign post_year = post.date | date: "%Y" %}
+              {% if post_year != year %}{% continue %}{% endif %}
+              {% assign p_cat = post.categories | first %}
+              <a class="archive-row"
+                 href="{{ post.url | relative_url }}"
+                 data-category="{{ p_cat }}"
+                 data-year="{{ year }}">
+                {% if post.image %}
+                  <span class="archive-thumb">
+                    <img src="{{ post.image | relative_url }}" loading="lazy" alt="">
+                  </span>
+                {% else %}
+                  <span class="archive-thumb archive-thumb--empty" aria-hidden="true">
+                    <i class="fas fa-file-alt"></i>
+                  </span>
+                {% endif %}
+                <span class="archive-row-meta">
+                  <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %d" }}</time>
+                  <span class="archive-row-cat">{{ p_cat }}</span>
+                  {% if post.series %}
+                    <span class="archive-row-series" title="{{ post.series_name | default: post.series }} {% if post.series_order %}{{ post.series_order }}편{% endif %}">
+                      <i class="fas fa-layer-group" aria-hidden="true"></i>
+                      {% if post.series_order %}{{ post.series_order }}편{% else %}시리즈{% endif %}
+                    </span>
+                  {% endif %}
+                </span>
+                <span class="archive-row-title">{{ post.title | escape }}</span>
+                <span class="archive-row-arrow" aria-hidden="true">→</span>
+              </a>
+            {% endfor %}
+          </div>
+        </section>
+      {% endfor %}
+    {% endif %}
+  </main>
+
+  {% if years.size > 1 %}
+    <aside class="archive-jump-aside" aria-label="연도 점프">
+      <span class="archive-jump-label">YEAR</span>
+      <ul class="archive-jump-list">
+        {% for year in years %}
+          <li>
+            <a href="#year-{{ year }}" class="archive-jump-link" data-jump-year="{{ year }}">
+              {{ year }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </aside>
+  {% endif %}
+</div>

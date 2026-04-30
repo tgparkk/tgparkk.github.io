@@ -1,0 +1,35 @@
+---
+layout: default
+---
+{% comment %}
+  Common layout for /categories/all/ and /categories/<name>/ pages.
+
+  Frontmatter on the page should set:
+    layout: category
+    category: <name>   # omit for "All Posts"
+    title: <display title>
+
+  When `page.category` is set, posts are filtered to that category and the
+  matching pill is pre-activated. When omitted, all posts are shown.
+{% endcomment %}
+
+{% if page.category %}
+  {% assign archive_posts = site.categories[page.category] | default: empty %}
+  {% assign archive_title = page.title | default: page.category %}
+  {% assign archive_active = page.category %}
+{% else %}
+  {% assign archive_posts = site.posts %}
+  {% assign archive_title = page.title | default: "All Posts" %}
+  {% assign archive_active = "all" %}
+{% endif %}
+
+<div class="archive-page" data-active-category="{{ archive_active }}">
+  {% include archive-list.html
+       posts=archive_posts
+       page_title=archive_title
+       active_category=archive_active
+       show_filter=true
+       show_series=true %}
+</div>
+
+<script src="{{ '/assets/js/archive-filter.js' | relative_url }}" defer></script>
