@@ -6,6 +6,9 @@ categories: [stock]
 tags: [stock, 주식, 자동매매, 시리즈, 한국투자증권, Open API, 파이썬, GitHub, 자동매매 프로그램]
 excerpt: "한국투자증권 Open API와 파이썬으로 만드는 자동매매 프로그램 시리즈. 단타 전략 종류부터 전략 선택, 프레임워크 설계, 코드 구현까지 전 과정을 다룹니다."
 comments: true
+series: stock-framework
+series_name: "주식 자동매매 프레임워크"
+series_order: 1
 image: /assets/images/auto-stock-thumbnails/stock-auto-trading.svg
 ---
 

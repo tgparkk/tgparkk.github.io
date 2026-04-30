@@ -6,6 +6,9 @@ categories: gamedev
 tags: [csharp, game, unity, 오목, 게임, 유니티, 씨샵]
 excerpt: "모바일 오목게임, 유니티 게임, 씬(scene)."
 comments: true
+series: omok-unity
+series_name: "Unity로 오목 만들기"
+series_order: 2
 ---
 
 

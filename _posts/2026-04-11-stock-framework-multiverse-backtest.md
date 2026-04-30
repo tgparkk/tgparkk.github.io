@@ -6,6 +6,9 @@ categories: [stock]
 tags: [stock, auto-trading, kis-api, python, framework, template, backtest, multiverse, optimization]
 excerpt: "전략을 만들었는데, 이 파라미터가 맞는 걸까? RSI 30이 좋을까 25가 좋을까? 멀티버스 백테스트는 수백~수천 개 조합을 한 번에 돌려보고, 안정적인 파라미터 영역을 찾아냅니다."
 comments: true
+series: stock-framework
+series_name: "주식 자동매매 프레임워크"
+series_order: 7
 image: /assets/images/auto-stock-thumbnails/stock-auto-trading.svg
 ---
 

@@ -6,6 +6,9 @@ categories: stock
 tags: [stock, python, 주식, 파이썬, 한국투자증권, Open API, 자동매매, 종목선정, 스캐닝]
 excerpt: "한국투자증권 Open API로 자동매매 종목을 어떻게 고를까? 파이썬 기반 고빈도 스캐닝 전략으로 코스피·코스닥 수천 종목 중 유망 종목을 자동 선별하는 방법을 정리합니다."
 comments: true
+series: auto-stock
+series_name: "한국투자증권 API 자동매매 (초기 시리즈)"
+series_order: 3
 ---
 
 # 데이터 기반 주식 종목 선정 과정

@@ -6,6 +6,9 @@ categories: [stock]
 tags: [stock, auto-trading, kis-api, python, framework, template, strategy]
 excerpt: "C++ 가상함수처럼, BaseStrategy의 빈 틀을 상속받아 나만의 전략을 끼워넣는 과정을 따라갑니다. 폴더 하나 만들고, 메서드 다섯 개 채우면 자동매매가 돌아갑니다."
 comments: true
+series: stock-framework
+series_name: "주식 자동매매 프레임워크"
+series_order: 6
 image: /assets/images/auto-stock-thumbnails/stock-auto-trading.svg
 ---
 

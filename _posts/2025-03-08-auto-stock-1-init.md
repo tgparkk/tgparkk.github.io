@@ -6,6 +6,9 @@ categories: stock
 tags: [stock, python, 주식, 자동매매, 한국투자증권, Open API, 파이썬, GitHub, 자동매매 프로그램]
 excerpt: "한국투자증권 Open API와 파이썬(Python)으로 주식 자동매매 프로그램을 개발한 경험을 공유합니다. REST API 인증부터 매매 전략 구현, GitHub 소스코드까지 — 직장인 개발자의 자동매매 시스템 구축 과정을 담았습니다."
 comments: true
+series: auto-stock
+series_name: "한국투자증권 API 자동매매 (초기 시리즈)"
+series_order: 1
 ---
 
 # 한국투자증권 API로 자동매매 시스템 구축하기: 개발 환경부터 인증 모듈까지
