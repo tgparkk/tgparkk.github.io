@@ -5,6 +5,9 @@
   {% assign ad_slot = "3445217418" %}
 {% elsif include.position == "home-sidebar" %}
   {% assign ad_slot = "8866214801" %}
+{% elsif include.position == "home-feed" %}
+  {% comment %}reusing the home-sidebar slot until a dedicated in-feed slot is created{% endcomment %}
+  {% assign ad_slot = "8866214801" %}
 {% endif %}
 <div class="ad-container ad-{{ include.position }}" aria-label="광고">
   <ins class="adsbygoogle"
