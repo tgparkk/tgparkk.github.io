@@ -4,39 +4,40 @@ layout: default
 <div class="reading-progress" id="reading-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 <article class="post">
   {% include series-banner.html %}
-  <div class="post-header">
+
+  {%- assign p_cat = page.categories | first -%}
+  {%- assign words = content | number_of_words -%}
+  {%- if words < 360 -%}{%- assign read_min = 1 -%}{%- else -%}{%- assign read_min = words | divided_by: 180 -%}{%- endif -%}
+
+  <header class="post-header">
+    {% if p_cat %}
     <div class="post-category-badge">
-      {% for category in page.categories limit:1 %}
-        <a href="{{ '/categories/' | append: category | relative_url }}/">{{ category }}</a>
-      {% endfor %}
+      <a href="{{ '/categories/' | append: p_cat | relative_url }}/">{{ p_cat }}</a>
     </div>
-    <h1 class="post-title" data-aos="fade-up">{{ page.title }}</h1>
-    <div class="post-meta" data-aos="fade-up" data-aos-delay="100">
-      <span class="post-date">
-        <i class="far fa-calendar-alt"></i> {{ page.date | date: "%B %d, %Y" }}
-      </span>
+    {% endif %}
+
+    <h1 class="post-title">{{ page.title }}</h1>
+
+    <svg class="post-title-underline" viewBox="0 0 600 14" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 4 9 Q 75 3 150 7 T 300 7 T 450 8 T 596 6" />
+    </svg>
+
+    <div class="post-meta meta-bar">
+      <span class="meta-bar__date date-numerals">{{ page.date | date: "%m / %d" }}</span>
+      <span class="meta-bar__sep">&#9474;</span>
+      <span class="meta-bar__time">{{ read_min }} min read</span>
       {% if page.last_modified_at %}
-      <span class="post-updated">
-        <i class="fas fa-sync-alt"></i> Updated: {{ page.last_modified_at | date: "%B %d, %Y" }}
-      </span>
+      <span class="meta-bar__sep">&#9474;</span>
+      <span class="meta-bar__updated">updated {{ page.last_modified_at | date: "%Y.%m.%d" }}</span>
       {% endif %}
-      <span class="post-reading-time">
-        <i class="far fa-clock"></i>
-        {% assign words = content | number_of_words %}
-        {% if words < 360 %}
-        1 min read
-        {% else %}
-        {{ words | divided_by: 180 }} min read
-        {% endif %}
-      </span>
     </div>
-  </div>
+  </header>
 
   <!-- 광고: 본문 상단 -->
   {% include ad-unit.html position="post-top" %}
 
   <div class="post-body-layout">
-    <div class="post-content" data-aos="fade-up" data-aos-delay="300">
+    <div class="post-content">
       {{ content }}
     </div>
     {% include toc-sidebar.html %}
@@ -46,29 +47,29 @@ layout: default
   {% include ad-unit.html position="post-bottom" %}
 
   {% if site.disqus.shortname %}
-<div class="comments">
-  <h2>댓글</h2>
-  <div id="disqus_thread"></div>
-  <script>
-    var disqus_config = function () {
-      this.page.url = '{{ site.url }}{{ page.url }}';
-      this.page.identifier = '{{ page.url }}';
-    };
-    (function() {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://{{ site.disqus.shortname }}.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-{% endif %}
+  <div class="comments">
+    <h2>댓글</h2>
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = '{{ site.url }}{{ page.url }}';
+        this.page.identifier = '{{ page.url }}';
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://{{ site.disqus.shortname }}.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  {% endif %}
 
   <!-- 태그 및 공유 -->
-  <div class="post-footer" data-aos="fade-up">
+  <div class="post-footer">
     <div class="post-tags">
-      <h3><i class="fas fa-tags"></i> Tags</h3>
+      <h3>Tags</h3>
       <div class="tags-list">
         {% for tag in page.tags %}
         <span class="tag">{{ tag }}</span>
@@ -76,83 +77,68 @@ layout: default
       </div>
     </div>
     <div class="share">
-      <h3><i class="fas fa-share-alt"></i> Share</h3>
+      <h3>Share</h3>
       <ul class="share-buttons">
         <li>
-          <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.url }}{{ page.url | url_encode }}" target="_blank" title="Share on Twitter">
+          <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.url }}{{ page.url | url_encode }}" target="_blank" title="Share on Twitter" aria-label="Share on Twitter">
             <i class="fab fa-twitter"></i>
           </a>
         </li>
         <li>
-          <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.url }}{{ page.url | url_encode }}&title={{ page.title | url_encode }}" target="_blank" title="Share on LinkedIn">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.url }}{{ page.url | url_encode }}&title={{ page.title | url_encode }}" target="_blank" title="Share on LinkedIn" aria-label="Share on LinkedIn">
             <i class="fab fa-linkedin-in"></i>
           </a>
         </li>
         <li>
-          <a href="https://www.reddit.com/submit?url={{ site.url }}{{ page.url | url_encode }}&title={{ page.title | url_encode }}" target="_blank" title="Share on Reddit">
+          <a href="https://www.reddit.com/submit?url={{ site.url }}{{ page.url | url_encode }}&title={{ page.title | url_encode }}" target="_blank" title="Share on Reddit" aria-label="Share on Reddit">
             <i class="fab fa-reddit-alien"></i>
           </a>
         </li>
         <li>
-          <a href="mailto:?subject={{ page.title | url_encode }}&body=Check out this article: {{ site.url }}{{ page.url | url_encode }}" title="Share via Email">
+          <a href="mailto:?subject={{ page.title | url_encode }}&body=Check out this article: {{ site.url }}{{ page.url | url_encode }}" title="Share via Email" aria-label="Share via Email">
             <i class="fas fa-envelope"></i>
           </a>
         </li>
       </ul>
     </div>
   </div>
-  
+
   <!-- 저자 정보 -->
-  <div class="author-box" data-aos="fade-up">
+  <div class="author-box">
     {% if site.avatar %}
     <div class="author-avatar">
-      <img src="{{ site.avatar | relative_url }}" alt="Author Avatar">
+      <img src="{{ site.avatar | relative_url }}" alt="">
     </div>
     {% endif %}
     <div class="author-info">
       <h3>{{ site.author.name | default: 'tgparkk' }}</h3>
-      <p>Developer passionate about C++, multi-threading, rendering, and game programming. Sharing insights and experiences through this blog.</p>
+      <p>C++ · 멀티스레딩 · 렌더링 · 게임 · 시스템 트레이딩, 그리고 책 — 만들고, 매매하고, 읽은 것을 기록합니다.</p>
       <div class="author-social">
-        <a href="https://github.com/tgparkk" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://github.com/tgparkk" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
       </div>
     </div>
   </div>
-  
+
   {% include next-read.html %}
 
 </article>
 
-<!-- JavaScript for Table of Contents -->
+<!-- 코드 블록에 복사 버튼 추가 -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // AOS 라이브러리 초기화
-    if (typeof AOS !== 'undefined') {
-      AOS.init({
-        once: true,
-        duration: 800
-      });
-    }
-    
-    // 코드 블록에 복사 버튼 추가
-    const codeBlocks = document.querySelectorAll('pre');
-    codeBlocks.forEach(block => {
-      const button = document.createElement('button');
+    var codeBlocks = document.querySelectorAll('pre');
+    codeBlocks.forEach(function(block) {
+      if (block.classList.contains('mermaid')) return;
+      var button = document.createElement('button');
       button.className = 'copy-code-button';
       button.textContent = 'Copy';
-      
-      button.addEventListener('click', () => {
-        const code = block.querySelector('code') ? 
-                     block.querySelector('code').textContent : 
-                     block.textContent;
-        
-        navigator.clipboard.writeText(code).then(() => {
-          button.textContent = 'Copied!';
-          setTimeout(() => {
-            button.textContent = 'Copy';
-          }, 2000);
+      button.addEventListener('click', function() {
+        var code = block.querySelector('code') ? block.querySelector('code').textContent : block.textContent;
+        navigator.clipboard.writeText(code).then(function() {
+          button.textContent = 'Copied';
+          setTimeout(function() { button.textContent = 'Copy'; }, 2000);
         });
       });
-      
       block.appendChild(button);
     });
   });
@@ -164,14 +150,13 @@ layout: default
     var mermaidCodes = document.querySelectorAll('.post-content pre code.language-mermaid');
     if (mermaidCodes.length === 0) return;
 
-    // mermaid 코드 블록이 있을 때만 CDN 로드
     var script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js';
     script.onload = function() {
       var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       mermaid.initialize({
         startOnLoad: false,
-        theme: isDark ? 'dark' : 'default',
+        theme: isDark ? 'dark' : 'neutral',
         securityLevel: 'loose',
         suppressErrors: true
       });

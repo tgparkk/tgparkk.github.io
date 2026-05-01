@@ -153,7 +153,7 @@
                   </span>
                 {% endif %}
                 <span class="archive-row-meta">
-                  <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %d" }}</time>
+                  <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%m / %d" }}</time>
                   <span class="archive-row-cat">{{ p_cat }}</span>
                   {% if post.series %}
                     <span class="archive-row-series" title="{{ post.series_name | default: post.series }} {% if post.series_order %}{{ post.series_order }}편{% endif %}">

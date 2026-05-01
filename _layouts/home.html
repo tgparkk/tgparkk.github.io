@@ -2,60 +2,52 @@
 layout: default
 ---
 
-<!-- Compact hero -->
+<!-- Editorial intro -->
 <section class="home-hero-compact">
-  <div class="home-hero-compact-inner" data-aos="fade-up" data-aos-duration="600">
+  <div class="home-hero-compact-inner">
     <h1 class="home-hero-title">{{ site.title }}</h1>
-    <p class="home-hero-subtitle">Deep dives into programming, tech, and more</p>
-    <div class="home-hero-actions">
-      <a href="{{ '/about/' | relative_url }}" class="btn btn-secondary">About Me</a>
-    </div>
+    <p class="home-hero-subtitle">코드를 짜고, 시장을 보고, 책을 읽는 사람의 노트.</p>
   </div>
 </section>
 
-<!-- Recent highlights (3 cards) -->
+<!-- Recent — 3 articles, editorial list -->
 <section class="home-recent-section">
-  <div class="section-title-container" data-aos="fade-up" data-aos-duration="600">
-    <h2 class="section-title">Recent Posts</h2>
+  <div class="section-title-container">
+    <h2 class="section-title">Recent</h2>
   </div>
 
-  <div class="post-grid post-grid--three">
+  <div class="recent-list">
     {% for post in site.posts limit:3 %}
-      <div class="post-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="{{ forloop.index | times: 80 }}">
-        {% if post.image %}
-          <div class="post-card-image-container">
-            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="post-card-image">
-          </div>
+      {% assign p_cat = post.categories | first %}
+      {% assign words = post.content | number_of_words %}
+      <a class="recent-item" href="{{ post.url | relative_url }}">
+        <div class="recent-item__meta meta-bar">
+          <span class="meta-bar__date">{{ post.date | date: "%m / %d" }}</span>
+          {% if p_cat %}
+            <span class="meta-bar__sep">&#9474;</span>
+            <span class="meta-bar__cat">{{ p_cat }}</span>
+          {% endif %}
+          {% if words >= 360 %}
+            <span class="meta-bar__sep">&#9474;</span>
+            <span class="meta-bar__time">{{ words | divided_by: 180 }} min</span>
+          {% endif %}
+        </div>
+
+        <h3 class="recent-item__title">{{ post.title }}</h3>
+
+        {% if post.excerpt %}
+          <p class="recent-item__excerpt">
+            {{ post.excerpt | strip_html | truncatewords: 24 }}
+          </p>
         {% endif %}
 
-        <div class="post-card-content">
-          <div class="post-card-meta">
-            <span class="post-date"><i class="far fa-calendar-alt"></i> {{ post.date | date: "%Y-%m-%d" }}</span>
-            {% if post.categories.size > 0 %}
-              <span class="post-category">
-                {% for category in post.categories limit:1 %}
-                  <a href="{{ '/categories/' | append: category | relative_url }}/">{{ category }}</a>
-                {% endfor %}
-              </span>
-            {% endif %}
-          </div>
-
-          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-
-          {% if post.excerpt %}
-            <div class="post-excerpt">
-              {{ post.excerpt | strip_html | truncatewords: 20 }}
-            </div>
-          {% endif %}
-
-          <a href="{{ post.url | relative_url }}" class="read-more">Read More</a>
-        </div>
-      </div>
+        <span class="recent-item__more">read</span>
+      </a>
     {% endfor %}
   </div>
 </section>
 
-<!-- In-feed ad between recent highlights and full archive -->
+<!-- In-feed ad between recent and full archive -->
 {% include ad-unit.html position="home-feed" %}
 
 <!-- Full archive (filter + series + year groups) -->
@@ -68,11 +60,4 @@ layout: default
        show_series=true %}
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof AOS !== 'undefined') {
-      AOS.init({ once: true });
-    }
-  });
-</script>
 <script src="{{ '/assets/js/archive-filter.js' | relative_url }}" defer></script>
