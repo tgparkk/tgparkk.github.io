@@ -1,0 +1,22 @@
+{
+  "investopedia_breakout": {
+    "url": "https://www.investopedia.com/articles/trading/08/trading-breakouts.asp",
+    "title": "The Anatomy of Trading Breakouts",
+    "type": "online_article"
+  },
+  "investopedia_breakout_trader": {
+    "url": "https://www.investopedia.com/terms/b/breakouttrader.asp",
+    "title": "Breakout Trader: Overview, Types, and Example",
+    "type": "online_article"
+  },
+  "axi_breakout": {
+    "url": "https://www.axi.com/int/blog/education/breakout-trading-strategy",
+    "title": "What is a Breakout Trading Strategy & How to Trade It?",
+    "type": "online_article"
+  },
+  "ig_breakout": {
+    "url": "https://www.ig.com/en/trading-strategies/what-is-a-breakout-trading-strategy-and-how-do-you-trade-with-it-230619",
+    "title": "Breakout Trading Strategy: A Guide for Traders",
+    "type": "online_article"
+  }
+}

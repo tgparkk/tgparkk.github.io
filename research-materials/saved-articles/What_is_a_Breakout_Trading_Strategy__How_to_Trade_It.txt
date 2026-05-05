@@ -1,0 +1,155 @@
+Title: What is a Breakout Trading Strategy & How to Trade It? / Axi
+
+URL Source: https://www.axi.com/int/blog/education/breakout-trading-strategy
+
+Markdown Content:
+![Image 1](https://d2tpnh780x5es.cloudfront.net/rebrand-prod/mqaow3st/breakout-trading.png)
+
+When to enter a trade has always been one of the top priorities for traders, particularly for those who are relatively new to the markets.
+
+This is normal and understandable.
+
+Why?
+
+Because numerous opportunities come up every day. And it can get challenging if you don’t know what to look for i.e. what is a good trade setup and when is a good time to enter a trade?
+
+In this article, we will look at the breakout trading strategy – one of the [most popular trading strategies](https://www.axi.com/int/blog/education/trading-strategies) that can be applied whether you’re trading [forex](https://www.axi.com/int/blog/education/forex/forex-trading-guide), [stocks](https://www.axi.com/int/blog/education/shares/stock-trading-guide),[indices](https://www.axi.com/int/blog/education/indices/index-trading-guide), [commodities](https://www.axi.com/int/blog/education/commodities/commodity-trading-guide), or [cryptocurrencies](https://www.axi.com/int/blog/education/cryptocurrencies/cryptocurrency-trading-guide).
+
+What is a breakout strategy in trading?
+---------------------------------------
+
+A breakout strategy aims to enter a trade as soon as the price manages to break out of its range. Traders are looking for strong momentum and the actual breakout is the signal to enter the [position](https://www.axi.com/int/blog/education/position-sizing-trading-strategies) a nd profit fro m the market movement that follows.
+
+Traders may enter the positions in the market, which means they will have to closely monitor the price action, or by placing buy-stop and sell-stop orders. They will usually place the stop just below the former resistance level or above the former support level. To set their exit targets, traders may use classic support and resistance levels.
+
+Before we go further, it’s a good idea to know what support and resistance levels are. Once you know that, it will become much clearer to see the price breakout from those levels.
+
+### So, what is a support level?
+
+If you’re using[technical analysis](https://www.axi.com/int/blog/education/technical-analysis)for your trading, looking at a[chart](https://www.axi.com/int/blog/education/shares/stock-chart-patterns)over a period of time will show some support levels– areas or specific levels where prices are usually supported.
+
+Support levels provide what is called a ‘floor’ for prices. This means prices usually stay at this level because it has the support (of buyers).
+
+### And what is a resistance level?
+
+A resistance level is the opposite of a support level.
+
+Looking at a chart, you can find resistance levels– which are areas or levels where prices are usually stopped (resisted) and can’t go any higher for a period of time.
+
+![Image 2: Support and resistance levels on a chart](https://aximedia.s3.amazonaws.com/rebrand-prod/u33db5lp/support-resistance-level.png)
+
+Here is an example where you can see the support and resistance levels. If you want to use the breakout entry strategy, it is important you determine the support and resistance levels.
+
+This is because support and resistance levels are seen as strong signals where prices tend to stop.
+
+How to use a breakout entry in your trading
+-------------------------------------------
+
+One way of using the breakout entry is to get into a trade when the price has breached a resistance level. For many traders, a breach of the resistance level means the price has the momentum to go higher.
+
+The thinking behind this is a breach of resistance can mean traders are bullish and will support the price move to a higher level.
+
+While this may not always be the case, many traders use this breakout from a resistance level as an entry point.
+
+On the flip side, you can use the breakout entry when the price has breached a support level. A break of support is usually seen as a signal that prices may go down further. Some traders use this breach of support to take advantage of falls in prices.
+
+Knowing what support and resistance levels are and how you can use them to identify when prices are breaking out of these levels, you can use this entry strategy for your trading.
+
+Whether you’re using a[demo trading account](https://www.axi.com/int/blog/education/demo-account)or a[live trading account](https://www.axi.com/int/live-account), you can use the charting function of the MT4 trading platform to identify support and resistance levels. It is a great idea to try and identify the support and resistance levels on different instruments at different time frames as well.
+
+Once you are familiar with and confident in identifying these levels, you may find it much easier to spot any price breakouts.
+
+Price breakout is only one of the many entry strategies you can use for your trading. If you want to learn more about other entry strategies, you can check out our [eBooks](https://www.axi.com/int/learn-to-trade/ebooks)about different entry and [exit strategies](https://www.axi.com/int/blog/education/trading-exit-strategies).
+
+Another important consideration for you as a trader is that while trade entries are important, they are only one component of your trading.
+
+It is important to have a solid entry strategy. However, it is equally vital to have a strict risk management and exit strategy. All these combined – entry, risk management, and exit strategy – can help you on your way to becoming a smart trader.
+
+What is the best indicator for the breakout strategy?
+-----------------------------------------------------
+
+Breakout strategies can be based purely on price action (as shown above with support/resistance levels), but indicators can be used as well - both as supporting tools and as an entry signal.
+
+One example of a [trading indicator](https://www.axi.com/int/blog/education/trading-indicators) that can be used in a breakout strategy is the [Ichimoku Cloud](https://www.axi.com/int/blog/education/ichimoku-cloud-trading-strategy).
+
+A trader would buy once the price breaks through the cloud or sell once the price goes below the cloud.
+
+![Image 3: Breakout entry example using ichimoku cloud indicator](https://aximedia.s3.amazonaws.com/rebrand-prod/hh5hkyab/breakout-cloud-example.png)
+
+You can use the [RSI (Relative Strength Index)](https://www.axi.com/int/blog/education/rsi-trading-strategy) indicator to watch out for confirmation and [divergence](https://www.axi.com/int/blog/education/forex/forex-divergence).
+
+We speak about confirmation when the RSI and price are moving in the same direction. Let's have a look at the AUD/JPY chart below and the breakout that occurred in mid-July.
+
+Price was already trending lower, and so was the RSI. At the time of the breakout, the RSI was close to the oversold territory but hadn't reached it yet. This is another sign that there might be more room for the downside.
+
+![Image 4: RSI indicator showing breakout entry](https://aximedia.s3.amazonaws.com/rebrand-prod/vqglgm4k/rsi-breakout-example.png)
+
+Below is another example - this time we are looking at EUR/NZD and a bearish RSI divergence that appeared in mid-August.
+
+Price broke above the key 1.71 resistance level, but we can see that the bearish RSI divergence was already visible and the RSI was in overbought territory. This would have been a warning sign not to buy the breakout. As we can see on the chart, there was a consolidation instead of a sharp upward move and a sell-off occurred shortly after the consolidation ended.
+
+![Image 5: RSI indicator on the EURNZD chart](https://aximedia.s3.amazonaws.com/rebrand-prod/mvij541h/rsi-eurnzd-breakout.png)
+
+What are the pros and cons of the breakout trading strategy?
+------------------------------------------------------------
+
+Discover below the pros and cons of using the breakout trading strategy:
+
+### Pros:
+
+*   Profit from quick market moves
+*   Defining the entry and exit points is relatively straightforward
+*   A simple strategy that you can trade using only price action
+
+### Cons:
+
+*   Traders must be able to make quick decisions
+*   Higher chance of false signals (i.e.false breakouts), so [risk management is very important](https://www.axi.com/int/blog/education/forex/forex-risk-management-trading-strategies)
+*   Adding additional confirmation signals can reduce the risk of false breakouts, but also decreases the odds of catching a big move
+
+How to confirm a breakout?
+--------------------------
+
+Placing a buy-stop or sell-stop order above or below the key support and resistance level is probably the most simple way of trading a breakout.
+
+However, it is also far riskier because there are high chances that the breakout you are trading is a false one. False breakouts occur frequently, as the price will only trade above/below the key resistance/support level for a very short time. There might initially be some momentum due to the stops being triggered, but this could fade quickly if there is not enough force behind the move.
+
+There are a few methods traders can utilise to confirm a breakout is valid. The first one is to monitor price action. If you are a [day trader](https://www.axi.com/int/blog/education/day-trading-guide), this can be viable as you are most likely in front of the monitor anyway. You can also set up an alert that will trigger if the price is nearing the level you are monitoring. However, you will need the skills and confidence to decide whether the breakout appears valid to you or not. You could then manually enter the trade - but there is a risk of missing the entire move if the price moves too quickly.
+
+Another method is to wait for a pullback. After breaking above/below a key resistance/support level, the price will often return to this level for a retest. If the price bounces from the former resistance level or stalls ahead of the former support level, it is a sign that the breakout was valid and you could use this as an entry point. However, there is the risk that the momentum has faded by then and that you may have missed the big move.
+
+Below are two examples where the price returned to the key support and resistance levels that were breached for a retest.
+
+![Image 6: Price returning to support and resistance on USOIL](https://aximedia.s3.amazonaws.com/rebrand-prod/0idme0ca/usoil-support-resistance.png)
+
+![Image 7: Price returning to support and resistance on EURAUD](https://aximedia.s3.amazonaws.com/rebrand-prod/usph2sjk/euraud-support-resistance.png)
+
+Does breakout trading work?
+---------------------------
+
+Trading breakouts can be a profitable trading strategy. The risk of a false breakout is high though, which is why having a sound risk management [plan](https://www.axi.com/int/blog/education/trading-plan) is important. Furthermore, you should aim for a reasonable risk/reward ratio - at least 1:2.
+
+What is the best time frame to trade breakouts?
+-----------------------------------------------
+
+Breakouts can be traded at any time frame. You could trade a breakout below a multi-year support level and hold the trade for months.
+
+However, breakout trading tends to be more popular with short-term traders as they are trying to catch the momentum and [profit](https://www.axi.com/int/blog/education/profit-taking-strategies) from sudden market moves that occur within a short period of time. It is far easier to get a feeling for the market and its momentum when trading on the lower time frames rather than the higher time frames.
+
+**Ready to trade your edge?**
+
+**Join thousands of traders and trade [CFDs](https://www.axi.com/int/trade/cfds) on [forex](https://www.axi.com/int/trade/cfds/forex), [shares](https://www.axi.com/int/trade/cfds/shares), [indices](https://www.axi.com/int/trade/cfds/indices), [commodities](https://www.axi.com/int/trade/cfds/commodities), and [cryptocurrencies](https://www.axi.com/int/trade/cfds/cryptocurrencies)!**
+
+_This information is not to be construed as a recommendation; or an offer to buy or sell; or the solicitation of an offer to buy or sell any security, financial product, or instrument; or to participate in any trading strategy. It has been prepared without taking your objectives, financial situation, or needs into account. Any references to past performance and forecasts are not reliable indicators of future results. Axi makes no representation and assumes no liability regarding the accuracy and completeness of the content in this publication. Readers should seek their own advice._
+
+[Milan Cutkovic](https://www.axi.com/int/blog/authors/milan-cutkovic)
+
+![Image 8: Milan Cutkovic](https://d2tpnh780x5es.cloudfront.net/rebrand-prod/42wfegkx/milan_large_axi-backgroundb.jpg)
+
+Milan Cutkovic has over eight years of experience in trading and market analysis across forex, indices, commodities, and stocks. He was one of the first traders accepted into the Axi Select program which identifies highly talented traders and assists them with professional development.
+
+As well as being a trader, Milan writes daily analysis for the Axi community, using his extensive knowledge of financial markets to provide unique insights and commentary. He is passionate about helping others become more successful in their trading and shares his skills by contributing to comprehensive trading eBooks and regularly publishing educational articles on the Axi blog, His work is frequently quoted in leading international newspapers and media portals.
+
+Milan is frequently quoted and mentioned in many financial publications, including Yahoo Finance, Business Insider, Barrons, CNN, Reuters, New York Post, and MarketWatch.
+
+**Find him on: [LinkedIn](https://www.linkedin.com/in/milan-cutkovic/)**

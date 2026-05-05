@@ -1,0 +1,352 @@
+# Breakout Trading Strategy: A Guide for Traders
+URL: https://www.ig.com/en/trading-strategies/what-is-a-breakout-trading-strategy-and-how-do-you-trade-with-it-230619
+다운로드 날짜: 2026-01-04 10:24:24
+
+---
+
+Skip to content
+CFDs are complex instruments. 71% of retail client accounts lose money when trading CFDs, with this investment provider. You can lose your money rapidly due to leverage. Please ensure you understand how this product works and whether you can afford to take the high risk of losing money.
+CFDs are complex instruments. 71% of retail client accounts lose money when trading CFDs, with this investment provider. You can lose your money rapidly due to leverage. Please ensure you understand how this product works and whether you can afford to take the high risk of losing money.
+More from IG
+Personal
+Academy
+Help
+Inbox
+Academy
+Help
+English
+繁體中文
+Español
+简体中文
+English
+Log in
+Create live account
+My account
+My IG
+Inbox
+Academy
+Help
+Personal
+Logout
+Open
+Trading
+Show submenu for Trading
+Main menu
+TRADING
+How to trade
+CFD trading
+What to trade
+Forex
+Indices
+Shares
+Commodities
+Cryptocurrencies
+Thematic and basket
+Other markets
+Discover more
+Create an account
+Out-of-hours trading
+Weekend trading
+Volatility trading
+Knock-Outs trading
+Options trading
+Futures trading
+Spot trading
+Market data
+Interest rates
+Try the IG platform now
+Set up a FREE demo account
+Platforms and tools
+Show submenu for Platforms and tools
+Main menu
+PLATFORMS AND TOOLS
+Mobile trading
+Compare platforms
+Explore on demo
+Third party platforms
+L2 Dealer
+ProRealTime
+MetaTrader 4
+MetaTrader 5
+TradingView
+Tools
+Stock screener
+Economic and trading calendar
+Trade analytics tool
+Trading alerts
+Trading charts
+Trading signals
+Forex Signals
+Discover more
+Explore on demo
+DMA trading
+Algorithmic trading
+APIs
+Trade on the go, anytime, anywhere.
+Download our app
+About us
+Show submenu for About us
+Main menu
+ABOUT US
+Our charges
+Welcome Cashback
+Volume-based rebates
+Reduced minimums
+Our services
+Premium services
+Corporate accounts
+Refer a friend
+Marketing partnership programmes
+Introducing Partners
+Discover more
+What we do with your money
+How does IG make money?
+How we support you
+Best execution
+Get up to a $150 cashback
+Open a live account
+Market analysis
+Show submenu for Market analysis
+Main menu
+MARKET ANALYSIS
+Latest analysis
+Financial events
+Discover more
+Economic and trading calendar
+Tools
+Stock screener
+Stay ahead with expert insights
+Latest updates on the markets
+Learning
+Show submenu for Learning
+Main menu
+LEARNING
+IG Academy
+Strategy and planning
+Managing your risk
+Risk vs reward in trading
+What is leverage?
+The impact of leverage on your trading
+What are stop orders?
+What are limit orders?
+Trading need-to-knows
+What is trading?
+Trading for beginners: a guide
+Start trading: how to get into trading
+How to choose the best online broker
+How to start trading online
+What are derivatives?
+What is a brokerage account?
+How to choose the best forex broker
+What is margin trading?
+How to find the best day trading platform
+How to trade stocks online
+Ways to learn
+Seminars and webinars
+Glossary of trading terms
+Maximising trading success
+Master your trading mind
+Trading psychology podcast series
+Discover more
+Explore on demo
+Help and support
+Master the markets with IG Academy
+Start learning
+Personal
+Inbox
+Academy
+Help
+Create live account
+English
+繁體中文
+Español
+简体中文
+English
+Create live account
+Search
+No results found
+View more search results
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+Related search:
+Market Data
+Market Data
+Type of market
+See all Market data search results >
+Strategy and planning
+What is a breakout trading strategy and how do you trade with it?
+What is a breakout trading strategy and how do you trade with it?
+The breakout trading strategy is a popular tactic to potentially generate returns by analysing breakouts grounded on chart-based support and resistance levels. Read our guide below.
+Source: Bloomberg
+Written by
+Charles Archer
+Financial Writer
+What's on this page?
+1. What is a breakout strategy in trading?
+2. How do breakouts work?
+3. Types of breakout strategies
+4. How to trade using breakouts
+5. Pros and cons of the breakout trading strategy
+What is a breakout strategy in trading?
+A breakout is when an asset price moves outside a defined support or resistance level with increased volume.
+Following this, a breakout strategy is a popular
+trading approach
+used by active traders to take a position within this trend's early stages. This strategy is often the starting point for large price moves and increased volatility – when managed carefully, it can even help in managing risk more efficiently.
+A breakout trade involves entering a long position after the asset price breaks above a
+resistance level
+, or a short position if it breaks below the
+support level
+. Once the asset trades beyond the perceived 'price barrier', volatility tends to increase and then the asset’s price usually trends in the breakout's direction.
+Traders are always looking for strong momentum, and the actual breakout can be a sign to enter a position and hopefully profit from the market movement.
+Breakouts are common in most markets. This pervasiveness is a key reason for the strategy's popularity. Large price movements are typical within channel breakouts and price pattern breakouts, such as the well-known head-and-shoulders, triangle, and flags patterns.¹
+Further, it can be a solid trading tactic. Whether you’re a position trader or you prefer to skim potential profits off several daily trades, the concept tends to work well if the market moves in your favour, regardless of your timeframe.
+Of course, there are a couple of caveats to be aware of:
+Traders using breakouts usually place 'take-profit' and 'stop-loss' orders to manage their risk
+Like all trading strategies, there’s no guarantee of returns. Just because a strategy is popular doesn’t necessarily mean that your trade will be successful
+How do breakouts work?
+A breakout occurs when the price of an asset moves below a support level or above a resistance level. It indicates that the asset price will move further in the breakout direction – but importantly, a breakout requires higher than normal volume to sustain itself. This signifies increased interest and conviction in market sentiment.
+Low-volume breakout patterns are prone to failure, meaning the asset price is more likely to retrace.
+Breakouts can be a subjective trading term, as traders often disagree about what exactly constitutes the support and resistance levels.
+What is a support level?
+When using technical analysis to support your trading decisions, looking at a chart over an extended period will likely show some support levels – areas where prices are usually supported. These support levels provide a 'floor' for asset prices – whenever an asset falls to the support level, there’s a wall of willing buyers to purchase because they think the price presents good relative value.
+What is a resistance level?
+A resistance level is essentially the opposite of a support level. On a chart, you can often find resistance levels as areas where prices usually stop (or are resisted) and don't go any higher.
+There’s an element of 'positive feedback' when it comes to support and resistance. To manage their risk, many traders will have stop and limit orders in place at the support and resistance levels, depending on the direction of their position. This means that both levels could remain in place for some time.
+Types of breakout strategies
+Breakout trading strategies have some tenets in common:
+Identifying your opportunity – find assets (eg stocks, forex or commodities) with strong support and/or resistance levels. The stronger the support or resistance, the better the potential for a favourable result
+Waiting for the breakout – most strategies require patience, and breakouts are no exception. To avoid a false breakout, you can wait for the asset price to make a sizeable move before taking your position
+Setting a profit target – you can plan when to take potential profits before you place your trade. Traders often use stop-loss and take-profit orders to manage the risk of possible losses and to lock in potential profits
+Allowing the asset to retest a level – when an asset breaks a support level, the old support often becomes the new resistance. When it breaks its resistance level, the old resistance level often becomes the new support. Some trades will see the asset retest the broken level fairly quickly – if it breaks back through it, many traders typically consider accepting the loss
+Continuation breakout strategy
+The continuation breakout strategy is an approach that aims to enter the market when there’s a breakout of a key level of support or resistance. The basic idea is that the established trend will continue – this breakout trade seeks to capitalise on the momentum.
+Traders start by identifying a trend, then look for a 'consolidation' phase – the strategy starts delivering returns when the price breaks out of consolidation and moves beyond the key level of support or resistance. This is when the trade is usually placed, with the profit target set by measuring the height of the consolidation phase and projecting it in the direction of the breakout.
+2
+Reversal breakout strategy
+While the continuation breakout strategy aims to capitalise on a trend's momentum, the reversal breakout strategy aims to profit from an expected trend reversal. The same theories that apply to the continuation breakout strategy remain relevant, as do the general tenets.
+How to trade using breakouts with CFDs
+How to invest in breakouts with us
+Create an account
+or
+log in
+Learn more about breakouts
+Search for your opportunity
+Select 'buy' to go long or 'sell' to go short
+Set your position size and
+manage your risk
+Open and monitor your position
+With us, you’ll trade using a
+contract for difference (CFD)
+, a financial derivative that enables you to take a position on an underlying market’s price movements, rather than owning the underlying asset outright.
+CFD trading is
+leveraged
+, so you could gain or lose money quickly – including the potential to lose more than the initial deposit paid to open the position, as potential profits and losses are magnified to the full value of the trade. It's useful to keep in mind that past performance isn't a guarantee of future patterns.
+New to trading? Practise on a
+demo account
+to build your confidence.
+Pros and cons of the breakout trading strategy
+As with all strategies, trading breakouts comes with its own unique set of advantages and risks.
+Pros of the breakout trading strategy
+Profit potential – breakout trading can be profitable because an asset's price can move rapidly when it goes past the breakout³
+Objective entry and exit points – the strategy takes the emotion out of the trade because there are very clear points to time your trade, both for profit-taking and accepting a loss
+Multi-market usability – breakout trading applies to many markets, including equities, commodities and forex
+Time-friendly – traders can set their
+take-profit and stop-loss orders
+after they’ve conducted their analysis, then leave their position without having to worry about adjustments
+Potential to manage risk more efficiently – through analysing price patterns and using toul such as stop-loss orders accordingly, risk can be managed based on support and resistance level theories to mitigate possible losses
+Cons of the breakout trading strategy
+Rapid pace – traders must usually be able to make rapid decisions as the market moves. This pressure isn’t for everyone
+Patience – the breakout trading strategy requires traders to be capable of waiting for the breakout and then confirming the direction of the trend. It’s also possible that you spend time analysing opportunities that don’t lead to a trade
+False breakouts – so-called 'fake-outs' can occur, where the asset price breaks out of the consolidation phase but then quickly reverses, which results in a loss when trading a breakout and you don’t take a profit before the reversal. You can minimise the chances of this happening by checking additional confirmation signals, but this also increases the risk of missing the opportunity altogether⁴
+Volatility – breakout trading typically occurs in highly volatile markets, which means that you can do everything right based on market conditions and strategy theory and still suffer a loss. Ultimately, no strategy is foolproof
+Trading costs – the strategy often involves many small trades, which increases platform fees and bites into potential returns over time
+Breakout trading strategy summed up
+A breakout is when an asset price moves outside a defined support or resistance level with increased volume
+The breakout strategy is a popular trading approach used by active traders to take a position within this trend's early stages
+A breakout trader will enter a long position after the asset price breaks above a resistance level, or enter a short position if it breaks below support
+Breakout trading can be profitable as an asset's price can move rapidly when it goes past the breakout
+The price movement can turn out being a false breakout, where the asset price breaks out of the consolidation phase but then quickly reverses, resulting in a loss
+1
+Babypips
+, 2023
+2
+Trading with Rayner
+, 2022
+3
+Axi
+, 2023
+4
+Warrior Trading
+, 2023
+This information has been prepared by IG, a trading name of IG Markets Limited. In addition to the disclaimer below, the material on this page does not contain a record of our trading prices, or an offer of, or solicitation for, a transaction in any financial instrument. IG accepts no responsibility for any use that may be made of these comments and for any consequences that result. No representation or warranty is given as to the accuracy or completeness of this information. Consequently any person acting on it does so entirely at their own risk. Any research provided does not have regard to the specific investment objectives, financial situation and needs of any specific person who may receive it. It has not been prepared in accordance with legal requirements designed to promote the independence of investment research and as such is considered to be a marketing communication. Although we are not specifically constrained from dealing ahead of our recommendations we do not seek to take advantage of them before they are provided to our clients.
+Explore the markets with our free course
+Discover the range of markets and learn how they work - with IG Academy's online course.
+Try IG Academy
+You might be interested in…
+How much does trading cost?
+Find out about IG
+Plan your trading
+Find out what charges your trades could incur with our transparent fee structure.
+Discover why so many clients choose us, and what makes us a world-leading provider of CFDs.
+Stay on top of upcoming market-moving events with our customisable economic calendar.
+Markets
+Share CFDs
+Forex
+Indices
+Commodities
+Other markets
+Trading platforms
+Web platform
+Trading apps
+TradingView
+MetaTrader 4
+ProRealTime
+Compare features
+Demo
+Learn to trade
+News and trade ideas
+Trading strategy
+About
+Charges and margins
+Premium services
+Refer a friend
+Marketing partnerships
+Corporate accounts
+Contact us
+Web chat:
+Click here
+WhatsApp:
+Click here
+to chat to us on our official Whatsapp channel
+IG
+|
+Terms and agreements
+|
+Privacy
+|
+How to fund
+|
+Vulnerability
+|
+Cookies
+|
+About IG
+Follow us online:
+^IG International Limited is part of the IG Group and its ultimate parent company is IG Group Holdings Plc. IG Group established in London in 1974, and is a constituent of the FTSE 250 index.
+The risks of loss from investing in CFDs can be substantial and the value of your investments may fluctuate. 71% of retail client accounts lose money when trading CFDs, with this investment provider. CFDs are complex instruments and come with a high risk of losing money rapidly due to leverage. You should consider whether you understand how this product works, and whether you can afford to take the high risk of losing your money.
+CFD Accounts provided by IG International Limited. IG International Limited is licensed to conduct investment business and digital asset business by the Bermuda Monetary Authority.
+IG provides an execution-only service. The information in this site does not contain (and should not be construed as containing) investment advice or an investment recommendation, or an offer of or solicitation for transaction in any financial instrument. IG accepts no responsibility for any use that may be made of these comments and for any consequences that result.
+The information on this site is not directed at residents of the United States and is not intended for distribution to, or use by, any person in any country or jurisdiction where such distribution or use would be contrary to local law or regulation.
+IG International Limited is part of the IG Group and its ultimate parent company is IG Group Holdings Plc. IG International Limited receives services from other members of the IG Group including IG Markets Limited.
+© 2003-2026
+Careers
+|
+IG Group

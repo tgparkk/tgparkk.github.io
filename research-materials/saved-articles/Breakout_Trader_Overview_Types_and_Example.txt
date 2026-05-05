@@ -1,0 +1,138 @@
+# Breakout Trader: Overview, Types, and Example
+URL: https://www.investopedia.com/terms/b/breakouttrader.asp
+다운로드 날짜: 2026-01-04 10:24:23
+
+---
+
+Table of Contents
+Expand
+Table of Contents
+What Is a Breakout Trader?
+How a Breakout Trader Works
+Types of Breakout Patterns
+Example
+FAQs
+The Bottom Line
+Breakout Trader: Overview, Types, and Example
+By
+Cory Mitchell
+Full Bio
+Cory Mitchell, CMT is the founder of TradeThatSwing.com. He has been a professional day and swing trader since 2005. Cory is an expert on stock, forex and futures price action trading strategies.
+Learn about our
+editorial policies
+Updated March 31, 2024
+Reviewed by
+Gordon Scott
+Reviewed by
+Gordon Scott
+Full Bio
+Gordon Scott has been an active investor and technical analyst or 20+ years. He is a Chartered Market Technician (CMT).
+Learn about our
+Financial Review Board
+Fact checked by
+Michael Logan
+Fact checked by
+Michael Logan
+Full Bio
+Michael Logan is an experienced writer, producer, and editorial leader. As a journalist, he has extensively covered business and tech news in the U.S. and Asia. He has produced multimedia content that has garnered billions of views worldwide.
+Learn about our
+editorial policies
+Close
+What Is a Breakout Trader?
+A breakout trader is a type of trader that uses a breakout strategy. This strategy looks for levels or areas that a security has been unable to move beyond, and waits for it to move beyond those levels (as it could keep moving in that direction). When a price moves beyond one of these levels, it is called a
+breakout
+.
+Many breakout traders use
+technical analysis
+to identify these areas, often using
+trendlines
+or
+price patterns
+. A breakout trader looks for patterns—for example, instances where the price of a security has been resistant to moving above or below a specific price level or price area. Then, the trader attempts to profit by entering a trade in the breakout direction, assuming that the price will continue to move in that direction.
+Key Takeways
+A breakout trader looks for price, a technical indicator, or a data point to move beyond a support or resistance level.
+A breakout trader can use price, a technical indicator, or fundamentals to prompt them into a breakout trade.
+Most breakout traders use technical analysis, entering trades when the price moves outside of a chart pattern or trendline.
+How a Breakout Trader Works
+A breakout trader seeks stocks or other financial assets that have been confined to trading below a specific level (
+resistance
+) or above a specific level (
+support
+), despite multiple attempts to break through.
+To the breakout trader, this confinement of the price is acting like a coiled spring. If the price eventually breaks out of the confined area, it may run in that direction—providing a profit opportunity. The same concept can be applied to a
+technical indicator
+. If a technical indicator is getting squeezed and/or can't penetrate through a certain area, when it does, it may present a breakout opportunity. The breakout signals an opportunity to buy or sell the security, depending on whether the breakout is
+bullish or bearish
+.
+Types of Breakout Patterns
+There many different types of breakout patterns that breakout traders look for.
+Charts Patterns
+Chart patterns are a common type of breakout. Chart patterns include
+triangles
+, wedges, channels, rectangles, head and shoulders,
+cup and handle
+, and expanding ranges. These patterns occur when the price moves in a specific way. The trader will typically draw trendlines on the pattern to indicate where the support/resistance levels are. When the price breakouts out of the pattern, they enter in the breakout direction.
+Technical Indicator
+A technical indicator works in a similar way, and may even form some of the same patterns mentioned above. For example, a
+relative strength index
+(RSI) indicator may form a triangle pattern. If the price breaks out of that triangle to the upside it may be a signal to buy the security, or if it breaks lower, to sell the security.
+Fundamental Data
+Breakout trading can even be applied to fundamental data. Assume that a company has been stagnant and reporting similar
+earnings
+each quarter for the last three years. Then, one quarter, they blow away
+estimates
+and report much higher earnings, with projections for even higher earnings in the future.
+This company may have developed a new in-demand product or found a way re-invent an old one. Their earnings are breaking out of the old pattern, and that may signal an opportunity to buy. A company could also report far worse earnings than they have in the past. They have broken out of their old pattern. In this case, it may be a signal to sell.
+A breakout trader will typically enter a trade when the price moves beyond the support or resistance level they have identified. They go
+long
+above resistance and
+short
+below support. Managing risk on a breakout is important, because not all breakouts succeed. In fact, many will fail. The price may move slightly above the breakout level and then move back through it, or it may breakout for some time, but then move back through the level at a later date. These are called
+failed breakouts
+.
+Before entering a trade based on a breakout, consider for how long you wish to hold the trade. If the breakout fails, consider exiting the position as the original premise for the trade has disappeared.
+Example of a Breakout Trader
+The following chart of Shopify (
+SHOP
+) shows two cup and handle chart patterns.
+TradingView
+The price made a high and then moved lower. As the price recovered and moved back toward the prior high, it moved sideways, forming a handle. The price then broke above the handle, signaling completion of the pattern and a potential long trade.
+To manage risk, a
+stop loss
+is often placed below the low of the handle for this particular pattern.
+For a
+profit target
+, the height of the cup (in dollars) is added to the breakout point (the price at the upper trendline of the handle). The height of the cup is added to the breakout point. A sell order is placed at this total to lock in profit.
+What Is the Difference Between a Breakout Trader and a Trend Trader?
+A breakout trader is identifying what they view as important areas or data points and using that area to trigger a trade if the price moves through it. A
+trend trader
+looks for securities that are already moving up or down and then attempts to profit by jumping on board by going long or short, respectively.
+Is Breakout Trading Profitable?
+Yes, breakout trading can be profitable, but you'll need a careful exit strategy to reduce losses. Setting your stop loss appropriately and watching for fake breakouts can help you increase your chances of a win.
+How Do You Maximize Wins as a Breakout Trader?
+Breakout trading requires discipline to act when a breakout occurs and to cut losses when the breakout fails. This will happen frequently. Therefore, to make money over time with a
+breakout strategy
+, the trader must also be willing to hold onto their winners. The breakouts that do work well and produce large price movements will hopefully more than compensate for all the losers that occur when a breakout fails.
+Focusing solely on breakouts eliminates a wide array of securities that are already
+trending
+, and presenting profit opportunities based on those trends.
+The Bottom Line
+Breakout traders use strategies that require them to monitor price levels and act when prices move beyond those levels in a breakout. Breakout traders must understand technical analysis and know how to identify patterns to be able to enter and exit trades successfully.
+Article Sources
+Investopedia requires writers to use primary sources to support their work. These include white papers, government data, original reporting, and interviews with industry experts. We also reference original research from other reputable publishers where appropriate. You can learn more about the standards we follow in producing accurate, unbiased content in our
+editorial policy.
+Babson University. "
+Introduction to Technical Analysis
+."
+U.S. Securities and Exchange Commission. "
+Stop Order
+."
+Read more
+Trading
+Technical Analysis
+Technical Analysis Basic Education
+Partner Links
+Take the Next Step to Invest
+Advertiser Disclosure
+×
+The offers that appear in this table are from partnerships from which Investopedia receives compensation. This compensation may impact how and where listings appear. Investopedia does not include all offers available in the marketplace.

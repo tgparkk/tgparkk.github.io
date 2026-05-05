@@ -16,16 +16,21 @@
 ### 1주차: 이론 및 자료 수집
 
 #### Day 1-2: 학술 자료 조사
-- [ ] Google Scholar에서 "breakout trading strategy" 검색
+- [x] Google Scholar/OpenAlex에서 "breakout trading strategy" 검색 (FinLLM-B 포함 20편 메타데이터 확보)
+- [x] OA 논문 PDF 3건 다운로드 (FinLLM-B, ORB 알고리즘 모델, 발칸 Bootstrap 검정)
 - [ ] 최근 5년 논문 10개 이상 수집
 - [ ] 핵심 논문 3-5개 선별하여 상세 읽기
 - [ ] 주요 발견사항 조사 노트에 기록
+- [x] arXiv:2402.07536 (FinLLM-B) 다운로드 및 요약
 
 #### Day 3-4: 서적 및 전문 자료
 - [ ] "Technical Analysis of the Financial Markets" (John J. Murphy) 읽기
 - [ ] "Encyclopedia of Chart Patterns" (Thomas Bulkowski) 관련 부분 읽기
 - [ ] "트레이딩 전략서 태쏘의 주식 실전단타" 재검토
 - [ ] Investopedia, TradingView 등 온라인 자료 정리
+  - [x] Investopedia: The Anatomy of Trading Breakouts 요약
+  - [ ] Investopedia: Breakout Trader (유형별 정리)
+  - [x] Axi: What is a Breakout Trading Strategy? 요약
 
 #### Day 5: 한국 시장 특화 자료
 - [ ] 국내 학위 논문 검색 (RISS, KCI)
@@ -75,6 +80,10 @@
    - 조사 포인트: 가짜 돌파 패턴, 대응 방법
 
 5. **"Momentum and Breakout Strategies: A Comparative Study"**
+#### 추가 확보 논문 (2026-01-04)
+- **"FinLLM-B: When Large Language Models Meet Financial Breakout Trading"** (NAACL 2025) – 돌파 감지용 LLM, 발자국 데이터셋 아이디어 확보.
+- **"Opening Range Breakout Stock Trading Algorithmic Model"** (IJCI 2016) – ORB 기술지표 결합 모델, 개장 범위 기반 리스크 룰 참고.
+- **"Bootstrap Testing of Trading Strategies in Emerging Balkan Stock Markets"** (E+M 2017) – TRB/채널 돌파 룰 Reality Check + SPA 부트스트랩 절차 확보.
    - 검색: Google Scholar → "momentum breakout comparison"
    - 조사 포인트: 모멘텀과 돌파 전략 비교
 
@@ -123,13 +132,23 @@
 ### 온라인 리소스
 
 #### Investopedia
-- [ ] "The Anatomy of Trading Breakouts"
+- [x] "The Anatomy of Trading Breakouts"
   - URL: https://www.investopedia.com/articles/trading/08/trading-breakouts.asp
   - 조사 포인트: 기본 개념, 진입/청산 조건
 
 - [ ] "Breakout Trader: Overview, Types, and Example"
   - URL: https://www.investopedia.com/terms/b/breakouttrader.asp
   - 조사 포인트: 돌파 트레이더 유형
+
+#### Axi
+- [x] "What is a Breakout Trading Strategy & How to Trade It?"
+  - URL: https://www.axi.com/int/blog/education/breakout-trading-strategy
+  - 조사 포인트: 보조 지표 활용, 리스크 관리, 리테스트 전략
+
+#### IG International
+- [ ] "Breakout Trading Strategy: A Guide for Traders"
+  - URL: https://www.ig.com/en/trading-strategies/what-is-a-breakout-trading-strategy-and-how-do-you-trade-with-it-230619
+  - 조사 포인트: 단계별 프로세스, 차트 예시, 실전 적용
 
 #### TradingView
 - [ ] 커뮤니티에서 "breakout strategy" 검색
@@ -228,16 +247,13 @@
 
 ### 즉시 시작할 수 있는 작업
 
-1. **Google Scholar 검색**
-   ```
-   검색어: "breakout trading strategy" "stock market"
-   필터: 최근 5년, 인용 수 높은 순
-   목표: 핵심 논문 3-5개 선별
-   ```
+1. **Investopedia 2편 완독 마무리**
+   - "Breakout Trader: Overview, Types, and Example" 요약
+   - 돌파 유형별 장단점 표 작성
 
-2. **Investopedia 읽기**
-   - "The Anatomy of Trading Breakouts" 상세 읽기
-   - 핵심 내용 조사 노트에 기록
+2. **IG International 가이드 정리**
+   - 단계별 프로세스/차트 캡처
+   - 국내 장세 적용 시 주의점 메모
 
 3. **RISS에서 국내 논문 검색**
    ```
@@ -250,6 +266,10 @@
    - "breakout strategy" 검색
    - 실제 차트 예시 수집
    - 트레이더 경험담 정리
+
+5. **FinLLM-B 후속 실험 아이디어 작성**
+   - 한국 호가 데이터 수집 범위 정의
+   - S1/S2/S3 태스크 라벨링 방법 초안
 
 ---
 

@@ -1,0 +1,286 @@
+# The Anatomy of Trading Breakouts
+URL: https://www.investopedia.com/articles/trading/08/trading-breakouts.asp
+다운로드 날짜: 2026-01-04 10:24:23
+
+---
+
+Table of Contents
+Expand
+Table of Contents
+What Is a Breakout?
+Identifying Breakouts
+Strategizing Entry Points
+Crafting Exit Strategies
+Breakout Trading Steps
+The Bottom Line
+Mastering Breakout Trading: Key Strategies for Success
+By
+James Chen
+Full Bio
+James Chen, CMT is an expert trader, investment adviser, and global market strategist.
+Learn about our
+editorial policies
+Updated October 14, 2025
+Reviewed by
+Khadija Khartit
+Reviewed by
+Khadija Khartit
+Full Bio
+Khadija Khartit is a strategy, investment, and funding expert, and an educator of fintech and strategic finance in top universities. She has been an investor, entrepreneur, and advisor for more than 25 years. She is a FINRA Series 7, 63, and 66 license holder.
+Learn about our
+Financial Review Board
+Fact checked by
+Suzanne Kvilhaug
+Fact checked by
+Suzanne Kvilhaug
+Full Bio
+Suzanne is a content marketer, writer, and fact-checker. She holds a Bachelor of Science in Finance degree from Bridgewater State University and helps develop content strategies.
+Learn about our
+editorial policies
+Part of the Series
+Guide to Technical Analysis
+Technical Analysis of Stocks and Trends Definition
+Key Technical Analysis Concepts
+Dow Theory
+Support and Resistance Basics
+Support (Support Level)
+Resistance (Resistance Level)
+Trend
+Pullback
+Breakout
+Reversal
+Overbought
+Oversold
+Relative Strength
+Candlestick
+Volume
+Gap
+Getting Started with Technical Analysis
+Best Ways To Learn Technical Analysis
+Top 7 Books to Learn Technical Analysis
+The Best Technical Analysis Trading Software
+Essential Technical Analysis Strategies
+Technical Analysis Strategies for Beginners
+How to Use a Moving Average to Buy Stocks
+How to Use Volume to Improve Your Trading
+The Anatomy of Trading Breakouts
+CURRENT ARTICLE
+Market Reversals and How to Spot Them
+Technical Analysis Patterns
+Introduction to Technical Analysis Price Patterns
+5 Most Powerful Candlestick Patterns
+Continuation Pattern
+Trendline
+Price Channel
+Channeling: Charting a Path to Success
+Playing the Gap
+Double Tops and Bottoms
+Triple Tops and Bottoms
+Head And Shoulders Pattern
+How to Trade the Head and Shoulders Pattern
+Flag
+Pennant
+Triangle
+Wedge
+Cup and Handle Pattern
+Trading Fibonacci Retracements
+Elliott Wave Theory
+Trader's Guide to Using Fractals
+Technical Analysis Indicators
+Technical Indicator Definition
+Moving Average (MA)
+Crossover
+Golden Cross vs. Death Cross
+Bollinger Band®
+Oscillator
+Moving Average Convergence Divergence (MACD)
+Relative Strength Index (RSI)
+Stochastic Oscillator
+Rate Of Change
+Money Flow Index (MFI)
+Divergence
+Close
+Breakout trading is a strategy that involves entering a position when a stock or asset moves beyond a defined support or resistance level, signaling the potential start of a strong price trend. This approach is significant because it can capture major price moves and periods of increased
+volatility
+when executed correctly.
+Successful breakout traders rely on identifying key price levels, planning precise entry and exit points, and managing emotions to stay disciplined throughout the trade.
+Key Takeaways
+Breakout trading involves taking a position when an asset's price moves beyond support or resistance levels with increased volume.
+Identifying strong support and resistance levels is crucial for successful breakout trades.
+Consider price patterns like channels, triangles, and flags when searching for trading opportunities.
+Waiting for confirmation can help differentiate between actual breakouts and fakeouts.
+Pre-determined exit strategies, including setting profit and stop-loss targets, are essential for managing breakout trades effectively.
+What Is a Breakout?
+A
+breakout
+is a stock price moving outside a defined
+support
+or
+resistance
+level with increased
+volume
+. A breakout trader enters a
+long position
+after the stock price breaks above resistance or enters a
+short position
+after the stock breaks below support. Once the stock trades beyond the price barrier, volatility tends to increase and prices usually trend in the breakout's direction. The reason breakouts are such an important trading strategy is because these setups are the starting point for future volatility increases, large price swings and, in many circumstances, major price trends.
+Breakouts occur in all types of market environments. Typically, the most explosive price movements are a result of
+channel
+breakouts and price pattern breakouts such as
+triangles
+,
+flags
+, or
+head and shoulders patterns
+. As volatility contracts during these time frames, it will typically expand after prices move beyond the identified ranges.
+Image by Sabrina Jiang © Investopedia 2020
+Regardless of the timeframe, breakout trading is a great strategy. Whether you use
+intraday
+, daily, or weekly charts, the concepts are universal. You can apply this strategy to day trading,
+swing trading
+, or any style of trading.
+Identifying Promising Breakout Trades
+When trading breakouts, it is important to consider the underlying stock's support and resistance levels. The more times a stock price has touched these areas, the more valid these levels are and the more important they become. At the same time, the longer these support and resistance levels have been in play, the better the outcome when the stock price finally breaks out.
+Image by Sabrina Jiang © Investopedia 2020
+As prices
+consolidate
+, various price patterns will occur on the price chart. Formations such as channels, triangles, and flags are valuable vehicles when looking for stocks to trade. Aside from patterns, consistency and the length of time a stock price has adhered to its support or resistance levels are important factors to consider when finding a good candidate to trade.
+Strategizing Entry Points for Breakout Trades
+After finding a good instrument to trade, it is time to plan the trade. The easiest consideration is the
+entry point
+. Entry points are fairly black and white when it comes to establishing positions on a breakout. Once prices are set to close above a resistance level, an investor will establish a
+bullish position
+. When prices are set to close below a support level, an investor will take on a bearish position.
+To determine the difference between a breakout and a
+fakeout
+, wait for confirmation. For example, fakeouts occur when prices open beyond a support or resistance level, but by the end of the day, they wind up moving back within a prior
+trading range
+. If an investor acts too quickly or without confirmation, there is no guarantee that prices will continue into new territory. Many investors look for above-average volume as confirmation or wait toward the close of a trading period to determine whether prices will sustain the levels they've broken out of.
+Crafting Exit Strategies for Breakout Success
+Predetermined exits are an essential ingredient to a successful trading approach. When trading breakouts, there are three exit plans to arrange prior to establishing a position.
+1. Where to Exit With a Profit
+When planning target prices, look at the stock's recent behavior to determine a reasonable objective. When trading price patterns, it is easy to use the recent
+price action
+to establish a
+price target
+. For example, if the range of a recent channel or price pattern is six points, that amount should be used as a price target once the stock breaks out (see below).
+Image by Sabrina Jiang © Investopedia 2020
+Another idea is to calculate recent price swings and average them out to get a relative price target. If the stock has made an average price swing of four points over the past few price swings, this would be a reasonable objective.
+These are a few ideas on how to set price targets as the trade objective. This should be your goal for the trade. After the goal is reached, an investor can exit the position, exit a portion of the position to let the rest run, or raise a
+stop-loss
+order to lock in profits.
+2. Where to Exit With a Loss
+It is important to know when a trade has failed. Breakout trading offers this insight in a fairly clear manner. After a breakout, old resistance levels should act as new support and old support levels should act as new resistance. This is an important consideration because it is an objective way to determine when a trade has failed and an easy way to determine where to set your stop-loss order. After a position has been taken, use the old support or resistance level as a line in the sand to close out a losing trade. As an example, study the PCZ chart below.
+Image by Sabrina Jiang © Investopedia 2020
+After a trade fails, it is important to exit the trade quickly. Never give a loss too much room. If you are not careful, losses can accumulate.
+3. Where to Set a Stop Order
+When considering where to exit a position with a loss, use the prior support or resistance level beyond which prices have broken. Placing a stop comfortably within these parameters is a safe way to protect a position without giving the trade too much downside risk. Setting a stop higher than this will likely trigger an exit prematurely because it is common for prices to retest
+price levels
+they've just broken out of.
+Looking at the above chart, you can see the initial consolidation of prices, the breakout, the retest, and the price objective reached. The process is fairly mechanical. When considering where to set a stop-loss order, had it been set above the old resistance level, prices wouldn't have been able to retest these levels and the investor would have been
+stopped out
+prematurely. Setting the stop below this level allows prices to retest and catch the trade quickly if it fails.
+Quick Guide to Breakout Trading Steps
+In summary, here are the steps to follow when trading breakouts:
+Identify the Candidate:
+Find stocks that have built strong support or resistance levels and watch them. Remember, the stronger the support or resistance, the better the outcome. Make sure you understand this when you shop for stocks.
+Wait for the Breakout:
+Finding a good candidate does not mean a trade should be taken prematurely. Wait patiently for the stock price to make its move. To be sure the breakout will hold, on the day the stock price trades outside its support or resistance level, wait until near the end of the trading day to make your move.
+Set a Reasonable Objective:
+If you are going to take a trade, set an expectation of where it is going. If you don't, you won't know where to exit the trade. This can be done by calculating an average move the stock makes or measuring the distance between support and resistance (especially when trading price patterns).
+Allow the Stock to Retest:
+This is the most critical step. When a stock price breaks a resistance level, old resistance becomes new support. When a stock breaks a support level,
+old support becomes new resistance
+. In the majority of your trades, the stock will test the level it has broken after the first couple of days. Prepare for it.
+Know When Your Trade/Pattern Has
+Failed:
+When the stock attempts to retest a prior support or resistance level and it breaks back through it, this is where a pattern or breakout has failed. It is imperative you take the loss at this point. Don't gamble with your losses.
+Exit Trades Toward the Market Close:
+You can't discern at the open whether prices will hold at a particular level. This is why you might consider waiting until near the market close to exit a losing trade. If a stock has remained outside a predetermined support or resistance level toward the market close, it is time to close the position and move on to the next.
+Be Patient:
+This strategy requires plenty of patience. By following these steps, you will reduce
+emotion
+and be more objective about a trade.
+Exit at Your Target:
+If you are not exiting the trade with a loss, then you are in the trade. You should remain in the trade until the stock price reaches its objective or you reach your time target without hitting your target price.
+The Bottom Line
+Breakout trading thrives on volatility, which can easily trigger emotional reactions as prices move quickly. A structured
+trading plan
+helps traders stay disciplined, manage risk, and make rational decisions instead of impulsive ones. With patience and careful execution, breakout trading can offer strong returns while keeping risk under control.
+Article Sources
+Investopedia requires writers to use primary sources to support their work. These include white papers, government data, original reporting, and interviews with industry experts. We also reference original research from other reputable publishers where appropriate. You can learn more about the standards we follow in producing accurate, unbiased content in our
+editorial policy.
+U.S. Securities and Exchange Commission. "
+Investor Bulletin: Stop, Stop-Limit, and Trailing Stop Orders
+."
+Part of the Series
+Guide to Technical Analysis
+Technical Analysis of Stocks and Trends Definition
+Key Technical Analysis Concepts
+Dow Theory
+Support and Resistance Basics
+Support (Support Level)
+Resistance (Resistance Level)
+Trend
+Pullback
+Breakout
+Reversal
+Overbought
+Oversold
+Relative Strength
+Candlestick
+Volume
+Gap
+Getting Started with Technical Analysis
+Best Ways To Learn Technical Analysis
+Top 7 Books to Learn Technical Analysis
+The Best Technical Analysis Trading Software
+Essential Technical Analysis Strategies
+Technical Analysis Strategies for Beginners
+How to Use a Moving Average to Buy Stocks
+How to Use Volume to Improve Your Trading
+The Anatomy of Trading Breakouts
+CURRENT ARTICLE
+Market Reversals and How to Spot Them
+Technical Analysis Patterns
+Introduction to Technical Analysis Price Patterns
+5 Most Powerful Candlestick Patterns
+Continuation Pattern
+Trendline
+Price Channel
+Channeling: Charting a Path to Success
+Playing the Gap
+Double Tops and Bottoms
+Triple Tops and Bottoms
+Head And Shoulders Pattern
+How to Trade the Head and Shoulders Pattern
+Flag
+Pennant
+Triangle
+Wedge
+Cup and Handle Pattern
+Trading Fibonacci Retracements
+Elliott Wave Theory
+Trader's Guide to Using Fractals
+Technical Analysis Indicators
+Technical Indicator Definition
+Moving Average (MA)
+Crossover
+Golden Cross vs. Death Cross
+Bollinger Band®
+Oscillator
+Moving Average Convergence Divergence (MACD)
+Relative Strength Index (RSI)
+Stochastic Oscillator
+Rate Of Change
+Money Flow Index (MFI)
+Divergence
+Read more
+Trading
+Technical Analysis
+Technical Analysis Basic Education
+Partner Links
+Take the Next Step to Invest
+Advertiser Disclosure
+×
+The offers that appear in this table are from partnerships from which Investopedia receives compensation. This compensation may impact how and where listings appear. Investopedia does not include all offers available in the marketplace.
