@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 140" width="600" height="140">
+  <defs>
+    <linearGradient id="bg-c" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D1117"/>
+      <stop offset="100%" stop-color="#161B22"/>
+    </linearGradient>
+    <linearGradient id="bar-c" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7780EB"/>
+      <stop offset="100%" stop-color="#58C2E8"/>
+    </linearGradient>
+    <linearGradient id="header-c" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1F2937"/>
+      <stop offset="100%" stop-color="#1A1F2E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 (GitHub-dark 느낌) -->
+  <rect width="600" height="140" fill="url(#bg-c)"/>
+
+  <!-- 터미널 창 (오른쪽 60%) -->
+  <rect x="170" y="10" width="420" height="120" rx="6" fill="#161B22" stroke="#30363D" stroke-width="1"/>
+
+  <!-- 터미널 헤더 바 -->
+  <rect x="170" y="10" width="420" height="24" rx="6" fill="url(#header-c)"/>
+  <rect x="170" y="22" width="420" height="12" fill="url(#header-c)"/>
+
+  <!-- 윈도우 버튼 -->
+  <circle cx="186" cy="22" r="4" fill="#FF5F57"/>
+  <circle cx="200" cy="22" r="4" fill="#FFBD2E"/>
+  <circle cx="214" cy="22" r="4" fill="#28C840"/>
+
+  <!-- 터미널 타이틀 -->
+  <text x="375" y="26" font-family="'Courier New', monospace" font-size="9"
+        fill="#8B949E" text-anchor="middle">backtest_runner.py</text>
+
+  <!-- 터미널 코드 내용 -->
+  <!-- 줄 1: 커맨드 -->
+  <text x="182" y="50" font-family="'Courier New', monospace" font-size="9.5" fill="#58A6FF">$</text>
+  <text x="192" y="50" font-family="'Courier New', monospace" font-size="9.5" fill="#E6EDF3">python backtest.py --universe </text>
+  <text x="414" y="50" font-family="'Courier New', monospace" font-size="9.5" fill="#A5D6FF">256</text>
+
+  <!-- 줄 2: 실행 중 -->
+  <text x="182" y="65" font-family="'Courier New', monospace" font-size="9.5" fill="#3FB950">[INFO]</text>
+  <text x="222" y="65" font-family="'Courier New', monospace" font-size="9.5" fill="#8B949E"> Running </text>
+  <text x="280" y="65" font-family="'Courier New', monospace" font-size="9.5" fill="#7780EB">256</text>
+  <text x="302" y="65" font-family="'Courier New', monospace" font-size="9.5" fill="#8B949E"> parallel universes...</text>
+
+  <!-- 줄 3: 결과 -->
+  <text x="182" y="80" font-family="'Courier New', monospace" font-size="9.5" fill="#3FB950">[DONE]</text>
+  <text x="224" y="80" font-family="'Courier New', monospace" font-size="9.5" fill="#8B949E"> Best params: </text>
+  <text x="318" y="80" font-family="'Courier New', monospace" font-size="9.5" fill="#58C2E8">rsi=14</text>
+  <text x="358" y="80" font-family="'Courier New', monospace" font-size="9.5" fill="#8B949E">, </text>
+  <text x="366" y="80" font-family="'Courier New', monospace" font-size="9.5" fill="#58C2E8">sl=0.02</text>
+
+  <!-- 줄 4: 수익률 -->
+  <text x="182" y="95" font-family="'Courier New', monospace" font-size="9.5" fill="#3FB950">[BEST]</text>
+  <text x="222" y="95" font-family="'Courier New', monospace" font-size="9.5" fill="#8B949E"> sharpe=</text>
+  <text x="270" y="95" font-family="'Courier New', monospace" font-size="9.5" fill="#7780EB">2.14</text>
+  <text x="294" y="95" font-family="'Courier New', monospace" font-size="9.5" fill="#8B949E">  return=</text>
+  <text x="348" y="95" font-family="'Courier New', monospace" font-size="9.5" fill="#3FB950">+31.2%</text>
+
+  <!-- 줄 5: 과적합 경고 -->
+  <text x="182" y="110" font-family="'Courier New', monospace" font-size="9.5" fill="#D29922">[WARN]</text>
+  <text x="222" y="110" font-family="'Courier New', monospace" font-size="9.5" fill="#8B949E"> overfit score: </text>
+  <text x="323" y="110" font-family="'Courier New', monospace" font-size="9.5" fill="#D29922">0.18</text>
+  <text x="347" y="110" font-family="'Courier New', monospace" font-size="9.5" fill="#3FB950"> ✓ safe</text>
+
+  <!-- 커서 깜빡임 효과 (블록) -->
+  <rect x="182" y="119" width="7" height="10" fill="#7780EB" opacity="0.8">
+    <animate attributeName="opacity" values="0.8;0;0.8" dur="1.2s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- 왼쪽 세로 악센트 바 -->
+  <rect x="0" y="0" width="4" height="140" fill="url(#bar-c)"/>
+
+  <!-- 왼쪽 텍스트 영역 -->
+  <text x="20" y="35" font-family="'Courier New', monospace" font-size="10" font-weight="700"
+        fill="#7780EB" letter-spacing="2">EP.07</text>
+
+  <!-- 메인 타이틀 -->
+  <text x="20" y="62" font-family="'Courier New', monospace" font-size="16" font-weight="700"
+        fill="#FFFFFF">멀티버스</text>
+  <text x="20" y="82" font-family="'Courier New', monospace" font-size="16" font-weight="700"
+        fill="#FFFFFF">백테스트</text>
+
+  <!-- 태그 -->
+  <rect x="18" y="95" width="64" height="14" rx="2" fill="#7780EB" fill-opacity="0.18"/>
+  <text x="50" y="105" font-family="'Courier New', monospace" font-size="8.5"
+        fill="#7780EB" text-anchor="middle">파라미터 탐색</text>
+
+  <rect x="18" y="113" width="56" height="14" rx="2" fill="#3FB950" fill-opacity="0.12"/>
+  <text x="46" y="123" font-family="'Courier New', monospace" font-size="8.5"
+        fill="#3FB950" text-anchor="middle">과적합 방지</text>
+
+  <!-- 우하단 워터마크 -->
+  <text x="580" y="135" font-family="'Courier New', monospace" font-size="8"
+        fill="#21262D" text-anchor="end">KIS AUTO TRADING</text>
+</svg>

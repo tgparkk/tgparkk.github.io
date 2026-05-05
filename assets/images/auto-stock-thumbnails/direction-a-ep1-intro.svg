@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 140" width="600" height="140">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F0F1A"/>
+      <stop offset="100%" stop-color="#1A1A2E"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="75%" cy="50%" r="45%">
+      <stop offset="0%" stop-color="#7780EB" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#7780EB" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7780EB"/>
+      <stop offset="100%" stop-color="#58C2E8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="140" fill="url(#bg)"/>
+  <rect width="600" height="140" fill="url(#glow1)"/>
+
+  <!-- 1편 고유 장식: API 연결 다이어그램 느낌 -->
+  <!-- Python 박스 -->
+  <rect x="400" y="25" width="60" height="22" rx="3" fill="#7780EB" fill-opacity="0.18" stroke="#7780EB" stroke-width="0.8" stroke-opacity="0.4"/>
+  <text x="430" y="40" font-family="'Courier New', monospace" font-size="9" fill="#7780EB" text-anchor="middle">Python</text>
+  <!-- KIS API 박스 -->
+  <rect x="490" y="25" width="68" height="22" rx="3" fill="#58C2E8" fill-opacity="0.12" stroke="#58C2E8" stroke-width="0.8" stroke-opacity="0.4"/>
+  <text x="524" y="40" font-family="'Courier New', monospace" font-size="9" fill="#58C2E8" text-anchor="middle">KIS API</text>
+  <!-- 화살표 -->
+  <line x1="461" y1="36" x2="489" y2="36" stroke="#7780EB" stroke-width="1" stroke-opacity="0.5" marker-end="url(#arrow)"/>
+  <line x1="460" y1="36" x2="490" y2="36" stroke="#7780EB" stroke-width="1" stroke-opacity="0.4"/>
+  <polygon points="487,33 492,36 487,39" fill="#7780EB" fill-opacity="0.6"/>
+
+  <!-- 주식 시세 흐름 (간단한 라인) -->
+  <polyline points="390,75 410,68 430,72 450,60 470,65 490,55 510,58 530,50 550,53 570,45 590,42"
+    fill="none" stroke="#7780EB" stroke-width="1.5" stroke-opacity="0.5" stroke-linejoin="round"/>
+  <polyline points="390,85 410,80 430,82 450,78 470,83 490,76 510,78 530,72 550,75 570,70 590,68"
+    fill="none" stroke="#58C2E8" stroke-width="1" stroke-opacity="0.3" stroke-linejoin="round" stroke-dasharray="4 3"/>
+
+  <!-- 하단 장식 점들 -->
+  <circle cx="420" cy="110" r="1.5" fill="#7780EB" fill-opacity="0.4"/>
+  <circle cx="440" cy="105" r="2" fill="#58C2E8" fill-opacity="0.3"/>
+  <circle cx="465" cy="112" r="1.5" fill="#7780EB" fill-opacity="0.35"/>
+  <circle cx="490" cy="108" r="1.8" fill="#58C2E8" fill-opacity="0.4"/>
+  <circle cx="515" cy="103" r="1.2" fill="#7780EB" fill-opacity="0.3"/>
+  <circle cx="540" cy="110" r="1.5" fill="#58C2E8" fill-opacity="0.3"/>
+
+  <!-- 왼쪽 세로 악센트 바 -->
+  <rect x="0" y="0" width="4" height="140" fill="url(#bar)"/>
+
+  <!-- 시리즈 뱃지 -->
+  <rect x="20" y="18" width="52" height="20" rx="3" fill="#7780EB" fill-opacity="0.18"/>
+  <text x="46" y="32" font-family="'Courier New', monospace" font-size="10" font-weight="700"
+        fill="#7780EB" text-anchor="middle" letter-spacing="1">SERIES</text>
+
+  <!-- 편 번호 -->
+  <text x="20" y="68" font-family="'Courier New', monospace" font-size="11" font-weight="400"
+        fill="#58C2E8" letter-spacing="2" opacity="0.8">EP.01</text>
+
+  <!-- 메인 타이틀 -->
+  <text x="20" y="92" font-family="'Courier New', monospace" font-size="22" font-weight="700"
+        fill="#FFFFFF" letter-spacing="-0.5">INTRO</text>
+
+  <!-- 서브 타이틀 -->
+  <text x="20" y="112" font-family="'Courier New', monospace" font-size="11" font-weight="400"
+        fill="#B0B0C8" letter-spacing="1">KIS API &amp; AUTO TRADING</text>
+
+  <!-- 태그들 -->
+  <rect x="20" y="122" width="52" height="13" rx="2" fill="#7780EB" fill-opacity="0.15"/>
+  <text x="46" y="132" font-family="'Courier New', monospace" font-size="9"
+        fill="#7780EB" text-anchor="middle" letter-spacing="0.5">자동매매</text>
+
+  <rect x="79" y="122" width="44" height="13" rx="2" fill="#58C2E8" fill-opacity="0.12"/>
+  <text x="101" y="132" font-family="'Courier New', monospace" font-size="9"
+        fill="#58C2E8" text-anchor="middle" letter-spacing="0.5">KIS API</text>
+
+  <text x="580" y="130" font-family="'Courier New', monospace" font-size="9"
+        fill="#2A2A40" text-anchor="end" letter-spacing="1">KIS AUTO TRADING</text>
+</svg>

@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 140" width="600" height="140">
+  <defs>
+    <linearGradient id="bg-b" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0F0F1A"/>
+      <stop offset="60%" stop-color="#12122A"/>
+      <stop offset="100%" stop-color="#0F0F1A"/>
+    </linearGradient>
+    <!-- 각 유니버스별 라인 색상 -->
+    <linearGradient id="line1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7780EB" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#7780EB"/>
+      <stop offset="100%" stop-color="#7780EB" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="line2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#58C2E8" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#58C2E8"/>
+      <stop offset="100%" stop-color="#58C2E8" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="line3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#A78BFA"/>
+      <stop offset="100%" stop-color="#A78BFA" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="bar-b" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7780EB"/>
+      <stop offset="100%" stop-color="#58C2E8"/>
+    </linearGradient>
+    <!-- 차트 영역 fill -->
+    <linearGradient id="area1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7780EB" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#7780EB" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="area2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#58C2E8" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#58C2E8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="600" height="140" fill="url(#bg-b)"/>
+
+  <!-- 그리드 라인 (차트 영역: x:170~580, y:20~115) -->
+  <line x1="170" y1="115" x2="580" y2="115" stroke="#2A2A40" stroke-width="0.8"/>
+  <line x1="170" y1="88"  x2="580" y2="88"  stroke="#2A2A40" stroke-width="0.5" stroke-dasharray="3 4"/>
+  <line x1="170" y1="62"  x2="580" y2="62"  stroke="#2A2A40" stroke-width="0.5" stroke-dasharray="3 4"/>
+  <line x1="170" y1="35"  x2="580" y2="35"  stroke="#2A2A40" stroke-width="0.5" stroke-dasharray="3 4"/>
+  <!-- 세로 그리드 -->
+  <line x1="170" y1="20" x2="170" y2="115" stroke="#2A2A40" stroke-width="0.8"/>
+  <line x1="278" y1="20" x2="278" y2="115" stroke="#1E1E30" stroke-width="0.5"/>
+  <line x1="375" y1="20" x2="375" y2="115" stroke="#1E1E30" stroke-width="0.5"/>
+  <line x1="472" y1="20" x2="472" y2="115" stroke="#1E1E30" stroke-width="0.5"/>
+
+  <!-- 유니버스 1: 상승 후 안정 (보라) -->
+  <polyline
+    points="170,100 210,90 245,75 278,58 310,50 345,47 375,44 410,46 445,42 472,40 510,38 545,36 580,35"
+    fill="none" stroke="#7780EB" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- area fill -->
+  <polygon
+    points="170,100 210,90 245,75 278,58 310,50 345,47 375,44 410,46 445,42 472,40 510,38 545,36 580,35 580,115 170,115"
+    fill="url(#area1)"/>
+
+  <!-- 유니버스 2: 변동 후 상승 (하늘) -->
+  <polyline
+    points="170,105 210,98 245,88 278,80 310,85 345,75 375,68 410,72 445,60 472,55 510,50 545,47 580,44"
+    fill="none" stroke="#58C2E8" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 2"/>
+
+  <!-- 유니버스 3: 낮은 성과 (연보라) -->
+  <polyline
+    points="170,108 210,105 245,102 278,98 310,100 345,95 375,92 410,96 445,90 472,88 510,92 545,89 580,85"
+    fill="none" stroke="#A78BFA" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="2 3"/>
+
+  <!-- 최적 파라미터 표시: 유니버스1 위 별표 -->
+  <circle cx="580" cy="35" r="4" fill="#7780EB" stroke="#0F0F1A" stroke-width="1"/>
+  <!-- 별 모양 -->
+  <text x="573" y="28" font-family="sans-serif" font-size="10" fill="#FFD700" text-anchor="middle">★</text>
+
+  <!-- x축 레이블 -->
+  <text x="170" y="128" font-family="'Courier New', monospace" font-size="8" fill="#4A4A6A" text-anchor="middle">Jan</text>
+  <text x="278" y="128" font-family="'Courier New', monospace" font-size="8" fill="#4A4A6A" text-anchor="middle">Feb</text>
+  <text x="375" y="128" font-family="'Courier New', monospace" font-size="8" fill="#4A4A6A" text-anchor="middle">Mar</text>
+  <text x="472" y="128" font-family="'Courier New', monospace" font-size="8" fill="#4A4A6A" text-anchor="middle">Apr</text>
+  <text x="580" y="128" font-family="'Courier New', monospace" font-size="8" fill="#4A4A6A" text-anchor="middle">May</text>
+
+  <!-- 왼쪽 세로 악센트 바 -->
+  <rect x="0" y="0" width="4" height="140" fill="url(#bar-b)"/>
+
+  <!-- 왼쪽 텍스트 영역 -->
+  <text x="20" y="30" font-family="'Courier New', monospace" font-size="10" font-weight="700"
+        fill="#7780EB" letter-spacing="2">EP.07</text>
+
+  <text x="20" y="58" font-family="'Courier New', monospace" font-size="17" font-weight="700"
+        fill="#FFFFFF" letter-spacing="-0.5">멀티버스</text>
+  <text x="20" y="77" font-family="'Courier New', monospace" font-size="17" font-weight="700"
+        fill="#FFFFFF" letter-spacing="-0.5">백테스트</text>
+
+  <!-- 레전드 -->
+  <rect x="18" y="88" width="8" height="2" fill="#7780EB" rx="1"/>
+  <text x="30" y="91" font-family="'Courier New', monospace" font-size="8" fill="#7780EB">최적 전략</text>
+
+  <rect x="18" y="97" width="8" height="2" fill="#58C2E8" rx="1" stroke-dasharray="2 1"/>
+  <text x="30" y="100" font-family="'Courier New', monospace" font-size="8" fill="#58C2E8">대안 전략</text>
+
+  <rect x="18" y="106" width="8" height="2" fill="#A78BFA" rx="1"/>
+  <text x="30" y="109" font-family="'Courier New', monospace" font-size="8" fill="#A78BFA">저성과 전략</text>
+
+  <!-- 시리즈 워터마크 -->
+  <text x="580" y="135" font-family="'Courier New', monospace" font-size="8"
+        fill="#2A2A40" text-anchor="end">KIS AUTO TRADING SERIES</text>
+</svg>
