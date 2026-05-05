@@ -3,3 +3,16 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
+
+# Local tooling / IDE
+.claude/
+.omc/
+.vscode/
+
+# Local-only / temp / backup
+*.bak
+tmp.*
+_posts/test.md
+openalex_breakout.json
+assets/images/auto-stock-thumbnails/preview.html
+assets/images/auto-stock-thumbnails/simple-preview.html
