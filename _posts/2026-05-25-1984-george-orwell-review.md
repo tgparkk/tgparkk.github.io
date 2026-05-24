@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "1984를 읽고 자기검열이 어디서 시작되는지 봤다"
+title: "1984를 읽고 전체주의가 멀리있지 않다고 생각했다"
 date: 2026-05-25
 categories: book
 tags: [1984, 조지오웰, 서평, 디스토피아, 전체주의, 독후감, Nineteen Eighty-Four]
