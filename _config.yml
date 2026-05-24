@@ -19,6 +19,17 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
+# 빌드 제외 (작업 문서·리서치 노트는 사이트에 발행하지 않음)
+exclude:
+  - docs/
+  - research-materials/
+  - research-notes/
+  - vendor/
+  - .bundle/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+
 # 테마 설정
 sass:
   sass_dir: _sass
