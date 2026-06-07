@@ -33,9 +33,7 @@ comments: true
 
 [^letter]: 편지 전문은 [Letters of Note — 1984 v A Brave New World](https://news.lettersofnote.com/p/1984-v-a-brave-new-world)에서 볼 수 있고, [Open Culture](https://www.openculture.com/2025/10/aldous-huxley-to-george-orwell-my-hellish-vision-of-the-future-is-better-than-yours-1949.html)와 [Boing Boing](https://boingboing.net/2016/08/22/george-orwells-letter-from-h.html)에도 정리되어 있습니다.
 
-## 주목할 부분
-
-**첫째, 빠른 장면 전환과 시간의 흐름.**
+**넷째, 빠른 장면 전환과 시간의 흐름.**
 
 특히 초반부가 그랬는데, 여러 인물의 대사와 장면이 짧게짧게 끊기며 빠르게 흘러갑니다. 이과인 저에게는 이 전개가 난독증을 조...금 유발하더라고요. 지금 누구의 말인지, 어느 시점인지를 따라잡는 데 한참 걸렸습니다. (나중에 알고 보니 이 정신없는 몽타주 자체가 헉슬리가 의도한 연출이라고 합니다.)
 
